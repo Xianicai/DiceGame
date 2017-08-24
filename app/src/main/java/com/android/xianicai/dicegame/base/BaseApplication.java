@@ -13,7 +13,7 @@ import org.xutils.x;
  * Created by zhanglibin on 2016/9/2.
  */
 public class BaseApplication extends Application {
-    public static String APP_ID = "你的APPID";
+    public static String APP_ID = "wx77283bee1d973479";
     public static IWXAPI api;
     public static BaseApplication app;
 
