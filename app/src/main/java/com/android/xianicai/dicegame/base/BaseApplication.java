@@ -7,6 +7,8 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.xutils.x;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * ZY:
@@ -32,6 +34,9 @@ public class BaseApplication extends Application {
         x.Ext.init(this);
         // 是否输出debug日志
         x.Ext.setDebug(true);
+        //极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
 }
