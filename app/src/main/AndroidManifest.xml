@@ -65,7 +65,7 @@
             android:name="com.android.xianicai.dicegame.wxapi.WXEntryActivity"
             android:exported="true"/>
         <activity
-            android:name="com.android.xianicai.dicegame.user.view.HomeActivity"
+            android:name="com.android.xianicai.dicegame.user.HomeActivity"
             android:screenOrientation="landscape">
         </activity>
         <!--极光推送start-->

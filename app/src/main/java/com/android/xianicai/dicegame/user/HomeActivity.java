@@ -1,4 +1,4 @@
-package com.android.xianicai.dicegame.user.view;
+package com.android.xianicai.dicegame.user;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.user.presenter.impl.UserPresenterImpl;
 import com.android.xianicai.dicegame.user.provider.data.UserBean;
+import com.android.xianicai.dicegame.user.view.HomeView;
 
 public class HomeActivity extends BaseActivity implements HomeView {
 

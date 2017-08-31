@@ -7,11 +7,12 @@ import android.os.Bundle;
 import com.android.xianicai.dicegame.Constant;
 import com.android.xianicai.dicegame.Urls;
 import com.android.xianicai.dicegame.base.basemvp.ReqBase;
-import com.android.xianicai.dicegame.user.view.HomeActivity;
+import com.android.xianicai.dicegame.user.HomeActivity;
 import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelpay.PayResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -46,13 +47,14 @@ public class WXPayActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp baseResp) {
+        String userId = ((PayResp) baseResp).extData;
         switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_OK://-成功
                 //-当用户支付成功，跳转到指定页面
                 if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
                     final ReqBase req = new ReqBase();
                     Map<String, String> map = new HashMap<>();
-                    map.put("usrId", "");
+                    map.put("usrId", userId);
                     map.put("price", "");
                     NetAsynTask.connectByPost(Urls.BASE_URL, map, req, new NetAsynTask.CallBack() {
                         @Override

@@ -52,6 +52,7 @@ public class PayActivity extends BaseActivity implements PayView {
         req.timeStamp = orderBean.getTimeStamp();
         req.sign = orderBean.getSign();
         mWxapi.registerApp(orderBean.getAppId());
+        req.extData = mUserId;
         mWxapi.sendReq(req);//调起微信
     }
 
