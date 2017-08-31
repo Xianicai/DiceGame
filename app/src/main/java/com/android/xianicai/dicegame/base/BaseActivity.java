@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.android.xianicai.dicegame.base.basemvp.BaseView;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -12,7 +14,7 @@ import butterknife.Unbinder;
  ZY:基础的Aty,实现简单的接口，方法
  * Created by zhanglibin.
  */
-public abstract class BaseActivity extends AppCompatActivity  {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private Unbinder mUnbinder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,4 +43,24 @@ public abstract class BaseActivity extends AppCompatActivity  {
     }
     public abstract int getlayoutId();
     public abstract void initViews(Bundle savedInstanceState);
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void showProgress(String message) {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void showMsg(String msg) {
+
+    }
 }

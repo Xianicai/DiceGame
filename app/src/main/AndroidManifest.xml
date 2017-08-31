@@ -53,7 +53,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.android.xianicai.dicegame.LoginActivity">
+        <activity android:name="com.android.xianicai.dicegame.user.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -64,7 +64,7 @@
             android:name="com.android.xianicai.dicegame.wxapi.WXEntryActivity"
             android:exported="true"/>
         <activity
-            android:name="com.android.xianicai.dicegame.HomeActivity"
+            android:name="com.android.xianicai.dicegame.user.view.HomeActivity"
             android:screenOrientation="landscape">
         </activity>
         <!--极光推送start-->

@@ -6,10 +6,12 @@ package com.android.xianicai.dicegame.base.basemvp;
 
 public interface BaseView {
 
-    void showMsg(String str);
+    void showProgress();
 
-    void showLoadingDialog();
+    void showProgress(String message);
 
-    void cancelLoadingDialog();
+    void hideProgress();
+
+    void showMsg(String msg);
 
 }

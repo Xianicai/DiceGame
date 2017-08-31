@@ -1,8 +1,10 @@
-package com.android.xianicai.dicegame;
+package com.android.xianicai.dicegame.user;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.android.xianicai.dicegame.Constant;
+import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.base.BaseApplication;
 import com.android.xianicai.dicegame.utils.ToastUtil;
@@ -30,7 +32,6 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.image_login)
     public void onViewClicked() {
-        HomeActivity.start(this);
         if (BaseApplication.api == null) {
             BaseApplication.api = WXAPIFactory.createWXAPI(this, Constant.APP_ID, true);
         }

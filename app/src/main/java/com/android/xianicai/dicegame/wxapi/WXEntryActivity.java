@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.xianicai.dicegame.Constant;
+import com.android.xianicai.dicegame.user.view.HomeActivity;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -37,7 +38,8 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
             case BaseResp.ErrCode.ERR_OK:// 同意
                 if (baseResp instanceof SendAuth.Resp) {
                     String code = ((SendAuth.Resp) baseResp).code;
-                    Login(code);
+                    HomeActivity.start(this, code);
+                    finish();
                 }
                 // 分享到微信后，点击返回掌门的回调
                 else if (baseResp instanceof SendMessageToWX.Resp) {
@@ -57,10 +59,4 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         }
     }
 
-    /**
-     * 微信登录获用户个人信息
-     */
-    private void Login(String code) {
-
-    }
 }
