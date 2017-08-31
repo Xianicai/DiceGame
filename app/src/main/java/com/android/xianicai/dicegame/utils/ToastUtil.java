@@ -37,7 +37,7 @@ public class ToastUtil {
                         toast.setText(msg);
                         toast.setDuration(len);
                     } else {
-                        toast = Toast.makeText(BaseApplication.app.getApplicationContext(), msg, len);
+                        toast = Toast.makeText(BaseApplication.getInstance().getApplicationContext(), msg, len);
                     }
                     toast.show();
                 }
@@ -55,7 +55,7 @@ public class ToastUtil {
                         toast.setText(msg);
                         toast.setDuration(len);
                     } else {
-                        toast = Toast.makeText(BaseApplication.app.getApplicationContext(), msg, len);
+                        toast = Toast.makeText(BaseApplication.getInstance().getApplicationContext(), msg, len);
                     }
                     toast.show();
                 }

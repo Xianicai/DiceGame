@@ -18,6 +18,6 @@ public class UserProviderImpl implements UserProvider {
         Map<String, String> map = new HashMap<>();
         map.put("code", code);
         map.put("phone", phone);
-        NetAsynTask.connectByGet(Urls.WEIXIN_LOGIN, map, reqUser, callBack);
+        NetAsynTask.connectByPost(Urls.POST_WEIXIN_LOGIN, map, reqUser, callBack);
     }
 }

@@ -90,8 +90,8 @@ public class NetAsynTask {
      */
     public static void connectByGet(String url, Map<String, String> map, ReqCommon req, CallBack call) {
         RequestParams params = getReqParamsForGet(url, map);
-        Log.i("GET", params.toString());
-        connetData(GET,call, params, req);
+        Log.i(TAG+"——→GET:", params.toString());
+        connetData(GET, call, params, req);
     }
 
     @NonNull
@@ -111,22 +111,26 @@ public class NetAsynTask {
      */
     public static void connectByPost(String url, Map<String, String> map, ReqCommon req, CallBack call) {
         RequestParams params = getReqParamsForPost(url, map);
-        Log.i("POST", params.toString());
-        connetData(POST,call, params, req);
+
+        connetData(POST, call, params, req);
     }
 
     @NonNull
     private static RequestParams getReqParamsForPost(String url, Map<String, String> map) {
         RequestParams params = new RequestParams(url);
+        StringBuilder sb = new StringBuilder("body");
         if (null != map) {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 params.addParameter(entry.getKey(), entry.getValue());
+                sb.append("\n" + entry.getKey() + "=" + entry.getValue());
             }
         }
+        Log.i(TAG+"——→POST:", params.toString());
+        Log.i(TAG, "getReqParamsForPost: " + sb.toString());
         return params;
     }
 
-    private static void connetData(int Type , final CallBack call, RequestParams params, final ReqCommon req) {
+    private static void connetData(int Type, final CallBack call, RequestParams params, final ReqCommon req) {
         if (Type == GET) {
             x.http().get(params, new CommonCallback<String>() {
                 @Override
@@ -165,7 +169,7 @@ public class NetAsynTask {
                     }
                 }
             });
-        }else if (Type == POST){
+        } else if (Type == POST) {
             x.http().post(params, new CommonCallback<String>() {
                 @Override
                 public void onSuccess(String s) {
