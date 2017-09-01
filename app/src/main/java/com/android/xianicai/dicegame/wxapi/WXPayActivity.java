@@ -8,6 +8,8 @@ import com.android.xianicai.dicegame.Constant;
 import com.android.xianicai.dicegame.Urls;
 import com.android.xianicai.dicegame.base.basemvp.ReqBase;
 import com.android.xianicai.dicegame.user.HomeActivity;
+import com.android.xianicai.dicegame.utils.RxBus;
+import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -50,6 +52,7 @@ public class WXPayActivity extends Activity implements IWXAPIEventHandler {
         String userId = ((PayResp) baseResp).extData;
         switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_OK://-成功
+
                 //-当用户支付成功，跳转到指定页面
                 if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
                     final ReqBase req = new ReqBase();
@@ -85,10 +88,14 @@ public class WXPayActivity extends Activity implements IWXAPIEventHandler {
 
             case BaseResp.ErrCode.ERR_USER_CANCEL://-用户取消
                 //-当用户取消支付时，关闭当前Activity
+                ToastUtil.showMessage("用户取消");
+                finish();
                 break;
 
             case BaseResp.ErrCode.ERR_COMM://-授权失败
                 //-当认证被否决时，关闭当前Activity、
+                ToastUtil.showMessage("授权失败");
+                finish();
                 break;
         }
     }

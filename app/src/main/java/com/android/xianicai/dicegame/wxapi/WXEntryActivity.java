@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.android.xianicai.dicegame.Constant;
 import com.android.xianicai.dicegame.user.HomeActivity;
+import com.android.xianicai.dicegame.utils.RxBus;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -36,6 +37,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     public void onResp(BaseResp baseResp) {
         switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_OK:// 同意
+                RxBus.getDefault().post(Constant.RXBUS_CLOSE_LOGIN);
                 if (baseResp instanceof SendAuth.Resp) {
                     String code = ((SendAuth.Resp) baseResp).code;
                     HomeActivity.start(this, code);

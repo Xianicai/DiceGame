@@ -1,18 +1,21 @@
 package com.android.xianicai.dicegame.user;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.android.xianicai.dicegame.Constant;
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.base.BaseApplication;
+import com.android.xianicai.dicegame.utils.RxBus;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 public class LoginActivity extends BaseActivity {
 
@@ -27,8 +30,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
+        finishLogin();
     }
+
 
     @OnClick(R.id.image_login)
     public void onViewClicked() {
@@ -45,5 +49,20 @@ public class LoginActivity extends BaseActivity {
             req.state = "wechat_sdk_xb_live_state";
             BaseApplication.api.sendReq(req);
         }
+    }
+
+    /**
+     * 接收rxbus关闭当前页面
+     */
+    private void finishLogin() {
+        RxBus.getDefault().toObservable(String.class)
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@NonNull String s) throws Exception {
+                        if (s.equals(Constant.RXBUS_CLOSE_LOGIN)) {
+                            finish();
+                        }
+                    }
+                });
     }
 }
