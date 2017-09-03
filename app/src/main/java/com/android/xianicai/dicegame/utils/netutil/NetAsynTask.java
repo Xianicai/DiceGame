@@ -118,6 +118,8 @@ public class NetAsynTask {
     @NonNull
     private static RequestParams getReqParamsForPost(String url, Map<String, String> map) {
         RequestParams params = new RequestParams(url);
+        params.addHeader("Content-type","application/x-www-form-urlencoded");
+        params.addHeader("Accept","text/html;charset=UTF-8,application/json, text/javascript, */*; q=0.01");
         StringBuilder sb = new StringBuilder("body");
         if (null != map) {
             for (Map.Entry<String, String> entry : map.entrySet()) {

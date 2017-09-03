@@ -54,8 +54,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.android.xianicai.dicegame.user.LoginActivity"
-                  android:screenOrientation="landscape">
+        <activity
+            android:name="com.android.xianicai.dicegame.user.LoginActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -64,9 +65,18 @@
         </activity>
         <activity
             android:name="com.android.xianicai.dicegame.wxapi.WXEntryActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:screenOrientation="landscape"/>
         <activity
             android:name="com.android.xianicai.dicegame.user.HomeActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name="com.android.xianicai.dicegame.pay.PayActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name="com.android.xianicai.dicegame.gameroom.GameRoomActivity"
             android:screenOrientation="landscape">
         </activity>
         <!--极光推送start-->
@@ -84,18 +94,18 @@
             android:enabled="true">
             <intent-filter>
                 <!--Required 用户注册SDK的intent-->
-                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/>
                 <!--Required 用户接收SDK消息的intent-->
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
                 <!--Required 用户接收SDK通知栏信息的intent-->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/>
                 <!--Required 用户打开自定义通知栏的intent-->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
                 <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
-                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/>
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <action android:name="cn.jpush.android.intent.CONNECTION" />
-                <category android:name="com.android.xianicai.dicegame" />
+                <action android:name="cn.jpush.android.intent.CONNECTION"/>
+                <category android:name="com.android.xianicai.dicegame"/>
             </intent-filter>
         </receiver>
     </application>

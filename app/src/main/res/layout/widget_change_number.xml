@@ -7,25 +7,36 @@
 
     <ImageView
         android:id="@+id/image_minus"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/icon_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_pay_minus"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_number"
+        app:layout_constraintTop_toTopOf="@+id/tv_number"/>
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:background="@mipmap/bg_ed_pay"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:singleLine="true"
+        app:layout_constraintLeft_toRightOf="@+id/image_minus"
         app:layout_constraintTop_toTopOf="parent"/>
-<TextView
-    android:id="@+id/tv_number"
-    android:layout_width="wrap_content"
-    android:layout_height="30dp"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toRightOf="@+id/image_minus"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:gravity="center"/>
+
     <ImageView
         android:id="@+id/image_add"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/icon_add"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_number"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:src="@mipmap/icom_pay_add"
+        app:layout_constraintLeft_toRightOf="@+id/tv_number"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_number"
+        app:layout_constraintTop_toTopOf="@+id/tv_number"/>
 </android.support.constraint.ConstraintLayout>

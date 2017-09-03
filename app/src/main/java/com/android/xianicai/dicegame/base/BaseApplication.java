@@ -3,6 +3,7 @@ package com.android.xianicai.dicegame.base;
 import android.app.Application;
 
 import com.android.xianicai.dicegame.Constant;
+import com.android.xianicai.dicegame.utils.Mobile;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -38,6 +39,8 @@ public class BaseApplication extends Application {
         //极光推送
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        //测量屏幕
+        Mobile.init(getApplicationContext());
     }
 
 }

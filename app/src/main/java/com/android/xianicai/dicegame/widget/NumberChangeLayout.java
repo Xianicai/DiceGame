@@ -75,7 +75,9 @@ public class NumberChangeLayout extends LinearLayout {
                 break;
         }
     }
-
+/**
+ * 设置增加和减少的 倍数（同时也是初始化的值）
+ * */
     public void setGoldCount(int goldCount) {
         this.goldCount = goldCount;
         mTvNumber.setText(goldCount + "");
