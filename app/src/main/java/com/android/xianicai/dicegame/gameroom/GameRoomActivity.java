@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
-import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
+import com.android.xianicai.dicegame.gameroom.provider.data.RoomBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
@@ -27,7 +27,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     }
 
     @Override
-    public void getGameRoomDetail(RoomDetailBean roomDetailBean) {
+    public void getGameRoomDetail(RoomBean RoomBean) {
 
     }
 }
