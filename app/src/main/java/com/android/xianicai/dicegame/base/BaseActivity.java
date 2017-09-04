@@ -30,7 +30,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mUnbinder=  ButterKnife.bind(this);
         //初始化控件
         initViews(savedInstanceState);
-
     }
 
 

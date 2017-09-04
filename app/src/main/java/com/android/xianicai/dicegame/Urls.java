@@ -5,8 +5,7 @@ package com.android.xianicai.dicegame;
  */
 
 public class Urls {
-    public static final String BASE_URL = "http://119.29.1.15:8080/ssmdemo/";
-    public static final String BASE_URL_b = "http://169.254.170.31:8080/web-ssm/";
+    public static final String BASE_URL = "http://47.94.225.154:8080/web-ssm/";
     /**
      * 登录
      */
@@ -22,22 +21,22 @@ public class Urls {
     /**
      * 获取房间详情
      */
-    public static final String POST_ROOM_DETAIL = BASE_URL_b + "room/detail";
+    public static final String POST_ROOM_DETAIL = BASE_URL + "room/detail";
     /**
      * 开始游戏
      */
-    public static final String POST_STAR_GAME = BASE_URL_b + "room/detail";
+    public static final String POST_STAR_GAME = BASE_URL + "room/detail";
     /**
      * 金币下注
      * */
-    public static final String POST_BET_GAME = BASE_URL_b + "room/detail";
+    public static final String POST_BET_GAME = BASE_URL + "room/detail";
 
     /**
      * 退出房间
      */
-    public static final String POST_QUITE_ROOM = BASE_URL_b + "room/detail";
+    public static final String POST_QUITE_ROOM = BASE_URL + "room/detail";
     /**
      * 解散房间
      */
-    public static final String POST_DISMISS_ROOM = BASE_URL_b + "room/detail";
+    public static final String POST_DISMISS_ROOM = BASE_URL + "room/detail";
 }

@@ -1,39 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/bg_room">
 
     <TextView
         android:id="@+id/tv_room_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:text="房间号：25965"
-        android:textSize="12sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="12dp"/>
-    <TextView
-        android:id="@+id/tv_user_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="20/50"
         android:textSize="12sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="20dp"/>
-    <ImageView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_member_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:text="20/50"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_last_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="50dp"
+        android:text="上一期骰点：3 3 6"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="8dp"/>
+
+    <com.android.xianicai.dicegame.utils.glide.GlideImageView
+        android:id="@+id/image_ower_logo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/icon_romm_ower_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imge_dice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_room_dice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@mipmap/icon_room_dice"/>
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/image_start_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:src="@mipmap/icon_start_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imge_dice"/>
+
+    <ImageView
+        android:id="@+id/image_bet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:src="@mipmap/icon_bet"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imge_dice"/>
+
+    <ImageView
+        android:id="@+id/image_dissmiaa_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginRight="45dp"
+        android:src="@mipmap/icon_dissmiss_room"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/image_bg_gold"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:src="@mipmap/bg_home_property"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/image_gold"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/image_bg_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
+        app:layout_constraintLeft_toLeftOf="@+id/image_bg_gold"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"/>
+
+    <TextView
+        android:id="@+id/tv_gold_count"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="#f7cf70"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
+        app:layout_constraintLeft_toRightOf="@+id/image_gold"
+        app:layout_constraintRight_toLeftOf="@+id/image_add_gold"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
+        tools:text="10000"/>
+
+    <ImageView
+        android:id="@+id/image_add_gold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:src="@mipmap/icon_home_add"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
+        app:layout_constraintRight_toRightOf="@+id/image_bg_gold"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"/>
+
+    <com.android.xianicai.dicegame.utils.glide.GlideImageView
+        android:id="@+id/image_user_logo"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="45dp"
+        android:src="@mipmap/icon_user_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="夏尼采"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_user_id"
+        app:layout_constraintLeft_toRightOf="@+id/image_user_logo"
+        app:layout_constraintTop_toTopOf="@+id/image_user_logo"/>
+
+    <TextView
+        android:id="@+id/tv_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="ID：62349"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_user_logo"
+        app:layout_constraintLeft_toRightOf="@+id/image_user_logo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name"/>
 </android.support.constraint.ConstraintLayout>
