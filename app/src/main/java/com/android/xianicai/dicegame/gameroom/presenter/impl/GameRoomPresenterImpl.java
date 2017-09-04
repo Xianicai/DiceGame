@@ -1,7 +1,9 @@
 package com.android.xianicai.dicegame.gameroom.presenter.impl;
 
 import com.android.xianicai.dicegame.base.basemvp.BasePresenterImpl;
+import com.android.xianicai.dicegame.base.basemvp.ReqBase;
 import com.android.xianicai.dicegame.gameroom.presenter.GameRoomPresenter;
+import com.android.xianicai.dicegame.gameroom.provider.data.ReqGameResult;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
 import com.android.xianicai.dicegame.gameroom.provider.impl.GameRoomProviderImpl;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
@@ -26,7 +28,9 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
         mGameRoomProvider.getGameRoomDetail(userId, roomId, reqRoomDetail, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
-                getView().getGameRoomDetail(reqRoomDetail.getT());
+                if (reqRoomDetail.code == 0) {
+                    getView().getGameRoomDetail(reqRoomDetail.getT());
+                }
             }
 
             @Override
@@ -45,4 +49,90 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
             }
         });
     }
+
+    @Override
+    public void dismissRoom(String userId, String roomId) {
+        final ReqBase reqBase = new ReqBase();
+        mGameRoomProvider.dismissRoom(userId, roomId, reqBase, new NetAsynTask.CallBack() {
+            @Override
+            public void onGetSucc() {
+                if (reqBase.code == 0) {
+                    getView().dismissRoom();
+                }
+            }
+
+            @Override
+            public void onGetFinished() {
+
+            }
+
+            @Override
+            public void onGetFaild() {
+
+            }
+
+            @Override
+            public void onGetError() {
+
+            }
+        });
+    }
+
+    @Override
+    public void startGame(String userId, String roomId) {
+        final ReqGameResult reqGameResult = new ReqGameResult();
+        mGameRoomProvider.startGame(userId, roomId, reqGameResult, new NetAsynTask.CallBack() {
+            @Override
+            public void onGetSucc() {
+                if (reqGameResult.code == 0) {
+                    getView().startGame(reqGameResult.getT());
+                }
+            }
+
+            @Override
+            public void onGetFinished() {
+
+            }
+
+            @Override
+            public void onGetFaild() {
+
+            }
+
+            @Override
+            public void onGetError() {
+
+            }
+        });
+    }
+
+    @Override
+    public void quitRoom(String userId, String roomId) {
+        final ReqBase reqBase = new ReqBase();
+        mGameRoomProvider.quitRoom(userId, roomId, reqBase, new NetAsynTask.CallBack() {
+            @Override
+            public void onGetSucc() {
+                if (reqBase.code == 0) {
+                    getView().quitRoom();
+                }
+            }
+
+            @Override
+            public void onGetFinished() {
+
+            }
+
+            @Override
+            public void onGetFaild() {
+
+            }
+
+            @Override
+            public void onGetError() {
+
+            }
+        });
+    }
+
+
 }

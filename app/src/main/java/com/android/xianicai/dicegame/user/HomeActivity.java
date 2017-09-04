@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.GameRoomActivity;
-import com.android.xianicai.dicegame.gameroom.provider.data.RoomBean;
+import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.pay.PayActivity;
 import com.android.xianicai.dicegame.user.presenter.impl.UserPresenterImpl;
 import com.android.xianicai.dicegame.user.provider.data.UserBean;
@@ -39,10 +39,6 @@ public class HomeActivity extends BaseActivity implements HomeView {
     TextView mTvGoldCount;
     @BindView(R.id.image_add_gold)
     ImageView mImageAddGold;
-    @BindView(R.id.image_finish)
-    ImageView mImageFinish;
-    @BindView(R.id.tv_home_notice)
-    TextView mTvHomeNotice;
     @BindView(R.id.image_creat_room)
     ImageView mImageCreatRoom;
     @BindView(R.id.image_join_room)
@@ -59,11 +55,9 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void initViews(Bundle savedInstanceState) {
         String code = getIntent().getStringExtra("code");
-        mUserPresenter = new UserPresenterImpl();
-        mUserPresenter.bindView(this);
-//        mUserPresenter.login(code, "1");
-        mUserPresenter.login("123456", "1");
-
+        UserPresenterImpl userPresenter = new UserPresenterImpl();
+        userPresenter.bindView(this);
+        userPresenter.login(code, "1");
     }
 
     @Override
@@ -72,14 +66,14 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void creatRoom(RoomBean roomBean) {
+    public void creatRoom(RoomDetailBean roomBean) {
 
     }
 
     @Override
-    public void joinRoomSuccess(RoomBean roomBean) {
+    public void joinRoomSuccess(RoomDetailBean roomBean) {
         mDialog.dismiss();
-        GameRoomActivity.start(this,mUserId);
+        GameRoomActivity.start(this, mUserId);
         finish();
     }
 

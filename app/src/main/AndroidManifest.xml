@@ -78,6 +78,12 @@
         <activity
             android:name="com.android.xianicai.dicegame.gameroom.GameRoomActivity"
             android:screenOrientation="landscape">
+
+        </activity>
+        <activity
+            android:name="com.android.xianicai.dicegame.gameroom.BetActivity"
+            android:screenOrientation="landscape">
+
         </activity>
         <!--极光推送start-->
         <service

@@ -7,13 +7,13 @@ import com.android.xianicai.dicegame.utils.netutil.ReqCommon;
 import org.json.JSONObject;
 
 /**
- * Created by Zhanglibin on 2017/9/2.
+ * Created by Zhanglibin on 2017/9/4.
  */
 
-public class ReqRoomDetail extends ReqCommon<RoomDetailBean> {
+public class ReqGameResult extends ReqCommon<GameResultBean> {
     @Override
     protected void parseResult(@NonNull JSONObject jsonObject) throws Exception {
-        RoomDetailBean bean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(),RoomDetailBean.class);
+        GameResultBean bean = com.alibaba.fastjson.JSONObject.parseObject(jsonObject.toString(),GameResultBean.class);
         setT(bean);
     }
 }

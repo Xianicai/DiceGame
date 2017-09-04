@@ -124,7 +124,7 @@ public class NetAsynTask {
         if (null != map) {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 params.addParameter(entry.getKey(), entry.getValue());
-                sb.append("\n" + entry.getKey() + "=" + entry.getValue());
+                sb.append("\n" + entry.getKey() + " = " + entry.getValue());
             }
         }
         Log.i(TAG+"——→POST:", params.toString());

@@ -23,4 +23,21 @@ public class Urls {
      * 获取房间详情
      */
     public static final String POST_ROOM_DETAIL = BASE_URL_b + "room/detail";
+    /**
+     * 开始游戏
+     */
+    public static final String POST_STAR_GAME = BASE_URL_b + "room/detail";
+    /**
+     * 金币下注
+     * */
+    public static final String POST_BET_GAME = BASE_URL_b + "room/detail";
+
+    /**
+     * 退出房间
+     */
+    public static final String POST_QUITE_ROOM = BASE_URL_b + "room/detail";
+    /**
+     * 解散房间
+     */
+    public static final String POST_DISMISS_ROOM = BASE_URL_b + "room/detail";
 }

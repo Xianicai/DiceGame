@@ -27,7 +27,7 @@ public class UserProviderImpl implements UserProvider {
     public void creatRoom(String userId, ReqCreatRoom reqCreatRoom,NetAsynTask.CallBack callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("userId", userId);
-        NetAsynTask.connectByPost(Urls.GET_ROOM_DETAIL, map, reqCreatRoom, callBack);
+        NetAsynTask.connectByPost(Urls.POST_ROOM_DETAIL, map, reqCreatRoom, callBack);
     }
 
     @Override
