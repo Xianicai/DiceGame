@@ -14,6 +14,7 @@ import com.android.xianicai.dicegame.gameroom.provider.data.GameResultBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
 import com.android.xianicai.dicegame.pay.PayActivity;
+import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
 
 import butterknife.BindView;
@@ -70,10 +71,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     }
 
 
-    public static void start(Context context, String userId) {
-        context.startActivity(new Intent(context, GameRoomActivity.class).putExtra("userId", userId));
-    }
-
     @Override
     public void getGameRoomDetail(RoomDetailBean RoomBean) {
 
@@ -104,7 +101,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 BetActivity.start(this, mUserId, mRoomId);
                 break;
             case R.id.image_dissmiaa_room:
-                mRoomPresenter.dismissRoom(mUserId, mRoomId);
+                dismissRoomClidked();
                 break;
             case R.id.image_add_gold:
                 PayActivity.start(this, mUserId);
@@ -112,7 +109,28 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         }
     }
 
-    public static void star(Context context, String userId, String roomId) {
+    /**
+     * 解散房间的点击事件
+     */
+    private void dismissRoomClidked() {
+        new ConfirmDialog(this).setMessage("是否解散当前房间，解散后无法恢复").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+            @Override
+            public void onClick(ConfirmDialog dialog, View v) {
+                mRoomPresenter.dismissRoom(mUserId, mRoomId);
+                dialog.dismiss();
+
+            }
+        }, new ConfirmDialog.OnConfirmDialogClickListener() {
+            @Override
+            public void onClick(ConfirmDialog dialog, View v) {
+                dialog.dismiss();
+            }
+        }).show();
+
+    }
+
+    public static void start(Context context, String userId, String roomId) {
         context.startActivity(new Intent(context, GameRoomActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
     }
+
 }

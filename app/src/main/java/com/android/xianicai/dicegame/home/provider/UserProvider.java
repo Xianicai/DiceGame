@@ -1,8 +1,8 @@
-package com.android.xianicai.dicegame.user.provider;
+package com.android.xianicai.dicegame.home.provider;
 
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
-import com.android.xianicai.dicegame.user.provider.data.ReqCreatRoom;
-import com.android.xianicai.dicegame.user.provider.data.ReqUser;
+import com.android.xianicai.dicegame.home.provider.data.ReqCreatRoom;
+import com.android.xianicai.dicegame.home.provider.data.ReqUser;
 import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
 
 /**

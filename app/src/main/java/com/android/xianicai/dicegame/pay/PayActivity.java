@@ -20,8 +20,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.android.xianicai.dicegame.Urls.POST_CREAT_WEIXIN_ODER;
-
 public class PayActivity extends BaseActivity implements PayView {
     @BindView(R.id.numberchangelayout)
     NumberChangeLayout mNumberchangelayout;
@@ -71,7 +69,7 @@ public class PayActivity extends BaseActivity implements PayView {
                 onBackPressed();
                 break;
             case R.id.image_go_pay:
-                int goldCount = mNumberchangelayout.getGoldCount();
+                int goldCount = mNumberchangelayout.getGoldPrice();
                 if (mWxapi.isWXAppInstalled()) {
                     mPresenter.getWeiXInOrder("mUserId", goldCount + "");
                 } else {

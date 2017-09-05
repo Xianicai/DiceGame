@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg_home"
-    tools:context="com.android.xianicai.dicegame.user.HomeActivity">
+    tools:context="com.android.xianicai.dicegame.home.HomeActivity">
 
     <ImageView
         android:id="@+id/image_bg_top"

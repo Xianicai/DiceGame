@@ -1,4 +1,4 @@
-package com.android.xianicai.dicegame.user.provider.data;
+package com.android.xianicai.dicegame.home.provider.data;
 
 /**
  * Created by Zhanglibin on 2017/8/30.

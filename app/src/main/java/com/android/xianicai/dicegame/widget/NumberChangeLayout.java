@@ -88,7 +88,7 @@ public class NumberChangeLayout extends LinearLayout {
         mImageAdd.setImageResource(rightImg);
     }
 
-    public int getGoldCount() {
+    public int getGoldPrice() {
         return Integer.parseInt(mTvNumber.getText().toString())/goldCount;
     }
 }

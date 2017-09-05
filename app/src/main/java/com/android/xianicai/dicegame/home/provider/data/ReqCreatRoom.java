@@ -1,4 +1,4 @@
-package com.android.xianicai.dicegame.user.provider.data;
+package com.android.xianicai.dicegame.home.provider.data;
 
 import android.support.annotation.NonNull;
 

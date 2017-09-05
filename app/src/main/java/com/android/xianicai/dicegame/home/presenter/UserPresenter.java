@@ -1,4 +1,4 @@
-package com.android.xianicai.dicegame.user.presenter;
+package com.android.xianicai.dicegame.home.presenter;
 
 /**
  * Created by Zhanglibin on 2017/8/30.

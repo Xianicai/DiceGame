@@ -1,4 +1,4 @@
-package com.android.xianicai.dicegame.user;
+package com.android.xianicai.dicegame.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,7 +36,6 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.image_login)
     public void onViewClicked() {
-//        HomeActivity.start(this,null);
         if (BaseApplication.api == null) {
             BaseApplication.api = WXAPIFactory.createWXAPI(this, Constant.APP_ID, true);
         }

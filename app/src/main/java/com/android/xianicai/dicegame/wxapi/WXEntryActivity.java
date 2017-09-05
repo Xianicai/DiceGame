@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.xianicai.dicegame.Constant;
-import com.android.xianicai.dicegame.user.HomeActivity;
+import com.android.xianicai.dicegame.home.HomeActivity;
 import com.android.xianicai.dicegame.utils.RxBus;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;

@@ -1,4 +1,4 @@
-package com.android.xianicai.dicegame.user;
+package com.android.xianicai.dicegame.home;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,9 +14,9 @@ import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.GameRoomActivity;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.pay.PayActivity;
-import com.android.xianicai.dicegame.user.presenter.impl.UserPresenterImpl;
-import com.android.xianicai.dicegame.user.provider.data.UserBean;
-import com.android.xianicai.dicegame.user.view.HomeView;
+import com.android.xianicai.dicegame.home.presenter.impl.UserPresenterImpl;
+import com.android.xianicai.dicegame.home.provider.data.UserBean;
+import com.android.xianicai.dicegame.home.view.HomeView;
 import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
@@ -46,6 +46,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
     private UserPresenterImpl mUserPresenter;
     private AlertDialog mDialog;
     private String mUserId;
+    private UserBean mUserBean;
 
     @Override
     public int getlayoutId() {
@@ -54,31 +55,50 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        mUserId = "26549";
+        mUserBean = new UserBean();
         String code = getIntent().getStringExtra("code");
-        UserPresenterImpl userPresenter = new UserPresenterImpl();
-        userPresenter.bindView(this);
-        userPresenter.login(code, "1");
+        mUserPresenter = new UserPresenterImpl();
+        mUserPresenter.bindView(this);
+        mUserPresenter.login(code, "1");
     }
 
     @Override
     public void login(UserBean userBean) {
         mUserId = userBean.getUserId();
+        mImageHead.setImage(userBean.getUserLogo());
+        mTvUserName.setText(userBean.getUserName());
+        mTvUserId.setText(userBean.getUserId());
+        mTvDiamondCount.setText(userBean.getDiamondCount());
+        mTvGoldCount.setText(userBean.getGoldCount());
+
+    }
+
+    @Override
+    public void loginFaild() {
+        // FIXME: 2017/9/5  登录失败关闭APP
+//        finish();
     }
 
     @Override
     public void creatRoom(RoomDetailBean roomBean) {
-
+        if (roomBean != null && StringUtil.isNotBlank(roomBean.getResult().getRoomId())) {
+            GameRoomActivity.start(this, mUserId, roomBean.getResult().getRoomId());
+        }
     }
 
     @Override
     public void joinRoomSuccess(RoomDetailBean roomBean) {
-        mDialog.dismiss();
-        GameRoomActivity.start(this, mUserId);
-        finish();
+        if (roomBean != null && StringUtil.isNotBlank(roomBean.getResult().getRoomId())) {
+            mDialog.dismiss();
+            GameRoomActivity.start(this, mUserId, roomBean.getResult().getRoomId());
+            finish();
+        }
+
     }
 
     @Override
-    public void JoinRommFaild(String msg) {
+    public void joinRoomFaild(String msg) {
         ToastUtil.showMessage(msg);
 
     }
@@ -127,9 +147,9 @@ public class HomeActivity extends BaseActivity implements HomeView {
         imageSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String roomNumber = edRoomNumber.getText().toString();
-                if (StringUtil.isNotBlank(roomNumber) && roomNumber.length() == 5) {
-
+                String roomId = edRoomNumber.getText().toString();
+                if (StringUtil.isNotBlank(roomId) && roomId.length() == 5) {
+                    mUserPresenter.joinRoom(mUserId,roomId);
                 } else {
                     ToastUtil.showMessage("房间号有误，请重新输入");
                 }
@@ -155,6 +175,9 @@ public class HomeActivity extends BaseActivity implements HomeView {
         new ConfirmDialog(this).setMessage("创建房间将消费10个钻石，是否创建？").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override
             public void onClick(ConfirmDialog dialog, View v) {
+                if (dialog != null) {
+
+                }
                 //创建房间
                 mUserPresenter.creatRomm(mUserId);
                 dialog.dismiss();

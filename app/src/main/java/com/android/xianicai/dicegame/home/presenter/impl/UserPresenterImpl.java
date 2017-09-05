@@ -1,12 +1,12 @@
-package com.android.xianicai.dicegame.user.presenter.impl;
+package com.android.xianicai.dicegame.home.presenter.impl;
 
 import com.android.xianicai.dicegame.base.basemvp.BasePresenterImpl;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
-import com.android.xianicai.dicegame.user.presenter.UserPresenter;
-import com.android.xianicai.dicegame.user.provider.data.ReqCreatRoom;
-import com.android.xianicai.dicegame.user.provider.data.ReqUser;
-import com.android.xianicai.dicegame.user.provider.impl.UserProviderImpl;
-import com.android.xianicai.dicegame.user.view.HomeView;
+import com.android.xianicai.dicegame.home.presenter.UserPresenter;
+import com.android.xianicai.dicegame.home.provider.data.ReqCreatRoom;
+import com.android.xianicai.dicegame.home.provider.data.ReqUser;
+import com.android.xianicai.dicegame.home.provider.impl.UserProviderImpl;
+import com.android.xianicai.dicegame.home.view.HomeView;
 import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
 
 /**
@@ -27,7 +27,11 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
         mUserProvider.login(code, phone, reqUser, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
-                getView().login(reqUser.getT());
+                if (reqUser.code ==0) {
+                    getView().login(reqUser.getT());
+                }else {
+                    getView().loginFaild();
+                }
             }
 
             @Override
@@ -37,12 +41,12 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFaild() {
-
+                getView().loginFaild();
             }
 
             @Override
             public void onGetError() {
-
+                getView().loginFaild();
             }
         });
     }
@@ -53,7 +57,9 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
         mUserProvider.creatRoom(userId, creatRoom, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
-                getView().creatRoom(creatRoom.getT());
+                if (creatRoom.code == 0) {
+                    getView().creatRoom(creatRoom.getT());
+                }
             }
 
             @Override
@@ -79,7 +85,11 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
         mUserProvider.joinRoom(userId,roomId, reqRoomDetail, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
-                getView().joinRoomSuccess(reqRoomDetail.getT());
+                if ( reqRoomDetail.code ==0) {
+                    getView().joinRoomSuccess(reqRoomDetail.getT());
+                }else {
+                    getView().joinRoomFaild(reqRoomDetail.message);
+                }
             }
 
             @Override
@@ -89,12 +99,12 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFaild() {
-                getView().JoinRommFaild(reqRoomDetail.message);
+                getView().joinRoomFaild(reqRoomDetail.message);
             }
 
             @Override
             public void onGetError() {
-
+                getView().joinRoomFaild(reqRoomDetail.message);
             }
         });
     }

@@ -55,7 +55,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.android.xianicai.dicegame.user.LoginActivity"
+            android:name="com.android.xianicai.dicegame.home.LoginActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -68,7 +68,7 @@
             android:exported="true"
             android:screenOrientation="landscape"/>
         <activity
-            android:name="com.android.xianicai.dicegame.user.HomeActivity"
+            android:name="com.android.xianicai.dicegame.home.HomeActivity"
             android:screenOrientation="landscape">
         </activity>
         <activity
