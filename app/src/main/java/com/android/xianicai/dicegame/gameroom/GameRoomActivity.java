@@ -18,9 +18,11 @@ import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
+    public static int goldcount ;
 
     @BindView(R.id.tv_room_number)
     TextView mTvRoomNumber;
@@ -52,6 +54,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     ImageView mImageBgGold;
     @BindView(R.id.image_gold)
     ImageView mImageGold;
+    @BindView(R.id.image_quit_room)
+    ImageView mImageQuitRoom;
     private GameRoomPresenterImpl mRoomPresenter;
     private String mUserId;
     private String mRoomId;
@@ -91,7 +95,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     }
 
-    @OnClick({R.id.image_start_game, R.id.image_bet, R.id.image_dissmiaa_room, R.id.image_add_gold})
+    @OnClick({R.id.image_start_game, R.id.image_bet, R.id.image_dissmiaa_room, R.id.image_add_gold, R.id.image_quit_room})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_start_game:
@@ -105,6 +109,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 break;
             case R.id.image_add_gold:
                 PayActivity.start(this, mUserId);
+                break;
+            case R.id.image_quit_room:
                 break;
         }
     }
@@ -133,4 +139,10 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         context.startActivity(new Intent(context, GameRoomActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

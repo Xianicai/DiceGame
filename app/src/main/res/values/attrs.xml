@@ -11,4 +11,9 @@
         <attr name="rightImage" format="reference"></attr>
     </declare-styleable>
 
+    <!--BetNumChangeLayout-->
+    <declare-styleable name="BetNumChangeLayout">
+        <attr name="imageIcon" format="reference"></attr>
+    </declare-styleable>
+
 </resources>
