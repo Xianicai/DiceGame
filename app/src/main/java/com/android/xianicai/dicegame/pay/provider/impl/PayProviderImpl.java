@@ -18,6 +18,6 @@ public class PayProviderImpl implements PayProvider {
         Map<String, String> map = new HashMap<>();
         map.put("usrId", usrId);
         map.put("price", price);
-        NetAsynTask.connectByPost(Urls.POST_WEIXIN_LOGIN, map, reqPayOrder, callBack);
+        NetAsynTask.connectByPost(Urls.POST_CREAT_WEIXIN_ODER, map, reqPayOrder, callBack);
     }
 }

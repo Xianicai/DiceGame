@@ -71,7 +71,7 @@ public class PayActivity extends BaseActivity implements PayView {
             case R.id.image_go_pay:
                 int goldCount = mNumberchangelayout.getGoldPrice();
                 if (mWxapi.isWXAppInstalled()) {
-                    mPresenter.getWeiXInOrder("mUserId", goldCount + "");
+                    mPresenter.getWeiXInOrder(mUserId, goldCount + "");
                 } else {
                     ToastUtil.showMessage("您手机尚未安装微信，请安装后再进行支付。");
                 }

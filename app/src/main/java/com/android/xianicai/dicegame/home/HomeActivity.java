@@ -149,7 +149,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
             public void onClick(View v) {
                 String roomId = edRoomNumber.getText().toString();
                 if (StringUtil.isNotBlank(roomId) && roomId.length() == 5) {
-                    mUserPresenter.joinRoom(mUserId,roomId);
+                    mUserPresenter.joinRoom(mUserId, roomId);
                 } else {
                     ToastUtil.showMessage("房间号有误，请重新输入");
                 }

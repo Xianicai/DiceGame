@@ -13,7 +13,7 @@ public class Urls {
     /**
      * 创建支付订单
      */
-    public static final String POST_CREAT_WEIXIN_ODER = BASE_URL + "pay/create/order";
+    public static final String POST_CREAT_WEIXIN_ODER = BASE_URL + "order/create";
     /**
      * 创建房间
      */
