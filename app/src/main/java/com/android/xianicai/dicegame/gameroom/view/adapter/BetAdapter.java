@@ -1,6 +1,7 @@
 package com.android.xianicai.dicegame.gameroom.view.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.xianicai.dicegame.R;
+import com.android.xianicai.dicegame.gameroom.provider.data.BetBean;
+
+import java.util.List;
 
 /**
  * Created by Zhanglibin on 2017/9/5.
@@ -15,8 +19,11 @@ import com.android.xianicai.dicegame.R;
 
 public class BetAdapter extends RecyclerView.Adapter<BetAdapter.BetVH> {
     private Context context;
-    public BetAdapter(Context context) {
+    private List<BetBean> betBeanList;
+
+    public BetAdapter(Context context, List<BetBean> betBeanList) {
         this.context = context;
+        this.betBeanList = betBeanList;
     }
 
     @Override
@@ -28,7 +35,11 @@ public class BetAdapter extends RecyclerView.Adapter<BetAdapter.BetVH> {
 
     @Override
     public void onBindViewHolder(BetVH holder, int position) {
-
+        holder.mRecyclerView.setHasFixedSize(true);
+        holder.mRecyclerView.setLayoutManager(new GridLayoutManager(context, 4));
+//        List<BeatItemBean> mBeatItemBeen = new ArrayList<>();
+        BetItemAdapter betItemAdapter = new BetItemAdapter(context, betBeanList.get(position).mBeatItemBeen);
+        holder.mRecyclerView.setAdapter(betItemAdapter);
     }
 
     @Override
@@ -44,8 +55,8 @@ public class BetAdapter extends RecyclerView.Adapter<BetAdapter.BetVH> {
 
         public BetVH(View itemView) {
             super(itemView);
-            mRecyclerView = (RecyclerView)itemView.findViewById(R.id.recyclerview);
-            mTvTitle = (TextView)itemView.findViewById(R.id.tv_title);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.recyclerview);
+            mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);
         }
     }
 }

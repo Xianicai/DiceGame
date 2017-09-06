@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/icon_pay_minus"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/tv_number"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_number"/>
 
     <TextView
@@ -31,10 +31,10 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/white"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:singleLine="true"
+        android:textColor="@color/white"
         app:layout_constraintLeft_toRightOf="@+id/image_minus"
         app:layout_constraintTop_toBottomOf="@+id/image_icon"/>
 
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:src="@mipmap/icom_pay_add"
-        app:layout_constraintLeft_toRightOf="@+id/tv_number"
         app:layout_constraintBottom_toBottomOf="@+id/tv_number"
+        app:layout_constraintLeft_toRightOf="@+id/tv_number"
         app:layout_constraintTop_toTopOf="@+id/tv_number"/>
 </android.support.constraint.ConstraintLayout>
