@@ -14,6 +14,12 @@ public class Urls {
      * 创建支付订单
      */
     public static final String POST_CREAT_WEIXIN_ODER = BASE_URL + "order/create";
+
+    /**
+     * 支付成功
+     */
+    public static final String POST_PAY_SUCCESS = BASE_URL + "pay/success";
+
     /**
      * 创建房间
      */
@@ -25,18 +31,18 @@ public class Urls {
     /**
      * 开始游戏
      */
-    public static final String POST_STAR_GAME = BASE_URL + "room/detail";
+    public static final String POST_STAR_GAME = BASE_URL + "game/start";
     /**
      * 金币下注
-     * */
-    public static final String POST_BET_GAME = BASE_URL + "room/detail";
+     */
+    public static final String POST_BET_GAME = BASE_URL + "user/bet";
 
     /**
      * 退出房间
      */
-    public static final String POST_QUITE_ROOM = BASE_URL + "room/detail";
+    public static final String POST_QUITE_ROOM = BASE_URL + "user/exit";
     /**
      * 解散房间
      */
-    public static final String POST_DISMISS_ROOM = BASE_URL + "room/detail";
+    public static final String POST_DISMISS_ROOM = BASE_URL + "user/dissolve";
 }

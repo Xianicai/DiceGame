@@ -56,9 +56,10 @@ public class WXPayActivity extends Activity implements IWXAPIEventHandler {
                 if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
                     final ReqBase req = new ReqBase();
                     Map<String, String> map = new HashMap<>();
-                    map.put("usrId", userId);
-                    map.put("price", "");
-                    NetAsynTask.connectByPost(Urls.BASE_URL, map, req, new NetAsynTask.CallBack() {
+                    map.put("userId", userId);
+                    map.put("orderId", "123456");
+                    map.put("status", 0+"");
+                    NetAsynTask.connectByPost(Urls.POST_PAY_SUCCESS, map, req, new NetAsynTask.CallBack() {
                         @Override
                         public void onGetSucc() {
                             if (req.code == 200) {

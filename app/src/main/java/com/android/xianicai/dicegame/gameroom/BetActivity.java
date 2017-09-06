@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
+import com.android.xianicai.dicegame.gameroom.provider.data.BeatItemBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.BetBean;
 import com.android.xianicai.dicegame.gameroom.view.BetView;
 import com.android.xianicai.dicegame.gameroom.view.adapter.BetAdapter;
@@ -25,6 +27,9 @@ public class BetActivity extends BaseActivity implements BetView {
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
+    @BindView(R.id.image_bet)
+    ImageView mImageBet;
+
     private String mUserId;
     private String mRoomId;
     private int[] icon = {R.mipmap.icon_manager_magic};
@@ -41,6 +46,7 @@ public class BetActivity extends BaseActivity implements BetView {
         List<BetBean> betBeanList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             BetBean betBean = new BetBean();
+            betBean.mBeatItemBeen = new ArrayList<>();
             int itemCount = 0;
             switch (i) {
                 case 0:
@@ -61,7 +67,9 @@ public class BetActivity extends BaseActivity implements BetView {
                     break;
             }
             for (int j = 0; j < itemCount; j++) {
-                betBean.mBeatItemBeen.get(j).icon = icon[0];
+                BeatItemBean beatItemBean = new BeatItemBean();
+                beatItemBean.icon = icon[0];
+                betBean.mBeatItemBeen.add(beatItemBean);
             }
             betBeanList.add(betBean);
         }

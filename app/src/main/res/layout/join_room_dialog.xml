@@ -32,7 +32,7 @@
         android:layout_height="25dp"
         android:background="@drawable/bg_home_roud"
         android:gravity="center"
-        android:hint="例如:36885"
+        android:hint="例如:368858"
         android:textSize="13sp"
         android:inputType="number"
         android:maxLength="6"

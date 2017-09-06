@@ -1,5 +1,7 @@
 package com.android.xianicai.dicegame.home;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,16 +15,17 @@ import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.GameRoomActivity;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
-import com.android.xianicai.dicegame.pay.PayActivity;
 import com.android.xianicai.dicegame.home.presenter.impl.UserPresenterImpl;
 import com.android.xianicai.dicegame.home.provider.data.UserBean;
 import com.android.xianicai.dicegame.home.view.HomeView;
+import com.android.xianicai.dicegame.pay.PayActivity;
 import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity implements HomeView {
@@ -43,6 +46,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
     ImageView mImageCreatRoom;
     @BindView(R.id.image_join_room)
     ImageView mImageJoinRoom;
+    @BindView(R.id.image_light_top)
+    ImageView mImageLightTop;
     private UserPresenterImpl mUserPresenter;
     private AlertDialog mDialog;
     private String mUserId;
@@ -55,12 +60,25 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+//        statAnimator();
         mUserId = "26549";
         mUserBean = new UserBean();
         String code = getIntent().getStringExtra("code");
         mUserPresenter = new UserPresenterImpl();
         mUserPresenter.bindView(this);
         mUserPresenter.login(code, "1");
+    }
+
+    /**
+     * 开始动画
+     */
+    private void statAnimator() {
+        ObjectAnimator transXAnim = ObjectAnimator.ofFloat(mImageLightTop, "translationX", 1200,-300 );
+        transXAnim.setRepeatCount(-1);
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(transXAnim);
+        set.setDuration(4000);
+        set.start();
     }
 
     @Override
@@ -148,7 +166,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
             @Override
             public void onClick(View v) {
                 String roomId = edRoomNumber.getText().toString();
-                if (StringUtil.isNotBlank(roomId) && roomId.length() == 5) {
+                if (StringUtil.isNotBlank(roomId) && roomId.length() == 6) {
                     mUserPresenter.joinRoom(mUserId, roomId);
                 } else {
                     ToastUtil.showMessage("房间号有误，请重新输入");
@@ -216,5 +234,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
                 dialog.dismiss();
             }
         }).show();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

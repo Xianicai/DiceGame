@@ -5,5 +5,5 @@ package com.android.xianicai.dicegame.pay.presenter;
  */
 
 public interface PaypPresenter {
-    void getWeiXInOrder(String usrId, String price);
+    void getWeiXInOrder(String userId, String price);
 }

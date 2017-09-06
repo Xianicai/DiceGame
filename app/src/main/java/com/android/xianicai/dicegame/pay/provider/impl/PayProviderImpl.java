@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class PayProviderImpl implements PayProvider {
     @Override
-    public void getWeiXInOrder(String usrId, String price,  ReqPayOrder reqPayOrder,NetAsynTask.CallBack callBack) {
+    public void getWeiXInOrder(String userId, String price,  ReqPayOrder reqPayOrder,NetAsynTask.CallBack callBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("usrId", usrId);
+        map.put("userId", userId);
         map.put("price", price);
         NetAsynTask.connectByPost(Urls.POST_CREAT_WEIXIN_ODER, map, reqPayOrder, callBack);
     }

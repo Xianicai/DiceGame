@@ -75,6 +75,8 @@ public class PayActivity extends BaseActivity implements PayView {
                 } else {
                     ToastUtil.showMessage("您手机尚未安装微信，请安装后再进行支付。");
                 }
+
+
                 break;
         }
     }

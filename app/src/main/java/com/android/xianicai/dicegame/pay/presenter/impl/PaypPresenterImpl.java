@@ -20,9 +20,9 @@ public class PaypPresenterImpl extends BasePresenterImpl<PayView> implements Pay
     }
 
     @Override
-    public void getWeiXInOrder(String usrId, String price) {
+    public void getWeiXInOrder(String userId, String price) {
         final ReqPayOrder reqPayOrder = new ReqPayOrder();
-        mPayProvider.getWeiXInOrder(usrId, price, reqPayOrder, new NetAsynTask.CallBack() {
+        mPayProvider.getWeiXInOrder(userId, price, reqPayOrder, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (reqPayOrder.code == 0) {

@@ -8,5 +8,5 @@ import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
  */
 
 public interface PayProvider {
-    void getWeiXInOrder(String usrId, String price,  ReqPayOrder reqPayOrder,NetAsynTask.CallBack callBack);
+    void getWeiXInOrder(String userId, String price,  ReqPayOrder reqPayOrder,NetAsynTask.CallBack callBack);
 }

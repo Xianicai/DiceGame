@@ -35,6 +35,7 @@ public class BetAdapter extends RecyclerView.Adapter<BetAdapter.BetVH> {
 
     @Override
     public void onBindViewHolder(BetVH holder, int position) {
+        holder.mTvTitle.setText(betBeanList.get(position).title);
         holder.mRecyclerView.setHasFixedSize(true);
         holder.mRecyclerView.setLayoutManager(new GridLayoutManager(context, 4));
 //        List<BeatItemBean> mBeatItemBeen = new ArrayList<>();

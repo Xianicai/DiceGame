@@ -58,7 +58,7 @@ public class BetNumChangeLayout extends LinearLayout {
             mImageIcon.setImageResource(mTopICon);
         }
 
-        mTvNumber.setText(goldCount + "");
+        mTvNumber.setText("0");
     }
 
     @OnClick({R.id.image_minus, R.id.image_add})
@@ -68,7 +68,7 @@ public class BetNumChangeLayout extends LinearLayout {
         switch (view.getId()) {
             case R.id.image_minus:
 
-                if (number > goldCount) {
+                if (number > 0) {
                     GameRoomActivity.goldcount += 100;
                     mTvNumber.setText((number - goldCount) + "");
                 }

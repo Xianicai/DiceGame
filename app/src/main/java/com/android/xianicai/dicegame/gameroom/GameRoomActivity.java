@@ -18,11 +18,10 @@ import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
-    public static int goldcount ;
+    public static int goldcount = 1000;
 
     @BindView(R.id.tv_room_number)
     TextView mTvRoomNumber;
@@ -82,7 +81,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void dismissRoom() {
-
+        finish();
     }
 
     @Override
@@ -92,7 +91,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void quitRoom() {
-
+        finish();
     }
 
     @OnClick({R.id.image_start_game, R.id.image_bet, R.id.image_dissmiaa_room, R.id.image_add_gold, R.id.image_quit_room})
@@ -111,8 +110,29 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 PayActivity.start(this, mUserId);
                 break;
             case R.id.image_quit_room:
+                exitRoom();
+
                 break;
         }
+    }
+
+    /**
+     * 退出房间
+     */
+    private void exitRoom() {
+        new ConfirmDialog(this).setMessage("是否退出当前房间?").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+            @Override
+            public void onClick(ConfirmDialog dialog, View v) {
+                mRoomPresenter.quitRoom(mUserId, mRoomId);
+                dialog.dismiss();
+
+            }
+        }, new ConfirmDialog.OnConfirmDialogClickListener() {
+            @Override
+            public void onClick(ConfirmDialog dialog, View v) {
+                dialog.dismiss();
+            }
+        }).show();
     }
 
     /**
@@ -137,12 +157,5 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     public static void start(Context context, String userId, String roomId) {
         context.startActivity(new Intent(context, GameRoomActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }
