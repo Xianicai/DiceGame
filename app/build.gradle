@@ -51,6 +51,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //极光推送
     compile 'cn.jiguang.sdk:jpush:3.0.8'
+    compile 'cn.jiguang.sdk:jcore:1.1.1'
     // 此处以JPush 3.0.8 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.6'
     // 此处以JCore 1.1.6 版本为例。

@@ -38,7 +38,7 @@ public class GlideImageView extends ImageView {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.GlideImageView);
         mDefaultImageResId = ta.getResourceId(R.styleable.GlideImageView_placeholderImage, 0);
         ta.recycle();
-        if (mDefaultImageResId != 0){
+        if (mDefaultImageResId != 0) {
             setImageResource(mDefaultImageResId);
         }
 
@@ -54,34 +54,29 @@ public class GlideImageView extends ImageView {
                     .centerCrop()
                     .crossFade()
                     .into(this);
-        }else{
+        } else {
             ToastUtil.showMessage("亲请设置默认图片n(*≧▽≦*)n");
         }
 
     }
-    public void setDefaultImage(int backgroud){
+
+    public void setDefaultImage(int backgroud) {
         mDefaultImageResId = backgroud;
 
     }
+
     //        设置圆角图片
-    public void setRounImage(String url) {
+    public void setRoundImage(String url, int round) {
         if (mDefaultImageResId != 0) {
+
             Glide.with(mCon)
                     .load(url)
-                    .asBitmap()
                     .placeholder(mDefaultImageResId)
                     .error(mDefaultImageResId)
                     .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
-                    .into(new BitmapImageViewTarget(this) {
-                        @Override
-                        protected void setResource(Bitmap resource) {
-                            RoundedBitmapDrawable circularBitmapDrawable =
-                                    RoundedBitmapDrawableFactory.create(mCon.getResources(), resource);
-                            circularBitmapDrawable.setCircular(true);
-                            GlideImageView.this.setImageDrawable(circularBitmapDrawable);
-                        }
-                    });
-        }else{
+                    .transform(new GlideRoundTransform(mCon, round))
+                    .into(this);
+        } else {
             ToastUtil.showMessage("亲请设置默认图片n(*≧▽≦*)n");
         }
 

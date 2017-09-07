@@ -32,6 +32,10 @@ public class BetActivity extends BaseActivity implements BetView {
 
     private String mUserId;
     private String mRoomId;
+    private int[] itemId = {BetBean.BET_ID_SIZE_BIG, BetBean.BET_ID__SIZE_SMALL, BetBean.BET_ID_SINGLEDOUBLE_SINGLE, BetBean.BET_ID_SINGLEDOUBLE_DOUBLE, BetBean.BET_ID_NUMBER_NINE,
+            BetBean.BET_ID_NUMBER_TEN, BetBean.BET_ID_NUMBER_ELEVEN, BetBean.BET_ID_NUMBER_TWELVE, BetBean.BET_ID_NUMBER_SEVEN, BetBean.BET_ID_NUMBER_EIGHT, BetBean.BET_ID_NUMBER_THIRTEEN,
+            BetBean.BET_ID_NUMBER_FOURTEEN, BetBean.BET_ID_NUMBER_FIVE, BetBean.BET_ID_NUMBER_SIX, BetBean.BET_ID_NUMBER_FIFTEEN, BetBean.BET_ID_NUMBER_SIXTEEN, BetBean.BET_ID_NUMBER_FOUR,
+            BetBean.BET_ID_NUMBER_SEVENTEEN, BetBean.BET_ID_LEOPARD_ONE, BetBean.BET_ID_LEOPARD_TWO, BetBean.BET_ID_LEOPARD_THREE, BetBean.BET_ID_LEOPARD_FOUR, BetBean.BET_ID_LEOPARD_FIVE, BetBean.BET_ID_LEOPARD_SIX};
     private int[] icon = {R.mipmap.icon_manager_magic};
 
     @Override
@@ -48,6 +52,7 @@ public class BetActivity extends BaseActivity implements BetView {
             BetBean betBean = new BetBean();
             betBean.mBeatItemBeen = new ArrayList<>();
             int itemCount = 0;
+            int idIndex = 0;
             switch (i) {
                 case 0:
                     betBean.title = "大小";
@@ -69,7 +74,9 @@ public class BetActivity extends BaseActivity implements BetView {
             for (int j = 0; j < itemCount; j++) {
                 BeatItemBean beatItemBean = new BeatItemBean();
                 beatItemBean.icon = icon[0];
+                beatItemBean.id = itemId[idIndex];
                 betBean.mBeatItemBeen.add(beatItemBean);
+                idIndex++;
             }
             betBeanList.add(betBean);
         }
@@ -84,6 +91,7 @@ public class BetActivity extends BaseActivity implements BetView {
     public void setBet() {
 
     }
+
 
     public static void start(Context context, String userId, String roomId) {
         context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));

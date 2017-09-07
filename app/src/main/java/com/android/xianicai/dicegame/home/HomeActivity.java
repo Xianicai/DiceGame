@@ -61,7 +61,6 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void initViews(Bundle savedInstanceState) {
 //        statAnimator();
-        mUserId = "26549";
         mUserBean = new UserBean();
         String code = getIntent().getStringExtra("code");
         mUserPresenter = new UserPresenterImpl();
@@ -73,7 +72,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
      * 开始动画
      */
     private void statAnimator() {
-        ObjectAnimator transXAnim = ObjectAnimator.ofFloat(mImageLightTop, "translationX", 1200,-300 );
+        ObjectAnimator transXAnim = ObjectAnimator.ofFloat(mImageLightTop, "translationX", 1200, -300);
         transXAnim.setRepeatCount(-1);
         AnimatorSet set = new AnimatorSet();
         set.playTogether(transXAnim);
@@ -83,19 +82,20 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void login(UserBean userBean) {
-        mUserId = userBean.getUserId();
-        mImageHead.setImage(userBean.getUserLogo());
-        mTvUserName.setText(userBean.getUserName());
-        mTvUserId.setText(userBean.getUserId());
-        mTvDiamondCount.setText(userBean.getDiamondCount());
-        mTvGoldCount.setText(userBean.getGoldCount());
+
+        mUserBean = userBean;
+        mUserId = userBean.getResult().getUserId();
+        mImageHead.setRoundImage(userBean.getResult().getUserLogo(),4);
+        mTvUserName.setText(userBean.getResult().getUserName());
+        mTvUserId.setText("ID:" + userBean.getResult().getUserId());
+        mTvDiamondCount.setText(userBean.getResult().getDiamondCount() + "");
+        mTvGoldCount.setText(userBean.getResult().getGoldCount() + "");
 
     }
 
     @Override
     public void loginFaild() {
-        // FIXME: 2017/9/5  登录失败关闭APP
-//        finish();
+        finish();
     }
 
     @Override

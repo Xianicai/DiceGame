@@ -5,73 +5,134 @@ package com.android.xianicai.dicegame.home.provider.data;
  */
 
 public class UserBean {
-    private String token;
+
     /**
-     * 用户ID
+     * result : {"accessToken":"aKgl8MiCZIoJQakW8TMEcGuUhVd8ofJ3ox_OoqqGofsVEihLh97MXkxkUzBgGE0KQKIoeXnZ98YDg8tWyxD8Eg","code":"0118PBpR03oVNa2jQwnR0b6LpR08PBpi","diamondCount":100,"goldCount":1000,"phone":1,"refreshToken":"3TzZa-nAq6xM8tdzvGCFWolcNmOtoBtGRZr15Svxlbrfw0N1q5T8GARQMtjwN7harKZsl7Pc6wCtUZXuHHRBRQ","userId":11050,"userLogo":"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoo6fHYEsGZSyFlXOewbr7vThJuFCRWs9DqLnW2QcNic7paHAwYeK66Mb88W3TJ4z6tabHr4ZHXSA/0","userName":"夏尼采"}
+     * code : 0
+     * message : 成功登录
      */
-    private String userId;
-    /**
-     * 用户名字
-     */
-    private String userName;
-    /**
-     * 用户头像
-     */
-    private String userLogo;
-    /**
-     * 钻石数量
-     */
-    private String diamondCount;
-    /**
-     * 金币数量
-     */
-    private String goldCount;
 
-    public String getToken() {
-        return token;
+    private ResultBean result;
+    private String code;
+    private String message;
+
+    public ResultBean getResult() {
+        return result;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setResult(ResultBean result) {
+        this.result = result;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCode() {
+        return code;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getMessage() {
+        return message;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getUserLogo() {
-        return userLogo;
-    }
+    public static class ResultBean {
+        /**
+         * accessToken : aKgl8MiCZIoJQakW8TMEcGuUhVd8ofJ3ox_OoqqGofsVEihLh97MXkxkUzBgGE0KQKIoeXnZ98YDg8tWyxD8Eg
+         * code : 0118PBpR03oVNa2jQwnR0b6LpR08PBpi
+         * diamondCount : 100
+         * goldCount : 1000
+         * phone : 1
+         * refreshToken : 3TzZa-nAq6xM8tdzvGCFWolcNmOtoBtGRZr15Svxlbrfw0N1q5T8GARQMtjwN7harKZsl7Pc6wCtUZXuHHRBRQ
+         * userId : 11050
+         * userLogo : http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoo6fHYEsGZSyFlXOewbr7vThJuFCRWs9DqLnW2QcNic7paHAwYeK66Mb88W3TJ4z6tabHr4ZHXSA/0
+         * userName : 夏尼采
+         */
 
-    public void setUserLogo(String userLogo) {
-        this.userLogo = userLogo;
-    }
+        private String accessToken;
+        private String code;
+        private int diamondCount;
+        private int goldCount;
+        private int phone;
+        private String refreshToken;
+        private String userId;
+        private String userLogo;
+        private String userName;
 
-    public String getDiamondCount() {
-        return diamondCount;
-    }
+        public String getAccessToken() {
+            return accessToken;
+        }
 
-    public void setDiamondCount(String diamondCount) {
-        this.diamondCount = diamondCount;
-    }
+        public void setAccessToken(String accessToken) {
+            this.accessToken = accessToken;
+        }
 
-    public String getGoldCount() {
-        return goldCount;
-    }
+        public String getCode() {
+            return code;
+        }
 
-    public void setGoldCount(String goldCount) {
-        this.goldCount = goldCount;
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public int getDiamondCount() {
+            return diamondCount;
+        }
+
+        public void setDiamondCount(int diamondCount) {
+            this.diamondCount = diamondCount;
+        }
+
+        public int getGoldCount() {
+            return goldCount;
+        }
+
+        public void setGoldCount(int goldCount) {
+            this.goldCount = goldCount;
+        }
+
+        public int getPhone() {
+            return phone;
+        }
+
+        public void setPhone(int phone) {
+            this.phone = phone;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
+
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getUserLogo() {
+            return userLogo;
+        }
+
+        public void setUserLogo(String userLogo) {
+            this.userLogo = userLogo;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
     }
 }

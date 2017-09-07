@@ -7,6 +7,7 @@ import com.android.xianicai.dicegame.home.provider.data.ReqCreatRoom;
 import com.android.xianicai.dicegame.home.provider.data.ReqUser;
 import com.android.xianicai.dicegame.home.provider.impl.UserProviderImpl;
 import com.android.xianicai.dicegame.home.view.HomeView;
+import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
 
 /**
@@ -27,9 +28,10 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
         mUserProvider.login(code, phone, reqUser, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
-                if (reqUser.code ==0) {
+                if (reqUser.code == 0) {
                     getView().login(reqUser.getT());
-                }else {
+                } else {
+                    ToastUtil.showMessage(reqUser.message);
                     getView().loginFaild();
                 }
             }
@@ -41,11 +43,13 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFaild() {
+                ToastUtil.showMessage(reqUser.message);
                 getView().loginFaild();
             }
 
             @Override
             public void onGetError() {
+                ToastUtil.showMessage(reqUser.message);
                 getView().loginFaild();
             }
         });
@@ -82,12 +86,12 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
     @Override
     public void joinRoom(String userId, String roomId) {
         final ReqRoomDetail reqRoomDetail = new ReqRoomDetail();
-        mUserProvider.joinRoom(userId,roomId, reqRoomDetail, new NetAsynTask.CallBack() {
+        mUserProvider.joinRoom(userId, roomId, reqRoomDetail, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
-                if ( reqRoomDetail.code ==0) {
+                if (reqRoomDetail.code == 0) {
                     getView().joinRoomSuccess(reqRoomDetail.getT());
-                }else {
+                } else {
                     getView().joinRoomFaild(reqRoomDetail.message);
                 }
             }

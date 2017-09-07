@@ -6,4 +6,5 @@ package com.android.xianicai.dicegame.gameroom.provider.data;
 
 public class BeatItemBean {
     public int icon;
+    public int id;
 }
