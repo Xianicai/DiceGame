@@ -95,7 +95,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void loginFaild() {
-        finish();
+//        finish();
     }
 
     @Override

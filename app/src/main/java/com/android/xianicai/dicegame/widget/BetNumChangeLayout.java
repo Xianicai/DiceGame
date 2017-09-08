@@ -32,8 +32,15 @@ public class BetNumChangeLayout extends LinearLayout {
     @BindView(R.id.image_icon)
     ImageView mImageIcon;
 
+
+    private setOnViewListener mViewListener;
+
     private int goldCount = 100;
     private int mTopICon;
+
+    public void setViewListener(setOnViewListener viewListener) {
+        mViewListener = viewListener;
+    }
 
     public BetNumChangeLayout(Context context) {
         this(context, null);
@@ -67,20 +74,28 @@ public class BetNumChangeLayout extends LinearLayout {
         number = Integer.parseInt(mTvNumber.getText().toString());
         switch (view.getId()) {
             case R.id.image_minus:
-
-                if (number > 0) {
-                    GameRoomActivity.goldcount += 100;
-                    mTvNumber.setText((number - goldCount) + "");
+                if (mViewListener != null) {
+                    if (number > 0) {
+                        GameRoomActivity.goldcount += 100;
+                        mTvNumber.setText((number - goldCount) + "");
+                    }
+                    mViewListener.onMinusClicked(getGoldCount());
                 }
+
+
 
                 break;
             case R.id.image_add:
-                if (GameRoomActivity.goldcount < 100) {
-                    ToastUtil.showMessage("您的金币不足");
-                } else {
-                    mTvNumber.setText((goldCount + number) + "");
-                    GameRoomActivity.goldcount -= 100;
+                if (mViewListener != null) {
+                    if (GameRoomActivity.goldcount < 100) {
+                        ToastUtil.showMessage("您的金币不足");
+                    } else {
+                        mTvNumber.setText((goldCount + number) + "");
+                        GameRoomActivity.goldcount -= 100;
+                    }
+                    mViewListener.onAddClicked(getGoldCount());
                 }
+
                 break;
         }
 
@@ -100,5 +115,11 @@ public class BetNumChangeLayout extends LinearLayout {
 
     public int getGoldCount() {
         return Integer.parseInt(mTvNumber.getText().toString());
+    }
+
+    public interface setOnViewListener {
+        void onMinusClicked(int count);
+
+        void onAddClicked(int count);
     }
 }

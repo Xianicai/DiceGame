@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,18 +43,20 @@ public class ConfirmDialog {
 
     private int mDialogWidth;
     private int mDialogHight;
+    private final View mLayout;
 
     public ConfirmDialog(Activity context) {
         this.mContext = context;
         mBuilder = new AlertDialog.Builder(context);
         mView = LayoutInflater.from(context).inflate(R.layout.confirm_dialog, null);
-        mTvMsg = (TextView)mView.findViewById(R.id.tv_msg);
+        mLayout = mView.findViewById(R.id.layout);
+        mTvMsg = (TextView) mView.findViewById(R.id.tv_msg);
         mImageSure = (ImageView) mView.findViewById(R.id.image_sure);
         mImageCancle = (ImageView) mView.findViewById(R.id.image_cancle);
         mImageKnow = (ImageView) mView.findViewById(R.id.image_know);
         mBuilder.setView(mView);
-        // 初始化Dialog的宽度，屏幕的6/7
-//        mDialogHight = Mobile.SCREEN_HEIGHT * 7/ 10;
+//         初始化Dialog的宽度，屏幕的6/7
+        mDialogHight = Mobile.SCREEN_HEIGHT * 8/ 10;
     }
 
     /**
@@ -61,7 +64,7 @@ public class ConfirmDialog {
      */
     public ConfirmDialog setMessage(String message) {
         this.mMessage = message;
-        if ( StringUtil.isNotBlank(mMessage)) {
+        if (StringUtil.isNotBlank(mMessage)) {
             mTvMsg.setText(mMessage);
         }
         return this;
@@ -109,6 +112,7 @@ public class ConfirmDialog {
                     mImageKnow.setOnClickListener(new OnDialogButtonClick(mSingleBtnListener));
                 }
                 mImageKnow.setVisibility(View.VISIBLE);
+                mLayout.setVisibility(View.GONE);
                 mImageSure.setVisibility(View.GONE);
                 mImageCancle.setVisibility(View.GONE);
             } // 2个按钮时
@@ -124,6 +128,7 @@ public class ConfirmDialog {
                     mImageCancle.setOnClickListener(new OnDialogButtonClick(mBtn2Listener));
                 }
                 mImageKnow.setVisibility(View.GONE);
+                mLayout.setVisibility(View.VISIBLE);
                 mImageSure.setVisibility(View.VISIBLE);
                 mImageCancle.setVisibility(View.VISIBLE);
             }
@@ -138,10 +143,10 @@ public class ConfirmDialog {
         try {
             if (mContext != null && !mContext.isFinishing()) {
                 mDialog.show();
-//                // 设置Dialog宽度
-//                WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-//                lp.height = mDialogHight;
-//                mDialog.getWindow().setAttributes(lp);
+                // 设置Dialog宽度
+                WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
+                lp.height = mDialogHight;
+                mDialog.getWindow().setAttributes(lp);
             }
         } catch (Exception e) {
             e.printStackTrace();

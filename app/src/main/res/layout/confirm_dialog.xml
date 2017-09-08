@@ -1,57 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="30dp"
-    android:background="@mipmap/bg_confirm_dialog">
+    android:background="@mipmap/bg_confirm_dialog"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_msg"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="70dp"
         android:gravity="center"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:textColor="@color/white"
-        android:layout_margin="60dp"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/image_sure"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="10dp"
-        tools:text="确定退出游戏？确定退出游戏确定退出游戏确定退出游戏确定退出游戏确定退出游戏"/>
-    <ImageView
-        android:id="@+id/image_sure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="60dp"
-        android:src="@mipmap/icon_dialog_sure"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        tools:text="确定退出游戏？"
+        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/layout"
+        android:layout_above="@+id/layout"/>
 
-    <ImageView
-        android:id="@+id/image_cancle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="60dp"
-        android:src="@mipmap/icon_dialog_cancle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="50dp">
+
+        <ImageView
+            android:id="@+id/image_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/icon_dialog_sure"/>
+
+        <ImageView
+            android:id="@+id/image_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/icon_dialog_cancle"/>
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/image_know"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:src="@mipmap/icon_dialog_know"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-</android.support.constraint.ConstraintLayout>
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="50dp"/>
+</RelativeLayout>

@@ -26,11 +26,6 @@ public class BetBean {
     public static final int BET_ID_NUMBER_FOUR = 16;
     public static final int BET_ID_NUMBER_SEVENTEEN = 17;
     public static final int BET_ID_LEOPARD_ONE = 18;
-    public static final int BET_ID_LEOPARD_TWO = 19;
-    public static final int BET_ID_LEOPARD_THREE = 20;
-    public static final int BET_ID_LEOPARD_FOUR = 21;
-    public static final int BET_ID_LEOPARD_FIVE = 22;
-    public static final int BET_ID_LEOPARD_SIX = 23;
 
 
     public String title;

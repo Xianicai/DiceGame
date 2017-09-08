@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BetItemAdapter extends RecyclerView.Adapter<BetItemAdapter.BeItemtVH> {
     private Context context;
-    private List<BeatItemBean> mBeatItemBeen;
+    public List<BeatItemBean> mBeatItemBeen;
 
     public BetItemAdapter(Context context, List<BeatItemBean> mBeatItemBeen) {
         this.context = context;
@@ -33,8 +33,19 @@ public class BetItemAdapter extends RecyclerView.Adapter<BetItemAdapter.BeItemtV
     }
 
     @Override
-    public void onBindViewHolder(BeItemtVH holder, int position) {
+    public void onBindViewHolder(BeItemtVH holder, final int position) {
         holder.mView.setTopICon(mBeatItemBeen.get(position).icon);
+        holder.mView.setViewListener(new BetNumChangeLayout.setOnViewListener() {
+            @Override
+            public void onMinusClicked(int count) {
+                mBeatItemBeen.get(position).goldCount = count;
+            }
+
+            @Override
+            public void onAddClicked(int count) {
+                mBeatItemBeen.get(position).goldCount = count;
+            }
+        });
 
     }
 

@@ -20,6 +20,7 @@ import java.util.List;
 public class BetAdapter extends RecyclerView.Adapter<BetAdapter.BetVH> {
     private Context context;
     private List<BetBean> betBeanList;
+    public BetItemAdapter mBetItemAdapter;
 
     public BetAdapter(Context context, List<BetBean> betBeanList) {
         this.context = context;
@@ -39,8 +40,8 @@ public class BetAdapter extends RecyclerView.Adapter<BetAdapter.BetVH> {
         holder.mRecyclerView.setHasFixedSize(true);
         holder.mRecyclerView.setLayoutManager(new GridLayoutManager(context, 4));
 //        List<BeatItemBean> mBeatItemBeen = new ArrayList<>();
-        BetItemAdapter betItemAdapter = new BetItemAdapter(context, betBeanList.get(position).mBeatItemBeen);
-        holder.mRecyclerView.setAdapter(betItemAdapter);
+        mBetItemAdapter = new BetItemAdapter(context, betBeanList.get(position).mBeatItemBeen);
+        holder.mRecyclerView.setAdapter(mBetItemAdapter);
     }
 
     @Override

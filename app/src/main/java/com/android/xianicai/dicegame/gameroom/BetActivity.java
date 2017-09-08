@@ -35,7 +35,7 @@ public class BetActivity extends BaseActivity implements BetView {
     private int[] itemId = {BetBean.BET_ID_SIZE_BIG, BetBean.BET_ID__SIZE_SMALL, BetBean.BET_ID_SINGLEDOUBLE_SINGLE, BetBean.BET_ID_SINGLEDOUBLE_DOUBLE, BetBean.BET_ID_NUMBER_NINE,
             BetBean.BET_ID_NUMBER_TEN, BetBean.BET_ID_NUMBER_ELEVEN, BetBean.BET_ID_NUMBER_TWELVE, BetBean.BET_ID_NUMBER_SEVEN, BetBean.BET_ID_NUMBER_EIGHT, BetBean.BET_ID_NUMBER_THIRTEEN,
             BetBean.BET_ID_NUMBER_FOURTEEN, BetBean.BET_ID_NUMBER_FIVE, BetBean.BET_ID_NUMBER_SIX, BetBean.BET_ID_NUMBER_FIFTEEN, BetBean.BET_ID_NUMBER_SIXTEEN, BetBean.BET_ID_NUMBER_FOUR,
-            BetBean.BET_ID_NUMBER_SEVENTEEN, BetBean.BET_ID_LEOPARD_ONE, BetBean.BET_ID_LEOPARD_TWO, BetBean.BET_ID_LEOPARD_THREE, BetBean.BET_ID_LEOPARD_FOUR, BetBean.BET_ID_LEOPARD_FIVE, BetBean.BET_ID_LEOPARD_SIX};
+            BetBean.BET_ID_NUMBER_SEVENTEEN, BetBean.BET_ID_LEOPARD_ONE,};
     private int[] icon = {R.mipmap.icon_manager_magic};
 
     @Override
@@ -68,7 +68,7 @@ public class BetActivity extends BaseActivity implements BetView {
                     break;
                 case 3:
                     betBean.title = "豹子";
-                    itemCount = 6;
+                    itemCount = 1;
                     break;
             }
             for (int j = 0; j < itemCount; j++) {
