@@ -82,7 +82,6 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void login(UserBean userBean) {
-
         mUserBean = userBean;
         mUserId = userBean.getResult().getUserId();
         mImageHead.setRoundImage(userBean.getResult().getUserLogo(),4);
@@ -190,22 +189,23 @@ public class HomeActivity extends BaseActivity implements HomeView {
      * 创建房间
      */
     private void creatRoom() {
-        new ConfirmDialog(this).setMessage("创建房间将消费10个钻石，是否创建？").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
-            @Override
-            public void onClick(ConfirmDialog dialog, View v) {
-                if (dialog != null) {
-
-                }
-                //创建房间
-                mUserPresenter.creatRomm(mUserId);
-                dialog.dismiss();
-            }
-        }, new ConfirmDialog.OnConfirmDialogClickListener() {
-            @Override
-            public void onClick(ConfirmDialog dialog, View v) {
-                dialog.dismiss();
-            }
-        }).show();
+        GameRoomActivity.start(this, mUserId, "");
+//        new ConfirmDialog(this).setMessage("创建房间将消费10个钻石，是否创建？").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+//            @Override
+//            public void onClick(ConfirmDialog dialog, View v) {
+//                if (dialog != null) {
+//
+//                }
+//                //创建房间
+//                mUserPresenter.creatRomm(mUserId);
+//                dialog.dismiss();
+//            }
+//        }, new ConfirmDialog.OnConfirmDialogClickListener() {
+//            @Override
+//            public void onClick(ConfirmDialog dialog, View v) {
+//                dialog.dismiss();
+//            }
+//        }).show();
     }
 
     /**

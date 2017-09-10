@@ -4,30 +4,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/image_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/icon_pay_glod"
         app:layout_constraintLeft_toRightOf="@+id/tv_number"
         app:layout_constraintRight_toLeftOf="@+id/tv_number"
-        android:src="@mipmap/icon_pay_glod"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/image_minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_pay_minus"
+        android:src="@mipmap/icon_bet_minue"
         app:layout_constraintBottom_toBottomOf="@+id/tv_number"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_number"/>
 
     <TextView
         android:id="@+id/tv_number"
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:background="@mipmap/bg_ed_pay"
+        android:background="@mipmap/bg_bet_text"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
@@ -43,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:src="@mipmap/icom_pay_add"
+        android:src="@mipmap/icon_bet_add"
         app:layout_constraintBottom_toBottomOf="@+id/tv_number"
         app:layout_constraintLeft_toRightOf="@+id/tv_number"
         app:layout_constraintTop_toTopOf="@+id/tv_number"/>
