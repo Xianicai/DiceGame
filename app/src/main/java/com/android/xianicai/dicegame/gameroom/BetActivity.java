@@ -5,17 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
 
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
+import com.android.xianicai.dicegame.gameroom.presenter.impl.BetpresenterImpl;
 import com.android.xianicai.dicegame.gameroom.provider.data.BeatItemBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.BetBean;
 import com.android.xianicai.dicegame.gameroom.view.BetView;
 import com.android.xianicai.dicegame.gameroom.view.adapter.BetAdapter;
+import com.android.xianicai.dicegame.utils.ListUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -27,8 +30,6 @@ public class BetActivity extends BaseActivity implements BetView {
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
-    @BindView(R.id.image_bet)
-    ImageView mImageBet;
 
     private String mUserId;
     private String mRoomId;
@@ -41,6 +42,8 @@ public class BetActivity extends BaseActivity implements BetView {
             R.mipmap.icon_number_seven, R.mipmap.icon_number_eight, R.mipmap.icon_number_thirteen, R.mipmap.icon_number_fourteen,
             R.mipmap.icon_number_five, R.mipmap.icon_number_six, R.mipmap.icon_number_six, R.mipmap.icon_number_sixteen,
             R.mipmap.icon_number_four, R.mipmap.icon_number_seventeen, R.mipmap.icon_lepoard};
+    private BetpresenterImpl mBetpresenter;
+    private BetAdapter mBetAdapter;
 
     @Override
     public int getlayoutId() {
@@ -51,6 +54,9 @@ public class BetActivity extends BaseActivity implements BetView {
     public void initViews(Bundle savedInstanceState) {
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
+        mBetpresenter = new BetpresenterImpl();
+        mBetpresenter.bindView(this);
+
         List<BetBean> betBeanList = new ArrayList<>();
         int idIndex = 0;
         for (int i = 0; i < 4; i++) {
@@ -86,8 +92,8 @@ public class BetActivity extends BaseActivity implements BetView {
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerview.setLayoutManager(linearLayoutManager);
-        BetAdapter betAdapter = new BetAdapter(this, betBeanList);
-        mRecyclerview.setAdapter(betAdapter);
+        mBetAdapter = new BetAdapter(this, betBeanList);
+        mRecyclerview.setAdapter(mBetAdapter);
 
     }
 
@@ -99,5 +105,34 @@ public class BetActivity extends BaseActivity implements BetView {
 
     public static void start(Context context, String userId, String roomId) {
         context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
+    }
+
+
+
+    public void bet(){
+        List<BeatItemBean> beatItemBeen = mBetAdapter.mBetItemAdapter.mBeatItemBeen;
+        if (ListUtil.isNotEmpty(beatItemBeen)) {
+            Map<String, String> map = new HashMap<>();
+            map.put("betBig", beatItemBeen.get(0).goldCount + "");
+            map.put("betSmall", beatItemBeen.get(1).goldCount + "");
+            map.put("betSingle", beatItemBeen.get(2).goldCount + "");
+            map.put("betDouble", beatItemBeen.get(3).goldCount + "");
+            map.put("betNine", beatItemBeen.get(4).goldCount + "");
+            map.put("betTen", beatItemBeen.get(5).goldCount + "");
+            map.put("betEleven", beatItemBeen.get(6).goldCount + "");
+            map.put("betTwelve", beatItemBeen.get(7).goldCount + "");
+            map.put("betSeven", beatItemBeen.get(8).goldCount + "");
+            map.put("betEight", beatItemBeen.get(9).goldCount + "");
+            map.put("betThirteen", beatItemBeen.get(10).goldCount + "");
+            map.put("betFourteen", beatItemBeen.get(11).goldCount + "");
+            map.put("betFive", beatItemBeen.get(12).goldCount + "");
+            map.put("betSix", beatItemBeen.get(13).goldCount + "");
+            map.put("betFifteen", beatItemBeen.get(14).goldCount + "");
+            map.put("betSixteen", beatItemBeen.get(15).goldCount + "");
+            map.put("betFour", beatItemBeen.get(16).goldCount + "");
+            map.put("betSeventeen", beatItemBeen.get(17).goldCount + "");
+            map.put("betLeopard", beatItemBeen.get(18).goldCount + "");
+            mBetpresenter.setBet(mUserId, mRoomId, map);
+        }
     }
 }

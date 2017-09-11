@@ -48,11 +48,9 @@ public class GameRoomProviderImpl implements GameRoomProvider {
     }
 
     @Override
-    public void setBet(String userId, String roomId, String dian, ReqBase reqBase, NetAsynTask.CallBack callBack) {
-        Map<String, String> map = new HashMap<>();
+    public void setBet(String userId, String roomId,Map<String,String> map, ReqBase reqBase, NetAsynTask.CallBack callBack) {
         map.put("userId", userId);
         map.put("roomId", roomId);
-        map.put("dian", dian);
         NetAsynTask.connectByPost(Urls.POST_BET_GAME, map, reqBase, callBack);
     }
 }

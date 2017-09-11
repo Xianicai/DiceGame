@@ -35,6 +35,7 @@ public class BetItemAdapter extends RecyclerView.Adapter<BetItemAdapter.BeItemtV
     @Override
     public void onBindViewHolder(BeItemtVH holder, final int position) {
         holder.mView.setTopICon(mBeatItemBeen.get(position).icon);
+        mBeatItemBeen.get(position).goldCount = 0;
         holder.mView.setViewListener(new BetNumChangeLayout.setOnViewListener() {
             @Override
             public void onMinusClicked(int count) {

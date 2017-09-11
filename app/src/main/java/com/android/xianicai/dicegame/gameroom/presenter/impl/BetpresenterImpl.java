@@ -7,6 +7,8 @@ import com.android.xianicai.dicegame.gameroom.provider.impl.GameRoomProviderImpl
 import com.android.xianicai.dicegame.gameroom.view.BetView;
 import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
 
+import java.util.Map;
+
 /**
  * Created by Zhanglibin on 2017/9/4.
  */
@@ -20,9 +22,9 @@ public class BetpresenterImpl extends BasePresenterImpl<BetView> implements BetP
     }
 
     @Override
-    public void setBet(String userId, String roomId, String dian) {
+    public void setBet(String userId, String roomId, Map<String,String> map) {
         final ReqBase reqBase = new ReqBase();
-        mGameRoomProvider.setBet(userId, roomId, dian, reqBase, new NetAsynTask.CallBack() {
+        mGameRoomProvider.setBet(userId, roomId, map, reqBase, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (reqBase.code == 0) {
