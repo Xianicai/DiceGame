@@ -16,6 +16,7 @@ import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.GameRoomActivity;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.home.presenter.impl.UserPresenterImpl;
+import com.android.xianicai.dicegame.home.provider.data.CreatRoomBean;
 import com.android.xianicai.dicegame.home.provider.data.UserBean;
 import com.android.xianicai.dicegame.home.view.HomeView;
 import com.android.xianicai.dicegame.pay.PayActivity;
@@ -98,9 +99,9 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void creatRoom(RoomDetailBean roomBean) {
-        if (roomBean != null && StringUtil.isNotBlank(roomBean.getResult().getRoomId())) {
-            GameRoomActivity.start(this, mUserId, roomBean.getResult().getRoomId());
+    public void creatRoom(CreatRoomBean creatRoomBean) {
+        if (creatRoomBean != null && StringUtil.isNotBlank(creatRoomBean.getResult().getRoomId())) {
+            GameRoomActivity.start(this, mUserId, creatRoomBean.getResult().getRoomId());
         }
     }
 
@@ -192,12 +193,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
         new ConfirmDialog(this).setMessage("创建房间将消费10个钻石，是否创建？").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override
             public void onClick(ConfirmDialog dialog, View v) {
-                if (dialog != null) {
-
-                }
-                //创建房间
-                mUserPresenter.creatRomm(mUserId);
-                dialog.dismiss();
+                GameRoomActivity.start(HomeActivity.this, mUserId, "123456");
+//                if (dialog != null) {
+//                    //创建房间
+//                    mUserPresenter.creatRomm(mUserId);
+//                    dialog.dismiss();
+//                }
             }
         }, new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override

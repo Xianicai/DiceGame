@@ -21,7 +21,7 @@ import java.util.List;
 
 public class BetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private List<BetBean> betBeanList;
+    public List<BetBean> betBeanList;
     public BetItemAdapter mBetItemAdapter;
 
 

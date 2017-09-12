@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Zhanglibin on 2017/9/4.
@@ -85,6 +86,7 @@ public class BetActivity extends BaseActivity implements BetView {
                 BeatItemBean beatItemBean = new BeatItemBean();
                 beatItemBean.icon = icon[idIndex];
                 beatItemBean.id = itemId[idIndex];
+                beatItemBean.goldCount = 0;
                 betBean.mBeatItemBeen.add(beatItemBean);
                 idIndex++;
             }
@@ -108,31 +110,41 @@ public class BetActivity extends BaseActivity implements BetView {
     }
 
 
-
-    public void bet(){
-        List<BeatItemBean> beatItemBeen = mBetAdapter.mBetItemAdapter.mBeatItemBeen;
-        if (ListUtil.isNotEmpty(beatItemBeen)) {
+    public void bet() {
+        List<BetBean> betBeanList = mBetAdapter.betBeanList;
+        if (ListUtil.isNotEmpty(betBeanList)) {
             Map<String, String> map = new HashMap<>();
-            map.put("betBig", beatItemBeen.get(0).goldCount + "");
-            map.put("betSmall", beatItemBeen.get(1).goldCount + "");
-            map.put("betSingle", beatItemBeen.get(2).goldCount + "");
-            map.put("betDouble", beatItemBeen.get(3).goldCount + "");
-            map.put("betNine", beatItemBeen.get(4).goldCount + "");
-            map.put("betTen", beatItemBeen.get(5).goldCount + "");
-            map.put("betEleven", beatItemBeen.get(6).goldCount + "");
-            map.put("betTwelve", beatItemBeen.get(7).goldCount + "");
-            map.put("betSeven", beatItemBeen.get(8).goldCount + "");
-            map.put("betEight", beatItemBeen.get(9).goldCount + "");
-            map.put("betThirteen", beatItemBeen.get(10).goldCount + "");
-            map.put("betFourteen", beatItemBeen.get(11).goldCount + "");
-            map.put("betFive", beatItemBeen.get(12).goldCount + "");
-            map.put("betSix", beatItemBeen.get(13).goldCount + "");
-            map.put("betFifteen", beatItemBeen.get(14).goldCount + "");
-            map.put("betSixteen", beatItemBeen.get(15).goldCount + "");
-            map.put("betFour", beatItemBeen.get(16).goldCount + "");
-            map.put("betSeventeen", beatItemBeen.get(17).goldCount + "");
-            map.put("betLeopard", beatItemBeen.get(18).goldCount + "");
+            map.put("betBig", betBeanList.get(0).mBeatItemBeen.get(0).goldCount + "");
+            map.put("betSmall", betBeanList.get(0).mBeatItemBeen.get(1).goldCount + "");
+            map.put("betSingle",betBeanList.get(1).mBeatItemBeen.get(0).goldCount + "");
+            map.put("betDouble", betBeanList.get(1).mBeatItemBeen.get(1).goldCount + "");
+            map.put("betNine", betBeanList.get(2).mBeatItemBeen.get(0).goldCount + "");
+            map.put("betTen", betBeanList.get(2).mBeatItemBeen.get(1).goldCount + "");
+            map.put("betEleven",betBeanList.get(2).mBeatItemBeen.get(2).goldCount + "");
+            map.put("betTwelve", betBeanList.get(2).mBeatItemBeen.get(3).goldCount + "");
+            map.put("betSeven",betBeanList.get(2).mBeatItemBeen.get(4).goldCount + "");
+            map.put("betEight",betBeanList.get(2).mBeatItemBeen.get(5).goldCount + "");
+            map.put("betThirteen", betBeanList.get(2).mBeatItemBeen.get(6).goldCount + "");
+            map.put("betFourteen", betBeanList.get(2).mBeatItemBeen.get(7).goldCount + "");
+            map.put("betFive", betBeanList.get(2).mBeatItemBeen.get(8).goldCount + "");
+            map.put("betSix", betBeanList.get(2).mBeatItemBeen.get(9).goldCount + "");
+            map.put("betFifteen", betBeanList.get(2).mBeatItemBeen.get(10).goldCount + "");
+            map.put("betSixteen", betBeanList.get(2).mBeatItemBeen.get(11).goldCount + "");
+            map.put("betFour", betBeanList.get(2).mBeatItemBeen.get(12).goldCount + "");
+            map.put("betSeventeen", betBeanList.get(2).mBeatItemBeen.get(13).goldCount + "");
+            map.put("betLeopard", betBeanList.get(3).mBeatItemBeen.get(0).goldCount + "");
             mBetpresenter.setBet(mUserId, mRoomId, map);
         }
+    }
+
+
+    @OnClick(R.id.image_back)
+    public void onViewClicked() {
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

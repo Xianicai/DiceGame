@@ -2,6 +2,7 @@ package com.android.xianicai.dicegame.home.view;
 
 import com.android.xianicai.dicegame.base.basemvp.BaseView;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
+import com.android.xianicai.dicegame.home.provider.data.CreatRoomBean;
 import com.android.xianicai.dicegame.home.provider.data.UserBean;
 
 /**
@@ -11,7 +12,7 @@ import com.android.xianicai.dicegame.home.provider.data.UserBean;
 public interface HomeView extends BaseView {
     void login(UserBean userBean);
     void loginFaild();
-    void creatRoom(RoomDetailBean roomBean);
+    void creatRoom(CreatRoomBean creatRoomBean);
     void joinRoomSuccess(RoomDetailBean roomBean);
     void joinRoomFaild(String msg);
 }

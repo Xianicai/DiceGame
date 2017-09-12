@@ -15,6 +15,7 @@ import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
 import com.android.xianicai.dicegame.pay.PayActivity;
 import com.android.xianicai.dicegame.utils.ConfirmDialog;
+import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
 
 import butterknife.BindView;
@@ -75,8 +76,29 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
 
     @Override
-    public void getGameRoomDetail(RoomDetailBean RoomBean) {
-
+    public void getGameRoomDetail(RoomDetailBean roomDetailBean) {
+        if (roomDetailBean.getResult().getUserType() == 0) {
+            mImageOwerLogo.setVisibility(View.GONE);
+            mImageBet.setVisibility(View.GONE);
+            mImageQuitRoom.setVisibility(View.GONE);
+            mImageStartGame.setVisibility(View.VISIBLE);
+            mImageDissmiaaRoom.setVisibility(View.VISIBLE);
+        } else {
+            mImageOwerLogo.setVisibility(View.VISIBLE);
+            mImageBet.setVisibility(View.VISIBLE);
+            mImageQuitRoom.setVisibility(View.VISIBLE);
+            mImageStartGame.setVisibility(View.GONE);
+            mImageDissmiaaRoom.setVisibility(View.GONE);
+        }
+        mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
+        if (StringUtil.isNotBlank(roomDetailBean.getResult().getRoomId())) {
+            mTvLastResult.setText("上一期骰点：" + roomDetailBean.getResult().getRoomId());
+        }
+        mImageOwerLogo.setImage(roomDetailBean.getResult().getOwnerLogo());
+        mImageUserLogo.setImage(roomDetailBean.getResult().getUserLogo());
+        mTvUserName.setText(roomDetailBean.getResult().getUserName());
+        mTvUserId.setText("ID：" + roomDetailBean.getResult().getUserId());
+        mTvGoldCount.setText(roomDetailBean.getResult().getUserGoldCount());
     }
 
     @Override
@@ -133,6 +155,12 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 dialog.dismiss();
             }
         }).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRoomPresenter.quitRoom(mUserId, mRoomId);
     }
 
     /**
