@@ -59,6 +59,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private GameRoomPresenterImpl mRoomPresenter;
     private String mUserId;
     private String mRoomId;
+    private int mGameTimes = 0;
+    private RoomDetailBean mDetailBean;
 
     @Override
     public int getlayoutId() {
@@ -69,6 +71,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public void initViews(Bundle savedInstanceState) {
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
+        mDetailBean = new RoomDetailBean();
         mRoomPresenter = new GameRoomPresenterImpl();
         mRoomPresenter.bindView(this);
         mRoomPresenter.getGameRoomDetail(mUserId, mRoomId);
@@ -77,6 +80,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void getGameRoomDetail(RoomDetailBean roomDetailBean) {
+        mDetailBean = roomDetailBean;
+        mGameTimes = roomDetailBean.getResult().getGameTimes();
         if (roomDetailBean.getResult().getUserType() == 0) {
             mImageOwerLogo.setVisibility(View.GONE);
             mImageBet.setVisibility(View.GONE);
@@ -84,11 +89,11 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             mImageStartGame.setVisibility(View.VISIBLE);
             mImageDissmiaaRoom.setVisibility(View.VISIBLE);
         } else {
-            mImageOwerLogo.setVisibility(View.VISIBLE);
-            mImageBet.setVisibility(View.VISIBLE);
-            mImageQuitRoom.setVisibility(View.VISIBLE);
-            mImageStartGame.setVisibility(View.GONE);
-            mImageDissmiaaRoom.setVisibility(View.GONE);
+        mImageOwerLogo.setVisibility(View.VISIBLE);
+        mImageBet.setVisibility(View.VISIBLE);
+        mImageQuitRoom.setVisibility(View.VISIBLE);
+        mImageStartGame.setVisibility(View.GONE);
+        mImageDissmiaaRoom.setVisibility(View.GONE);
         }
         mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
         if (StringUtil.isNotBlank(roomDetailBean.getResult().getRoomId())) {
@@ -120,10 +125,10 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_start_game:
-                mRoomPresenter.startGame(mUserId, mRoomId);
+                mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes);
                 break;
             case R.id.image_bet:
-                BetActivity.start(this, mUserId, mRoomId);
+                BetActivity.start(this, mUserId, mRoomId, mGameTimes);
                 break;
             case R.id.image_dissmiaa_room:
                 dismissRoomClidked();
@@ -160,7 +165,11 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mRoomPresenter.quitRoom(mUserId, mRoomId);
+        if (mDetailBean.getResult().getUserType() == 0) {
+            mRoomPresenter.dismissRoom(mUserId, mRoomId);
+        } else {
+            mRoomPresenter.quitRoom(mUserId, mRoomId);
+        }
     }
 
     /**

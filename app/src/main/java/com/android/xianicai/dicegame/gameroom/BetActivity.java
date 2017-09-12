@@ -45,6 +45,7 @@ public class BetActivity extends BaseActivity implements BetView {
             R.mipmap.icon_number_four, R.mipmap.icon_number_seventeen, R.mipmap.icon_lepoard};
     private BetpresenterImpl mBetpresenter;
     private BetAdapter mBetAdapter;
+    private int mGameTimes;
 
     @Override
     public int getlayoutId() {
@@ -55,6 +56,7 @@ public class BetActivity extends BaseActivity implements BetView {
     public void initViews(Bundle savedInstanceState) {
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
+        mGameTimes = getIntent().getIntExtra("mGameTimes",0);
         mBetpresenter = new BetpresenterImpl();
         mBetpresenter.bindView(this);
 
@@ -105,8 +107,8 @@ public class BetActivity extends BaseActivity implements BetView {
     }
 
 
-    public static void start(Context context, String userId, String roomId) {
-        context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
+    public static void start(Context context, String userId, String roomId,int mGameTimes) {
+        context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId).putExtra("roomId", roomId).putExtra("mGameTimes",mGameTimes));
     }
 
 
@@ -133,6 +135,7 @@ public class BetActivity extends BaseActivity implements BetView {
             map.put("betFour", betBeanList.get(2).mBeatItemBeen.get(12).goldCount + "");
             map.put("betSeventeen", betBeanList.get(2).mBeatItemBeen.get(13).goldCount + "");
             map.put("betLeopard", betBeanList.get(3).mBeatItemBeen.get(0).goldCount + "");
+            map.put("gameTimes",mGameTimes+"");
             mBetpresenter.setBet(mUserId, mRoomId, map);
         }
     }

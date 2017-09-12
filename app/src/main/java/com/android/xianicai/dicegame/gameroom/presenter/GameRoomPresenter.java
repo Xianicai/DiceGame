@@ -7,6 +7,6 @@ package com.android.xianicai.dicegame.gameroom.presenter;
 public interface GameRoomPresenter {
     void getGameRoomDetail(String userId, String roomId);
     void dismissRoom(String userId, String roomId);
-    void startGame(String userId, String roomId);
+    void startGame(String userId, String roomId,int gameTimes);
     void quitRoom(String userId, String roomId);
 }

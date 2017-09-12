@@ -14,7 +14,7 @@ import java.util.Map;
 public interface GameRoomProvider {
     void getGameRoomDetail(String userId, String roomId,ReqRoomDetail reqRoomDetail, NetAsynTask.CallBack callBack );
     void dismissRoom(String userId, String roomId, ReqBase reqBase, NetAsynTask.CallBack callBack);
-    void startGame(String userId, String roomId, ReqGameResult reqGameResult, NetAsynTask.CallBack callBack);
+    void startGame(String userId, String roomId,int gameTimes,ReqGameResult reqGameResult, NetAsynTask.CallBack callBack);
     void quitRoom(String userId, String roomId, ReqBase reqBase, NetAsynTask.CallBack callBack);
     void setBet(String userId, String roomId, Map<String,String> map, ReqBase reqBase, NetAsynTask.CallBack callBack);
 }

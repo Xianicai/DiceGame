@@ -79,9 +79,9 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
     }
 
     @Override
-    public void startGame(String userId, String roomId) {
+    public void startGame(String userId, String roomId,int gameTimes) {
         final ReqGameResult reqGameResult = new ReqGameResult();
-        mGameRoomProvider.startGame(userId, roomId, reqGameResult, new NetAsynTask.CallBack() {
+        mGameRoomProvider.startGame(userId, roomId,gameTimes, reqGameResult, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (reqGameResult.code == 0) {

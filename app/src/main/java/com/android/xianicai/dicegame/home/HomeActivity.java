@@ -193,12 +193,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
         new ConfirmDialog(this).setMessage("创建房间将消费10个钻石，是否创建？").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override
             public void onClick(ConfirmDialog dialog, View v) {
-                GameRoomActivity.start(HomeActivity.this, mUserId, "123456");
-//                if (dialog != null) {
-//                    //创建房间
-//                    mUserPresenter.creatRomm(mUserId);
-//                    dialog.dismiss();
-//                }
+//                GameRoomActivity.start(HomeActivity.this, mUserId, "123456");
+                if (dialog != null) {
+                    //创建房间
+                    mUserPresenter.creatRomm(mUserId);
+                    dialog.dismiss();
+                }
             }
         }, new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override

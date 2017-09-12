@@ -32,10 +32,11 @@ public class GameRoomProviderImpl implements GameRoomProvider {
     }
 
     @Override
-    public void startGame(String userId, String roomId, ReqGameResult reqGameResult, NetAsynTask.CallBack callBack) {
+    public void startGame(String userId, String roomId,int gameTimes, ReqGameResult reqGameResult, NetAsynTask.CallBack callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("userId", userId);
         map.put("roomId", roomId);
+        map.put("gameTimes", gameTimes+"");
         NetAsynTask.connectByPost(Urls.POST_STAR_GAME, map, reqGameResult, callBack);
     }
 
