@@ -25,6 +25,10 @@ public class Urls {
      */
     public static final String POST_CREAT_ROOM = BASE_URL + "room/create";
     /**
+     * 加入房间
+     */
+    public static final String POST_ADD_ROOM = BASE_URL + "user/addRoom";
+    /**
      * 获取房间详情
      */
     public static final String POST_ROOM_DETAIL = BASE_URL + "room/detail";

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.GameRoomActivity;
-import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.home.presenter.impl.UserPresenterImpl;
 import com.android.xianicai.dicegame.home.provider.data.CreatRoomBean;
 import com.android.xianicai.dicegame.home.provider.data.UserBean;
@@ -105,7 +104,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
     }
 
     @Override
-    public void joinRoomSuccess(RoomDetailBean roomBean) {
+    public void joinRoomSuccess(CreatRoomBean roomBean) {
         if (roomBean != null && StringUtil.isNotBlank(roomBean.getResult().getRoomId())) {
             mDialog.dismiss();
             GameRoomActivity.start(this, mUserId, roomBean.getResult().getRoomId());

@@ -51,21 +51,11 @@ public class CreatRoomBean {
          * roomId : 100201
          */
 
-        private String ownerName;
         private int memberCount;
-        private String ownerLogo;
-        private int diamondCount;
-        private int goldCount;
         private String ownerId;
         private String roomId;
 
-        public String getOwnerName() {
-            return ownerName;
-        }
 
-        public void setOwnerName(String ownerName) {
-            this.ownerName = ownerName;
-        }
 
         public int getMemberCount() {
             return memberCount;
@@ -75,29 +65,6 @@ public class CreatRoomBean {
             this.memberCount = memberCount;
         }
 
-        public String getOwnerLogo() {
-            return ownerLogo;
-        }
-
-        public void setOwnerLogo(String ownerLogo) {
-            this.ownerLogo = ownerLogo;
-        }
-
-        public int getDiamondCount() {
-            return diamondCount;
-        }
-
-        public void setDiamondCount(int diamondCount) {
-            this.diamondCount = diamondCount;
-        }
-
-        public int getGoldCount() {
-            return goldCount;
-        }
-
-        public void setGoldCount(int goldCount) {
-            this.goldCount = goldCount;
-        }
 
         public String getOwnerId() {
             return ownerId;

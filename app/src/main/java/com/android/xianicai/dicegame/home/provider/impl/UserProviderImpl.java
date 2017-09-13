@@ -31,10 +31,10 @@ public class UserProviderImpl implements UserProvider {
     }
 
     @Override
-    public void joinRoom(String userId, String roomId, ReqRoomDetail reqRoomDetail, NetAsynTask.CallBack callBack) {
+    public void joinRoom(String userId, String roomId, ReqCreatRoom reqCreatRoom, NetAsynTask.CallBack callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("userId", userId);
         map.put("roomId", roomId);
-        NetAsynTask.connectByPost(Urls.POST_ROOM_DETAIL, map, reqRoomDetail, callBack);
+        NetAsynTask.connectByPost(Urls.POST_ADD_ROOM, map, reqCreatRoom, callBack);
     }
 }

@@ -85,14 +85,14 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
     @Override
     public void joinRoom(String userId, String roomId) {
-        final ReqRoomDetail reqRoomDetail = new ReqRoomDetail();
-        mUserProvider.joinRoom(userId, roomId, reqRoomDetail, new NetAsynTask.CallBack() {
+        final ReqCreatRoom reqCreatRoom = new ReqCreatRoom();
+        mUserProvider.joinRoom(userId, roomId, reqCreatRoom, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
-                if (reqRoomDetail.code == 0) {
-                    getView().joinRoomSuccess(reqRoomDetail.getT());
+                if (reqCreatRoom.code == 0) {
+                    getView().joinRoomSuccess(reqCreatRoom.getT());
                 } else {
-                    getView().joinRoomFaild(reqRoomDetail.message);
+                    getView().joinRoomFaild(reqCreatRoom.message);
                 }
             }
 
@@ -103,12 +103,12 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFaild() {
-                getView().joinRoomFaild(reqRoomDetail.message);
+                getView().joinRoomFaild(reqCreatRoom.message);
             }
 
             @Override
             public void onGetError() {
-                getView().joinRoomFaild(reqRoomDetail.message);
+                getView().joinRoomFaild(reqCreatRoom.message);
             }
         });
     }
