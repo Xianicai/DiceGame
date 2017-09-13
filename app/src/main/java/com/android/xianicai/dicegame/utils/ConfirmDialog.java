@@ -57,6 +57,7 @@ public class ConfirmDialog {
         mBuilder.setView(mView);
 //         初始化Dialog的宽度，屏幕的6/7
         mDialogHight = Mobile.SCREEN_HEIGHT * 8/ 10;
+        mDialogWidth = Mobile.SCREEN_WIDTH *6/10;
     }
 
     /**
@@ -146,6 +147,7 @@ public class ConfirmDialog {
                 // 设置Dialog宽度
                 WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
                 lp.height = mDialogHight;
+                lp.width = mDialogWidth;
                 mDialog.getWindow().setAttributes(lp);
             }
         } catch (Exception e) {

@@ -56,7 +56,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.android.xianicai.dicegame.home.LoginActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -69,20 +70,24 @@
             android:screenOrientation="landscape"/>
         <activity
             android:name="com.android.xianicai.dicegame.home.HomeActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize">
         </activity>
         <activity
             android:name="com.android.xianicai.dicegame.pay.PayActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize">
         </activity>
         <activity
             android:name="com.android.xianicai.dicegame.gameroom.GameRoomActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize">
 
         </activity>
         <activity
             android:name="com.android.xianicai.dicegame.gameroom.BetActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize">
 
         </activity>
         <!--极光推送start-->

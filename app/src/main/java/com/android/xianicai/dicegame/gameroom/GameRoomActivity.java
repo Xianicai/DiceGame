@@ -96,14 +96,14 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mImageDissmiaaRoom.setVisibility(View.GONE);
         }
         mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
-        if (StringUtil.isNotBlank(roomDetailBean.getResult().getRoomId())) {
-            mTvLastResult.setText("上一期骰点：" + roomDetailBean.getResult().getRoomId());
+        if (StringUtil.isNotBlank(roomDetailBean.getResult().getLastResult())) {
+            mTvLastResult.setText("上一期骰点：" + roomDetailBean.getResult().getLastResult());
         }
         mImageOwerLogo.setImage(roomDetailBean.getResult().getOwnerLogo());
         mImageUserLogo.setImage(roomDetailBean.getResult().getUserLogo());
         mTvUserName.setText(roomDetailBean.getResult().getUserName());
         mTvUserId.setText("ID：" + roomDetailBean.getResult().getUserId());
-        mTvGoldCount.setText(roomDetailBean.getResult().getUserGoldCount());
+        mTvGoldCount.setText(roomDetailBean.getResult().getUserGoldCount()+"");
     }
 
     @Override
@@ -165,7 +165,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mDetailBean.getResult().getUserType() == 0) {
+        if (mDetailBean!=null&&mDetailBean.getResult().getUserType() == 0) {
             mRoomPresenter.dismissRoom(mUserId, mRoomId);
         } else {
             mRoomPresenter.quitRoom(mUserId, mRoomId);

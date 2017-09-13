@@ -2,6 +2,8 @@ package com.android.xianicai.dicegame.utils.netutil;
 
 import android.support.annotation.NonNull;
 
+import com.android.xianicai.dicegame.utils.ToastUtil;
+
 import org.json.JSONObject;
 
 /**
@@ -25,8 +27,9 @@ public abstract class ReqCommon<T> {
         try {
             JSONObject jsonObject = new JSONObject(paramString);
             code = jsonObject.optInt("code");
-            if (code != 200) {
+            if (code != 0) {
                 message = jsonObject.optString("message");
+                ToastUtil.showMessage(message);
             }
             parseResult(jsonObject);
         } catch (Exception e) {

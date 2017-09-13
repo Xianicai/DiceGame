@@ -56,7 +56,7 @@ public class BetActivity extends BaseActivity implements BetView {
     public void initViews(Bundle savedInstanceState) {
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
-        mGameTimes = getIntent().getIntExtra("mGameTimes",0);
+        mGameTimes = getIntent().getIntExtra("mGameTimes", 0);
         mBetpresenter = new BetpresenterImpl();
         mBetpresenter.bindView(this);
 
@@ -107,8 +107,8 @@ public class BetActivity extends BaseActivity implements BetView {
     }
 
 
-    public static void start(Context context, String userId, String roomId,int mGameTimes) {
-        context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId).putExtra("roomId", roomId).putExtra("mGameTimes",mGameTimes));
+    public static void start(Context context, String userId, String roomId, int mGameTimes) {
+        context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId).putExtra("roomId", roomId).putExtra("mGameTimes", mGameTimes));
     }
 
 
@@ -116,26 +116,64 @@ public class BetActivity extends BaseActivity implements BetView {
         List<BetBean> betBeanList = mBetAdapter.betBeanList;
         if (ListUtil.isNotEmpty(betBeanList)) {
             Map<String, String> map = new HashMap<>();
-            map.put("betBig", betBeanList.get(0).mBeatItemBeen.get(0).goldCount + "");
-            map.put("betSmall", betBeanList.get(0).mBeatItemBeen.get(1).goldCount + "");
-            map.put("betSingle",betBeanList.get(1).mBeatItemBeen.get(0).goldCount + "");
-            map.put("betDouble", betBeanList.get(1).mBeatItemBeen.get(1).goldCount + "");
-            map.put("betNine", betBeanList.get(2).mBeatItemBeen.get(0).goldCount + "");
-            map.put("betTen", betBeanList.get(2).mBeatItemBeen.get(1).goldCount + "");
-            map.put("betEleven",betBeanList.get(2).mBeatItemBeen.get(2).goldCount + "");
-            map.put("betTwelve", betBeanList.get(2).mBeatItemBeen.get(3).goldCount + "");
-            map.put("betSeven",betBeanList.get(2).mBeatItemBeen.get(4).goldCount + "");
-            map.put("betEight",betBeanList.get(2).mBeatItemBeen.get(5).goldCount + "");
-            map.put("betThirteen", betBeanList.get(2).mBeatItemBeen.get(6).goldCount + "");
-            map.put("betFourteen", betBeanList.get(2).mBeatItemBeen.get(7).goldCount + "");
-            map.put("betFive", betBeanList.get(2).mBeatItemBeen.get(8).goldCount + "");
-            map.put("betSix", betBeanList.get(2).mBeatItemBeen.get(9).goldCount + "");
-            map.put("betFifteen", betBeanList.get(2).mBeatItemBeen.get(10).goldCount + "");
-            map.put("betSixteen", betBeanList.get(2).mBeatItemBeen.get(11).goldCount + "");
-            map.put("betFour", betBeanList.get(2).mBeatItemBeen.get(12).goldCount + "");
-            map.put("betSeventeen", betBeanList.get(2).mBeatItemBeen.get(13).goldCount + "");
-            map.put("betLeopard", betBeanList.get(3).mBeatItemBeen.get(0).goldCount + "");
-            map.put("gameTimes",mGameTimes+"");
+            if (betBeanList.get(0).mBeatItemBeen.get(0).goldCount > 0) {
+                map.put("betBig", betBeanList.get(0).mBeatItemBeen.get(0).goldCount + "");
+            }
+            if (betBeanList.get(0).mBeatItemBeen.get(1).goldCount > 0) {
+                map.put("betSmall", betBeanList.get(0).mBeatItemBeen.get(1).goldCount + "");
+            }
+            if (betBeanList.get(1).mBeatItemBeen.get(0).goldCount > 0) {
+                map.put("betSingle", betBeanList.get(1).mBeatItemBeen.get(0).goldCount + "");
+            }
+            if (betBeanList.get(1).mBeatItemBeen.get(1).goldCount > 0) {
+                map.put("betDouble", betBeanList.get(1).mBeatItemBeen.get(1).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(0).goldCount > 0) {
+                map.put("betNine", betBeanList.get(2).mBeatItemBeen.get(0).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(1).goldCount > 0) {
+                map.put("betTen", betBeanList.get(2).mBeatItemBeen.get(1).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(2).goldCount > 0) {
+                map.put("betEleven", betBeanList.get(2).mBeatItemBeen.get(2).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(3).goldCount > 0) {
+                map.put("betTwelve", betBeanList.get(2).mBeatItemBeen.get(3).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(4).goldCount > 0) {
+                map.put("betSeven", betBeanList.get(2).mBeatItemBeen.get(4).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(5).goldCount > 0) {
+                map.put("betEight", betBeanList.get(2).mBeatItemBeen.get(5).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(6).goldCount > 0) {
+                map.put("betThirteen", betBeanList.get(2).mBeatItemBeen.get(6).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(7).goldCount > 0) {
+                map.put("betFourteen", betBeanList.get(2).mBeatItemBeen.get(7).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(8).goldCount > 0) {
+                map.put("betFive", betBeanList.get(2).mBeatItemBeen.get(8).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(9).goldCount > 0) {
+                map.put("betSix", betBeanList.get(2).mBeatItemBeen.get(9).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(10).goldCount > 0) {
+                map.put("betFifteen", betBeanList.get(2).mBeatItemBeen.get(10).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(11).goldCount > 0) {
+                map.put("betSixteen", betBeanList.get(2).mBeatItemBeen.get(11).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(12).goldCount > 0) {
+                map.put("betFour", betBeanList.get(2).mBeatItemBeen.get(12).goldCount + "");
+            }
+            if (betBeanList.get(2).mBeatItemBeen.get(13).goldCount > 0) {
+                map.put("betSeventeen", betBeanList.get(2).mBeatItemBeen.get(13).goldCount + "");
+            }
+            if (betBeanList.get(3).mBeatItemBeen.get(0).goldCount > 0) {
+                map.put("betLeopard", betBeanList.get(3).mBeatItemBeen.get(0).goldCount + "");
+            }
+            map.put("gameTimes", mGameTimes + "");
             mBetpresenter.setBet(mUserId, mRoomId, map);
         }
     }

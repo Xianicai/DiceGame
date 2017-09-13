@@ -6,29 +6,22 @@ package com.android.xianicai.dicegame.gameroom.provider.data;
 
 public class RoomDetailBean {
 
+
     /**
-     * result : {"diamondcount":12,"goldcount":12,"id":26549,"logo":"logo url","name":"测试中文名字","roomId":10021}
-     * code : ok
-     * message : 创建成功
+     * code : 0
+     * message : 获取房间详情
+     * result : {"gameTimes":0,"lastResult":"","memberCount":1,"ownerId":123660,"ownerLogo":"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoo6fHYEsGZSyFlXOewbr7vThJuFCRWs9DqLnW2QcNic7paHAwYeK66Mb88W3TJ4z6tabHr4ZHXSA/0","ownerName":"夏尼采","roomId":"1236606","roomStatus":1,"userDiamongCount":100,"userGoldCount":1000,"userId":"123660","userLogo":"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoo6fHYEsGZSyFlXOewbr7vThJuFCRWs9DqLnW2QcNic7paHAwYeK66Mb88W3TJ4z6tabHr4ZHXSA/0","userName":"夏尼采","userType":"0"}
      */
 
-    private ResultBean result;
-    private String code;
+    private int code;
     private String message;
+    private ResultBean result;
 
-    public ResultBean getResult() {
-        return result;
-    }
-
-    public void setResult(ResultBean result) {
-        this.result = result;
-    }
-
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -40,116 +33,46 @@ public class RoomDetailBean {
         this.message = message;
     }
 
+    public ResultBean getResult() {
+        return result;
+    }
+
+    public void setResult(ResultBean result) {
+        this.result = result;
+    }
+
     public static class ResultBean {
         /**
-         * diamondcount : 12
-         * goldcount : 12
-         * id : 26549
-         * logo : logo url
-         * name : 测试中文名字
-         * roomId : 10021
+         * gameTimes : 0
+         * lastResult :
+         * memberCount : 1
+         * ownerId : 123660
+         * ownerLogo : http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoo6fHYEsGZSyFlXOewbr7vThJuFCRWs9DqLnW2QcNic7paHAwYeK66Mb88W3TJ4z6tabHr4ZHXSA/0
+         * ownerName : 夏尼采
+         * roomId : 1236606
+         * roomStatus : 1
+         * userDiamongCount : 100
+         * userGoldCount : 1000
+         * userId : 123660
+         * userLogo : http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJoo6fHYEsGZSyFlXOewbr7vThJuFCRWs9DqLnW2QcNic7paHAwYeK66Mb88W3TJ4z6tabHr4ZHXSA/0
+         * userName : 夏尼采
+         * userType : 0
          */
 
-        private int memberCount;
-        private String ownerId;
-        private String roomId;
-        private String ownerName;
-        private String ownerLogo;
-        private String userId;
-        private String userName;
-        private String userLogo;
-        private int userType;
-        private int userGoldCount;
-        private int userDiamongCount;
         private int gameTimes;
-
-        public int getMemberCount() {
-            return memberCount;
-        }
-
-        public void setMemberCount(int memberCount) {
-            this.memberCount = memberCount;
-        }
-
-        public String getOwnerId() {
-            return ownerId;
-        }
-
-        public void setOwnerId(String ownerId) {
-            this.ownerId = ownerId;
-        }
-
-        public String getRoomId() {
-            return roomId;
-        }
-
-        public void setRoomId(String roomId) {
-            this.roomId = roomId;
-        }
-
-        public String getOwnerName() {
-            return ownerName;
-        }
-
-        public void setOwnerName(String ownerName) {
-            this.ownerName = ownerName;
-        }
-
-        public String getOwnerLogo() {
-            return ownerLogo;
-        }
-
-        public void setOwnerLogo(String ownerLogo) {
-            this.ownerLogo = ownerLogo;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public String getUserLogo() {
-            return userLogo;
-        }
-
-        public void setUserLogo(String userLogo) {
-            this.userLogo = userLogo;
-        }
-
-        public int getUserType() {
-            return userType;
-        }
-
-        public void setUserType(int userType) {
-            this.userType = userType;
-        }
-
-        public int getUserGoldCount() {
-            return userGoldCount;
-        }
-
-        public void setUserGoldCount(int userGoldCount) {
-            this.userGoldCount = userGoldCount;
-        }
-
-        public int getUserDiamongCount() {
-            return userDiamongCount;
-        }
-
-        public void setUserDiamongCount(int userDiamongCount) {
-            this.userDiamongCount = userDiamongCount;
-        }
+        private String lastResult;
+        private int memberCount;
+        private int ownerId;
+        private String ownerLogo;
+        private String ownerName;
+        private String roomId;
+        private int roomStatus;
+        private int userDiamongCount;
+        private int userGoldCount;
+        private String userId;
+        private String userLogo;
+        private String userName;
+        private int userType;
 
         public int getGameTimes() {
             return gameTimes;
@@ -167,7 +90,100 @@ public class RoomDetailBean {
             this.lastResult = lastResult;
         }
 
-        private String lastResult;
+        public int getMemberCount() {
+            return memberCount;
+        }
 
+        public void setMemberCount(int memberCount) {
+            this.memberCount = memberCount;
+        }
+
+        public int getOwnerId() {
+            return ownerId;
+        }
+
+        public void setOwnerId(int ownerId) {
+            this.ownerId = ownerId;
+        }
+
+        public String getOwnerLogo() {
+            return ownerLogo;
+        }
+
+        public void setOwnerLogo(String ownerLogo) {
+            this.ownerLogo = ownerLogo;
+        }
+
+        public String getOwnerName() {
+            return ownerName;
+        }
+
+        public void setOwnerName(String ownerName) {
+            this.ownerName = ownerName;
+        }
+
+        public String getRoomId() {
+            return roomId;
+        }
+
+        public void setRoomId(String roomId) {
+            this.roomId = roomId;
+        }
+
+        public int getRoomStatus() {
+            return roomStatus;
+        }
+
+        public void setRoomStatus(int roomStatus) {
+            this.roomStatus = roomStatus;
+        }
+
+        public int getUserDiamongCount() {
+            return userDiamongCount;
+        }
+
+        public void setUserDiamongCount(int userDiamongCount) {
+            this.userDiamongCount = userDiamongCount;
+        }
+
+        public int getUserGoldCount() {
+            return userGoldCount;
+        }
+
+        public void setUserGoldCount(int userGoldCount) {
+            this.userGoldCount = userGoldCount;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getUserLogo() {
+            return userLogo;
+        }
+
+        public void setUserLogo(String userLogo) {
+            this.userLogo = userLogo;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public int getUserType() {
+            return userType;
+        }
+
+        public void setUserType(int userType) {
+            this.userType = userType;
+        }
     }
 }
