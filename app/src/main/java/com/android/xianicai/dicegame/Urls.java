@@ -49,4 +49,9 @@ public class Urls {
      * 解散房间
      */
     public static final String POST_DISMISS_ROOM = BASE_URL + "user/dissolve";
+    /**
+     *
+     *查询房间人数
+     */
+    public static final String POST_CHECK_MEMBER = BASE_URL + "room/check";
 }

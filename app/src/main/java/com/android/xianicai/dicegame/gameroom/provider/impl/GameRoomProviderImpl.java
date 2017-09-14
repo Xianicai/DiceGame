@@ -4,6 +4,7 @@ import com.android.xianicai.dicegame.Urls;
 import com.android.xianicai.dicegame.base.basemvp.ReqBase;
 import com.android.xianicai.dicegame.gameroom.provider.GameRoomProvider;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqGameResult;
+import com.android.xianicai.dicegame.gameroom.provider.data.ReqCheckRoom;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
 import com.android.xianicai.dicegame.utils.netutil.NetAsynTask;
 
@@ -53,5 +54,14 @@ public class GameRoomProviderImpl implements GameRoomProvider {
         map.put("userId", userId);
         map.put("roomId", roomId);
         NetAsynTask.connectByPost(Urls.POST_BET_GAME, map, reqBase, callBack);
+    }
+
+    @Override
+    public void checkMemberCount(String userId,String roomId, String gameTimes, ReqCheckRoom reqCheckRoom, NetAsynTask.CallBack callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("roomId", roomId);
+        map.put("gameTimes", gameTimes);
+        NetAsynTask.connectByPost(Urls.POST_CHECK_MEMBER, map, reqCheckRoom, callBack);
     }
 }

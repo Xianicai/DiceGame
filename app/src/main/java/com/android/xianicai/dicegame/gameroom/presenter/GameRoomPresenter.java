@@ -9,4 +9,5 @@ public interface GameRoomPresenter {
     void dismissRoom(String userId, String roomId);
     void startGame(String userId, String roomId,int gameTimes);
     void quitRoom(String userId, String roomId);
+    void checkedRoom(String userId,String roomId, String gameTimes);
 }

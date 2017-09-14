@@ -4,6 +4,7 @@ import com.android.xianicai.dicegame.base.basemvp.BasePresenterImpl;
 import com.android.xianicai.dicegame.base.basemvp.ReqBase;
 import com.android.xianicai.dicegame.gameroom.presenter.GameRoomPresenter;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqGameResult;
+import com.android.xianicai.dicegame.gameroom.provider.data.ReqCheckRoom;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
 import com.android.xianicai.dicegame.gameroom.provider.impl.GameRoomProviderImpl;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
@@ -114,6 +115,34 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
             public void onGetSucc() {
                 if (reqBase.code == 0) {
                     getView().quitRoom();
+                }
+            }
+
+            @Override
+            public void onGetFinished() {
+
+            }
+
+            @Override
+            public void onGetFaild() {
+
+            }
+
+            @Override
+            public void onGetError() {
+
+            }
+        });
+    }
+
+    @Override
+    public void checkedRoom(String userId,String roomId, String gameTimes) {
+        final ReqCheckRoom reqMemberCount = new ReqCheckRoom();
+        mGameRoomProvider.checkMemberCount(userId,roomId, gameTimes, reqMemberCount, new NetAsynTask.CallBack() {
+            @Override
+            public void onGetSucc() {
+                if (reqMemberCount.code == 0) {
+                    getView().checkedRoom(reqMemberCount.getT());
                 }
             }
 

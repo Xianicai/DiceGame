@@ -3,6 +3,7 @@ package com.android.xianicai.dicegame.gameroom;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.presenter.impl.GameRoomPresenterImpl;
 import com.android.xianicai.dicegame.gameroom.provider.data.GameResultBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
+import com.android.xianicai.dicegame.gameroom.provider.data.CheckRoomBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
 import com.android.xianicai.dicegame.pay.PayActivity;
 import com.android.xianicai.dicegame.utils.ConfirmDialog;
@@ -59,8 +61,11 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private GameRoomPresenterImpl mRoomPresenter;
     private String mUserId;
     private String mRoomId;
-    private int mGameTimes = 0;
     private RoomDetailBean mDetailBean;
+    private Handler mHandler;
+    private int mMemberCount;
+    private int mGameTimes = 0;
+    private String mLastResult;
 
     @Override
     public int getlayoutId() {
@@ -81,7 +86,12 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     @Override
     public void getGameRoomDetail(RoomDetailBean roomDetailBean) {
         mDetailBean = roomDetailBean;
+        mMemberCount = roomDetailBean.getResult().getMemberCount();
         mGameTimes = roomDetailBean.getResult().getGameTimes();
+        mLastResult = roomDetailBean.getResult().getLastResult();
+        //群主房间情况
+        mRoomPresenter.checkedRoom(mUserId,mRoomId, mGameTimes + "");
+
         if (roomDetailBean.getResult().getUserType() == 0) {
             mImageOwerLogo.setVisibility(View.GONE);
             mImageBet.setVisibility(View.GONE);
@@ -89,21 +99,22 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             mImageStartGame.setVisibility(View.VISIBLE);
             mImageDissmiaaRoom.setVisibility(View.VISIBLE);
         } else {
-        mImageOwerLogo.setVisibility(View.VISIBLE);
-        mImageBet.setVisibility(View.VISIBLE);
-        mImageQuitRoom.setVisibility(View.VISIBLE);
-        mImageStartGame.setVisibility(View.GONE);
-        mImageDissmiaaRoom.setVisibility(View.GONE);
+            mImageOwerLogo.setVisibility(View.VISIBLE);
+            mImageBet.setVisibility(View.VISIBLE);
+            mImageQuitRoom.setVisibility(View.VISIBLE);
+            mImageStartGame.setVisibility(View.GONE);
+            mImageDissmiaaRoom.setVisibility(View.GONE);
         }
+        mTvMemberCount.setText(mMemberCount + "/50");
         mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
         if (StringUtil.isNotBlank(roomDetailBean.getResult().getLastResult())) {
-            mTvLastResult.setText("上一期骰点：" + roomDetailBean.getResult().getLastResult());
+            mTvLastResult.setText("上一期骰点：" + mLastResult);
         }
         mImageOwerLogo.setImage(roomDetailBean.getResult().getOwnerLogo());
         mImageUserLogo.setImage(roomDetailBean.getResult().getUserLogo());
         mTvUserName.setText(roomDetailBean.getResult().getUserName());
         mTvUserId.setText("ID：" + roomDetailBean.getResult().getUserId());
-        mTvGoldCount.setText(roomDetailBean.getResult().getUserGoldCount()+"");
+        mTvGoldCount.setText(roomDetailBean.getResult().getUserGoldCount() + "");
     }
 
     @Override
@@ -119,6 +130,30 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     @Override
     public void quitRoom() {
         finish();
+    }
+
+    @Override
+    public void checkedRoom(CheckRoomBean countBean) {
+        //房间人数是否发生变化
+        if (mMemberCount!=countBean.getResult().getMemberCount()) {
+            mMemberCount = countBean.getResult().getMemberCount();
+            mTvMemberCount.setText(mMemberCount + "/50");
+        }
+        //游戏结果是否是发生变化
+        if (!StringUtil.equals(mLastResult,countBean.getResult().getGameResult())) {
+            mLastResult = countBean.getResult().getGameResult();
+            mTvLastResult.setText("上一期骰点：" + mLastResult);
+        }
+        if (mHandler == null) {
+            mHandler = new Handler();
+        }
+        mHandler.postDelayed(new Runnable() {
+            public void run() {
+                mRoomPresenter.checkedRoom(mUserId,mRoomId, mGameTimes + "");
+            }
+        }, 2000);
+
+
     }
 
     @OnClick({R.id.image_start_game, R.id.image_bet, R.id.image_dissmiaa_room, R.id.image_add_gold, R.id.image_quit_room})
@@ -165,7 +200,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mDetailBean!=null&&mDetailBean.getResult().getUserType() == 0) {
+        if (mDetailBean != null && mDetailBean.getResult().getUserType() == 0) {
             mRoomPresenter.dismissRoom(mUserId, mRoomId);
         } else {
             mRoomPresenter.quitRoom(mUserId, mRoomId);
