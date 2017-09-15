@@ -160,7 +160,6 @@ public class HomeActivity extends BaseActivity implements HomeView {
         ImageView imageSure = (ImageView) view.findViewById(R.id.image_sure);
         ImageView imageCancle = (ImageView) view.findViewById(R.id.image_cancle);
         final EditText edRoomNumber = (EditText) view.findViewById(R.id.ed_room_number);
-
         // 设置视图
         builder.setView(view);
         mDialog = builder.create();
