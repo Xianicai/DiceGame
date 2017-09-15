@@ -18,8 +18,8 @@ import com.android.xianicai.dicegame.home.presenter.impl.UserPresenterImpl;
 import com.android.xianicai.dicegame.home.provider.data.CreatRoomBean;
 import com.android.xianicai.dicegame.home.provider.data.UserBean;
 import com.android.xianicai.dicegame.home.view.HomeView;
-import com.android.xianicai.dicegame.pay.PayActivity;
 import com.android.xianicai.dicegame.utils.ConfirmDialog;
+import com.android.xianicai.dicegame.utils.Mobile;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
@@ -47,6 +47,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
     ImageView mImageJoinRoom;
     @BindView(R.id.image_light_top)
     ImageView mImageLightTop;
+    @BindView(R.id.image_light_bottom)
+    ImageView mImageLightBottom;
     private UserPresenterImpl mUserPresenter;
     private AlertDialog mDialog;
     private String mUserId;
@@ -59,7 +61,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        statAnimator();
+        statAnimator();
         mUserBean = new UserBean();
         String code = getIntent().getStringExtra("code");
         mUserPresenter = new UserPresenterImpl();
@@ -71,10 +73,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
      * 开始动画
      */
     private void statAnimator() {
-        ObjectAnimator transXAnim = ObjectAnimator.ofFloat(mImageLightTop, "translationX", 1200, -300);
-        transXAnim.setRepeatCount(-1);
+        ObjectAnimator transXAnimTop = ObjectAnimator.ofFloat(mImageLightTop, "translationX", Mobile.SCREEN_WIDTH,-Mobile.SCREEN_WIDTH);
+        ObjectAnimator transXAnimBot = ObjectAnimator.ofFloat(mImageLightBottom, "translationX", -Mobile.SCREEN_WIDTH,Mobile.SCREEN_WIDTH);
+        transXAnimTop.setRepeatCount(-1);
+        transXAnimBot.setRepeatCount(-1);
         AnimatorSet set = new AnimatorSet();
-        set.playTogether(transXAnim);
+        set.playTogether(transXAnimTop,transXAnimBot);
         set.setDuration(4000);
         set.start();
     }
@@ -129,10 +133,11 @@ public class HomeActivity extends BaseActivity implements HomeView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_add_diamond:
-                addDiamond();
+                addDiamond("钻石");
                 break;
             case R.id.image_add_gold:
-                PayActivity.start(this, mUserId);
+                addDiamond("金币");
+//                PayActivity.start(this, mUserId);
                 break;
             case R.id.image_finish:
                 onBackPressed();
@@ -191,7 +196,6 @@ public class HomeActivity extends BaseActivity implements HomeView {
         new ConfirmDialog(this).setMessage("创建房间将消费10个钻石，是否创建？").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override
             public void onClick(ConfirmDialog dialog, View v) {
-//                GameRoomActivity.start(HomeActivity.this, mUserId, "123456");
                 if (dialog != null) {
                     //创建房间
                     mUserPresenter.creatRomm(mUserId);
@@ -209,8 +213,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
     /**
      * 充值砖石
      */
-    private void addDiamond() {
-        new ConfirmDialog(this).setMessage("充值钻石请联系客服微信：touwang001").setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+    private void addDiamond(String msg) {
+        new ConfirmDialog(this).setMessage("充值"+msg+"请联系客服微信：touwang001").setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override
             public void onClick(ConfirmDialog dialog, View v) {
                 dialog.dismiss();

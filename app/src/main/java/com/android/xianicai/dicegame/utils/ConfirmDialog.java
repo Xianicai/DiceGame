@@ -3,6 +3,7 @@ package com.android.xianicai.dicegame.utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.xianicai.dicegame.R;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Zhanglibin on 2017/9/2.
@@ -56,8 +59,10 @@ public class ConfirmDialog {
         mImageKnow = (ImageView) mView.findViewById(R.id.image_know);
         mBuilder.setView(mView);
 //         初始化Dialog的宽度，屏幕的6/7
-        mDialogHight = Mobile.SCREEN_HEIGHT * 8/ 10;
-        mDialogWidth = Mobile.SCREEN_WIDTH *6/10;
+        mDialogHight = Mobile.SCREEN_HEIGHT * 8 / 10;
+        mDialogWidth = Mobile.SCREEN_WIDTH * 6 / 10;
+        Log.i(TAG, "ConfirmDialog: mDialogHight   " + Mobile.SCREEN_HEIGHT * 8 / 10);
+        Log.i(TAG, "ConfirmDialog: mDialogWidth   " + Mobile.SCREEN_WIDTH * 6 / 10);
     }
 
     /**

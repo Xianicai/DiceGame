@@ -51,6 +51,7 @@ public class CheckRoomBean {
         private int roomState;
         private int resultGain;
         private int goldCount;
+        private int gameTimes;
 
         public int getMemberCount() {
             return memberCount;
@@ -90,6 +91,14 @@ public class CheckRoomBean {
 
         public void setGoldCount(int goldCount) {
             this.goldCount = goldCount;
+        }
+
+        public int getGameTimes() {
+            return gameTimes;
+        }
+
+        public void setGameTimes(int gameTimes) {
+            this.gameTimes = gameTimes;
         }
     }
 }

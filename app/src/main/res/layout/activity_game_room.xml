@@ -39,7 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="54dp"
-        android:text="上一期骰点：3 3 6"
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintLeft_toLeftOf="parent"
