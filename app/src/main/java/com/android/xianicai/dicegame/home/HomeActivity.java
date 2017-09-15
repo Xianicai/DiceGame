@@ -168,7 +168,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
             @Override
             public void onClick(View v) {
                 String roomId = edRoomNumber.getText().toString();
-                if (StringUtil.isNotBlank(roomId) && roomId.length() == 6) {
+                if (StringUtil.isNotBlank(roomId) && roomId.length() == 7) {
                     mUserPresenter.joinRoom(mUserId, roomId);
                 } else {
                     ToastUtil.showMessage("房间号有误，请重新输入");
