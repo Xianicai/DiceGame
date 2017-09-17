@@ -67,6 +67,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private int mGameTimes = 0;
     private String mLastResult;
     private int mUserGoldCount;
+    private int mRoomState = 0;
+    private boolean mIsExitRoom = false;
 
     @Override
     public int getlayoutId() {
@@ -121,6 +123,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void dismissRoom() {
+        mRoomState = 1;
         finish();
     }
 
@@ -131,15 +134,18 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void quitRoom() {
+        mIsExitRoom = true;
         finish();
     }
 
     @Override
     public void checkedRoom(CheckRoomBean countBean) {
         //游戏房间是否被解散 0正常状态  1被解散
+        mRoomState = countBean.getResult().getRoomState();
         if (countBean.getResult().getRoomState() == 1) {
             ToastUtil.showMessage(countBean.getMessage());
             finish();
+            return;
         }
         //房间人数是否发生变化
         if (mMemberCount != countBean.getResult().getMemberCount()) {
@@ -211,10 +217,16 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public void onDestroy() {
         super.onDestroy();
         if (mDetailBean != null && mDetailBean.getResult().getUserType() == 0) {
-            mRoomPresenter.dismissRoom(mUserId, mRoomId);
+            if (mRoomState != 1) {
+                mRoomPresenter.dismissRoom(mUserId, mRoomId);
+            }
         } else {
-            mRoomPresenter.quitRoom(mUserId, mRoomId);
+            if (!mIsExitRoom) {
+                mRoomPresenter.quitRoom(mUserId, mRoomId);
+            }
+
         }
+
     }
 
     /**
