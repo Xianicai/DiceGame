@@ -143,6 +143,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void checkedRoom(CheckRoomBean countBean) {
+
         //游戏房间是否被解散 0正常状态  1被解散
         mRoomState = countBean.getResult().getRoomState();
         if (countBean.getResult().getRoomState() == 1) {
