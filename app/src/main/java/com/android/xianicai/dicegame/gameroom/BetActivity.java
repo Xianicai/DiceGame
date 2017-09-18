@@ -14,6 +14,7 @@ import com.android.xianicai.dicegame.gameroom.provider.data.BetBean;
 import com.android.xianicai.dicegame.gameroom.view.BetView;
 import com.android.xianicai.dicegame.gameroom.view.adapter.BetAdapter;
 import com.android.xianicai.dicegame.utils.ListUtil;
+import com.android.xianicai.dicegame.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,7 +104,8 @@ public class BetActivity extends BaseActivity implements BetView {
 
     @Override
     public void setBet() {
-
+        ToastUtil.showMessage("下注成功");
+        finish();
     }
 
 

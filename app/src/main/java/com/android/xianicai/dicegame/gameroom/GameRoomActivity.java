@@ -2,6 +2,7 @@ package com.android.xianicai.dicegame.gameroom;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -69,6 +70,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private int mUserGoldCount;
     private int mRoomState = 0;
     private boolean mIsExitRoom = false;
+    private AnimationDrawable mAnimation;
 
     @Override
     public int getlayoutId() {
@@ -77,6 +79,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        mImgeDice.setImageResource(R.drawable.anim_dice);
+        mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
         mDetailBean = new RoomDetailBean();
@@ -152,11 +156,13 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             mMemberCount = countBean.getResult().getMemberCount();
             mTvMemberCount.setText(mMemberCount + "/50");
         }
-        //游戏结果是否是发生变化
+        //游戏结果是否是发生变化(新一局游戏结果)
         if (mGameTimes != countBean.getResult().getGameTimes()) {
             mGameTimes = countBean.getResult().getGameTimes();
             mLastResult = countBean.getResult().getGameResult();
             mTvLastResult.setText("上一期骰点：" + mLastResult);
+            startAnimation();
+
         }
         if (mUserGoldCount != countBean.getResult().getGoldCount()) {
             mUserGoldCount = countBean.getResult().getGoldCount();
@@ -170,6 +176,21 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 mRoomPresenter.checkedRoom(mUserId, mRoomId, mGameTimes + "");
             }
         }, 2000);
+    }
+
+    /**
+     * 骰子动画
+     */
+    private void startAnimation() {
+        mAnimation.start();
+        if (mHandler == null) {
+            mHandler = new Handler();
+        }
+        mHandler.postDelayed(new Runnable() {
+            public void run() {
+               mAnimation.stop();
+            }
+        }, 3000);
     }
 
     @OnClick({R.id.image_start_game, R.id.image_bet, R.id.image_dissmiaa_room, R.id.image_add_gold, R.id.image_quit_room})
@@ -263,5 +284,14 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     public static void start(Context context, String userId, String roomId) {
         context.startActivity(new Intent(context, GameRoomActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDetailBean != null && mDetailBean.getResult().getUserType() == 0) {
+            dismissRoomClidked();
+        } else {
+            exitRoom();
+        }
     }
 }
