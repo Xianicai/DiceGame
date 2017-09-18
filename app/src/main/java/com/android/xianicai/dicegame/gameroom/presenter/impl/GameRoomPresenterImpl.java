@@ -136,9 +136,9 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
     }
 
     @Override
-    public void checkedRoom(String userId,String roomId, String gameTimes) {
+    public void checkedRoom(String userId,String roomId) {
         final ReqCheckRoom reqMemberCount = new ReqCheckRoom();
-        mGameRoomProvider.checkMemberCount(userId,roomId, gameTimes, reqMemberCount, new NetAsynTask.CallBack() {
+        mGameRoomProvider.checkMemberCount(userId,roomId, reqMemberCount, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (reqMemberCount.code == 0) {

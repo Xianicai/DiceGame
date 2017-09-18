@@ -67,7 +67,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private int mMemberCount;
     private int mGameTimes = 0;
     private String mLastResult;
-    private int mUserGoldCount;
     private int mRoomState = 0;
     private boolean mIsExitRoom = false;
     private AnimationDrawable mAnimation;
@@ -96,9 +95,9 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mMemberCount = roomDetailBean.getResult().getMemberCount();
         mGameTimes = roomDetailBean.getResult().getGameTimes();
         mLastResult = roomDetailBean.getResult().getLastResult();
-        mUserGoldCount = roomDetailBean.getResult().getUserGoldCount();
+        goldcount = roomDetailBean.getResult().getUserGoldCount();
         //检查房间情况
-        mRoomPresenter.checkedRoom(mUserId, mRoomId, mGameTimes + "");
+        mRoomPresenter.checkedRoom(mUserId, mRoomId);
 
         if (roomDetailBean.getResult().getUserType() == 0) {
             mImageOwerLogo.setVisibility(View.GONE);
@@ -122,7 +121,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mImageUserLogo.setImage(roomDetailBean.getResult().getUserLogo());
         mTvUserName.setText(roomDetailBean.getResult().getUserName());
         mTvUserId.setText("ID：" + roomDetailBean.getResult().getUserId());
-        mTvGoldCount.setText(mUserGoldCount + "");
+        mTvGoldCount.setText(goldcount + "");
     }
 
     @Override
@@ -164,16 +163,16 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             startAnimation();
 
         }
-        if (mUserGoldCount != countBean.getResult().getGoldCount()) {
-            mUserGoldCount = countBean.getResult().getGoldCount();
-            mTvGoldCount.setText(mUserGoldCount + "");
+        if (goldcount != countBean.getResult().getGoldCount()) {
+            goldcount = countBean.getResult().getGoldCount();
+            mTvGoldCount.setText(goldcount + "");
         }
         if (mHandler == null) {
             mHandler = new Handler();
         }
         mHandler.postDelayed(new Runnable() {
             public void run() {
-                mRoomPresenter.checkedRoom(mUserId, mRoomId, mGameTimes + "");
+                mRoomPresenter.checkedRoom(mUserId, mRoomId);
             }
         }, 2000);
     }

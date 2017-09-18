@@ -57,11 +57,10 @@ public class GameRoomProviderImpl implements GameRoomProvider {
     }
 
     @Override
-    public void checkMemberCount(String userId,String roomId, String gameTimes, ReqCheckRoom reqCheckRoom, NetAsynTask.CallBack callBack) {
+    public void checkMemberCount(String userId,String roomId, ReqCheckRoom reqCheckRoom, NetAsynTask.CallBack callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("userId", userId);
         map.put("roomId", roomId);
-        map.put("gameTimes", gameTimes);
         NetAsynTask.connectByPost(Urls.POST_CHECK_MEMBER, map, reqCheckRoom, callBack);
     }
 }
