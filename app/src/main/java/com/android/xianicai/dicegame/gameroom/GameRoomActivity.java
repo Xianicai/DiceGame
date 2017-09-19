@@ -20,6 +20,7 @@ import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
+import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,6 +28,7 @@ import butterknife.OnClick;
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public static int goldcount = 1000;
 
+    public static int mGameTimes = 0;
     @BindView(R.id.tv_room_number)
     TextView mTvRoomNumber;
     @BindView(R.id.tv_member_count)
@@ -65,12 +67,12 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private RoomDetailBean mDetailBean;
     private Handler mHandler;
     private int mMemberCount;
-    private int mGameTimes = 0;
     private String mLastResult;
     private int mRoomState = 0;
     private boolean mIsExitRoom = false;
     private AnimationDrawable mAnimation;
     private ConfirmDialog mResultDialog;
+    private ShapeLoadingDialog mShapeLoadingDialog;
 
     @Override
     public int getlayoutId() {
@@ -81,6 +83,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public void initViews(Bundle savedInstanceState) {
         mImgeDice.setImageResource(R.drawable.anim_dice);
         mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
+        mImgeDice.setVisibility(View.GONE);
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
         mDetailBean = new RoomDetailBean();
@@ -133,7 +136,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void startGame(GameResultBean gameResultBean) {
-
     }
 
     @Override
@@ -186,6 +188,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 骰子动画
      */
     private void startAnimation(final CheckRoomBean countBean) {
+        cancelLoading();
+        mImgeDice.setVisibility(View.VISIBLE);
         mAnimation.start();
         if (mHandler == null) {
             mHandler = new Handler();
@@ -193,6 +197,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mHandler.postDelayed(new Runnable() {
             public void run() {
                 mAnimation.stop();
+                mImgeDice.setVisibility(View.GONE);
                 resultDialog(countBean);
                 mTvLastResult.setText("上一期骰点：" + mLastResult);
             }
@@ -203,10 +208,11 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_start_game:
+                showLoading();
                 mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
                 break;
             case R.id.image_bet:
-                BetActivity.start(this, mUserId, mRoomId, mGameTimes);
+                BetActivity.start(this, mUserId, mRoomId);
                 break;
             case R.id.image_dissmiaa_room:
                 dismissRoomClidked();
@@ -292,13 +298,39 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 游戏结果
      */
     private void resultDialog(CheckRoomBean countBean) {
-        mResultDialog = new ConfirmDialog(this).setMessage("本期游戏结果：" + countBean.getResult().getGameResult() + "\n" + countBean.getResult().getResultGain()).setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        String mMsg;
+        if (mDetailBean.getResult().getUserType() == 0) {
+            mMsg = "本期游戏结果：" + countBean.getResult().getGameResult();
+        } else {
+            mMsg = "本期游戏结果：" + countBean.getResult().getGameResult() + "\n\n您的亏盈情况： " + countBean.getResult().getResultGain();
+        }
+        mResultDialog = new ConfirmDialog(this).setMessage(mMsg).setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
             @Override
             public void onClick(ConfirmDialog dialog, View v) {
                 dialog.dismiss();
             }
         });
         mResultDialog.show();
+    }
+
+    /**
+     * showloading
+     */
+    private void showLoading() {
+        if (mShapeLoadingDialog == null) {
+            mShapeLoadingDialog = new ShapeLoadingDialog(this);
+        }
+        mShapeLoadingDialog.setLoadingText("loading...");
+        mShapeLoadingDialog.show();
+    }
+
+    /**
+     * cancelLoading
+     */
+    private void cancelLoading() {
+        if (mShapeLoadingDialog != null) {
+            mShapeLoadingDialog.dismiss();
+        }
     }
 
     public static void start(Context context, String userId, String roomId) {

@@ -50,10 +50,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        app:placeholderImage="@mipmap/icon_romm_ower_logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderImage="@mipmap/icon_romm_ower_logo"/>
 
     <ImageView
         android:id="@+id/imge_dice"
@@ -71,10 +71,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:src="@mipmap/icon_start_game"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/imge_dice"/>
 
     <ImageView
@@ -99,6 +99,7 @@
         android:src="@mipmap/icon_dissmiss_room"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
     <ImageView
         android:id="@+id/image_quit_room"
         android:layout_width="wrap_content"
@@ -106,9 +107,9 @@
         android:layout_marginBottom="2dp"
         android:layout_marginRight="45dp"
         android:src="@mipmap/icon_quit_room"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="visible"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <ImageView
         android:id="@+id/image_bg_gold"
@@ -161,9 +162,9 @@
         android:layout_height="34dp"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="45dp"
-        app:placeholderImage="@mipmap/icon_user_logo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:placeholderImage="@mipmap/icon_user_logo"/>
 
     <TextView
         android:id="@+id/tv_user_name"
@@ -188,4 +189,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/image_user_logo"
         app:layout_constraintLeft_toRightOf="@+id/image_user_logo"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_name"/>
+
+
+    <com.android.xianicai.dicegame.widget.loading.LoadingView
+        android:id="@+id/loadView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:loadingText="加载中..."
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
 </android.support.constraint.ConstraintLayout>

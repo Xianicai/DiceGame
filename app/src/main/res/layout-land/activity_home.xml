@@ -63,14 +63,7 @@
         app:layout_constraintLeft_toRightOf="@+id/tv_user_name"
         app:layout_constraintTop_toTopOf="@+id/image_bg_top"/>
 
-    <ImageView
-        android:id="@+id/image_diamond"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/icon_home_diamond"
-        app:layout_constraintBottom_toBottomOf="@+id/image_bg_diamond"
-        app:layout_constraintLeft_toLeftOf="@+id/image_bg_diamond"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_diamond"/>
+
 
     <TextView
         android:id="@+id/tv_diamond_count"
@@ -81,8 +74,8 @@
         android:maxLines="1"
         android:textColor="#f7cf70"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_diamond"
-        app:layout_constraintLeft_toRightOf="@+id/image_diamond"
-        app:layout_constraintRight_toLeftOf="@+id/image_add_diamond"
+        app:layout_constraintLeft_toLeftOf="@+id/image_bg_diamond"
+        app:layout_constraintRight_toRightOf="@+id/image_bg_diamond"
         app:layout_constraintTop_toTopOf="@+id/image_bg_diamond"
         tools:text="1000"/>
 
@@ -90,7 +83,6 @@
         android:id="@+id/image_add_diamond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="3dp"
         android:src="@mipmap/icon_home_add"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_diamond"
         app:layout_constraintRight_toRightOf="@+id/image_bg_diamond"
@@ -101,20 +93,12 @@
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_marginLeft="30dp"
-        android:src="@mipmap/bg_home_property"
+        android:src="@mipmap/bg_home_gold"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top"
         app:layout_constraintLeft_toRightOf="@+id/image_bg_diamond"
         app:layout_constraintTop_toTopOf="@+id/image_bg_top"/>
 
-    <ImageView
-        android:id="@+id/image_gold"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/image_bg_gold"
-        app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
-        app:layout_constraintLeft_toLeftOf="@+id/image_bg_gold"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"/>
+
 
     <TextView
         android:id="@+id/tv_gold_count"
@@ -125,8 +109,8 @@
         android:maxLines="1"
         android:textColor="#f7cf70"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
-        app:layout_constraintLeft_toRightOf="@+id/image_gold"
-        app:layout_constraintRight_toLeftOf="@+id/image_add_gold"
+        app:layout_constraintLeft_toRightOf="@+id/image_bg_gold"
+        app:layout_constraintRight_toLeftOf="@+id/image_bg_gold"
         app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
         tools:text="10000"/>
 
@@ -134,7 +118,6 @@
         android:id="@+id/image_add_gold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
         android:src="@mipmap/icon_home_add"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
         app:layout_constraintRight_toRightOf="@+id/image_bg_gold"
@@ -146,10 +129,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="14dp"
         android:src="@mipmap/icon_home_finish"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"/>
 
     <ImageView
         android:id="@+id/image_light_top"
@@ -177,27 +160,30 @@
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_light_top"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_light_top"
+        android:layout_marginTop="0dp"
+        app:layout_constraintHorizontal_bias="0.0"/>
 
     <ImageView
         android:id="@+id/image_creat_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="87dp"
-        android:layout_marginTop="49dp"
+        android:layout_marginRight="55dp"
         android:src="@mipmap/icon_creat_room"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_bg_top"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_home_notice"
+        app:layout_constraintBottom_toTopOf="@+id/image_join_room"/>
 
     <ImageView
         android:id="@+id/image_join_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="87dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginRight="55dp"
+        android:layout_marginTop="23dp"
         android:src="@mipmap/icon_join_room"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_creat_room"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_creat_room"
+        app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"/>
 
     <ImageView
         android:id="@+id/image_notice"
@@ -206,7 +192,9 @@
         android:layout_marginTop="10dp"
         android:src="@mipmap/bg_home_notice"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_home_notice"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_home_notice"
+        app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"
+        />
 
 
     <TextView
@@ -220,7 +208,8 @@
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="@+id/image_notice"
         app:layout_constraintLeft_toRightOf="@+id/image_notice"
-        app:layout_constraintTop_toTopOf="@+id/image_notice"/>
+        app:layout_constraintTop_toTopOf="@+id/image_notice"
+        app:layout_constraintBottom_toBottomOf="@+id/image_notice"/>
 
     <ImageView
         android:id="@+id/image_light_bottom"

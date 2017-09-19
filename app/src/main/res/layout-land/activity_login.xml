@@ -8,20 +8,13 @@
     android:background="@mipmap/bg_login"
     tools:context="com.android.xianicai.dicegame.home.LoginActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:src="@mipmap/icon_login_person"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+
 
     <ImageView
         android:id="@+id/image_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="93dp"
+        android:layout_marginBottom="37dp"
         android:src="@mipmap/icon_login_weix"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="93dp"
+        android:layout_marginBottom="37dp"
         android:src="@mipmap/icon_login_weix"
         android:text="     Copyright @2017-2018\n垣曲纳比熊网络科技有限公司"
         android:textColor="@color/linear_divider"
@@ -45,18 +38,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="7dp"
         android:src="@mipmap/icon_login_dian"
         app:layout_constraintLeft_toLeftOf="@+id/image_login"
-        app:layout_constraintTop_toBottomOf="@+id/image_login"/>
+        app:layout_constraintTop_toTopOf="@+id/image_login_agree"
+        app:layout_constraintBottom_toBottomOf="@+id/image_login_agree"/>
 
     <ImageView
+        android:id="@+id/image_login_agree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:src="@mipmap/icon_login_agree"
         app:layout_constraintLeft_toRightOf="@+id/image_dian"
         app:layout_constraintTop_toBottomOf="@+id/image_login"/>
-
+    <com.android.xianicai.dicegame.widget.loading.LoadingView
+        android:id="@+id/loadView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:loadingText="加载中..."
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
 </android.support.constraint.ConstraintLayout>
