@@ -70,6 +70,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private int mRoomState = 0;
     private boolean mIsExitRoom = false;
     private AnimationDrawable mAnimation;
+    private ConfirmDialog mResultDialog;
 
     @Override
     public int getlayoutId() {
@@ -158,10 +159,13 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         }
         //游戏结果是否是发生变化(新一局游戏结果)
         if (mGameTimes != countBean.getResult().getGameTimes()) {
+            //将上次的提示框销毁掉
+            if (mResultDialog != null) {
+                mResultDialog.dismiss();
+            }
             mGameTimes = countBean.getResult().getGameTimes();
             mLastResult = countBean.getResult().getGameResult();
-            mTvLastResult.setText("上一期骰点：" + mLastResult);
-            startAnimation();
+            startAnimation(countBean);
 
         }
         if (goldcount != countBean.getResult().getGoldCount()) {
@@ -181,14 +185,16 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     /**
      * 骰子动画
      */
-    private void startAnimation() {
+    private void startAnimation(final CheckRoomBean countBean) {
         mAnimation.start();
         if (mHandler == null) {
             mHandler = new Handler();
         }
         mHandler.postDelayed(new Runnable() {
             public void run() {
-               mAnimation.stop();
+                mAnimation.stop();
+                resultDialog(countBean);
+                mTvLastResult.setText("上一期骰点：" + mLastResult);
             }
         }, 3000);
     }
@@ -282,8 +288,30 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         }).show();
     }
 
+    /**
+     * 游戏结果
+     */
+    private void resultDialog(CheckRoomBean countBean) {
+        mResultDialog = new ConfirmDialog(this).setMessage("本期游戏结果：" + countBean.getResult().getGameResult() + "\n" + countBean.getResult().getResultGain()).setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+            @Override
+            public void onClick(ConfirmDialog dialog, View v) {
+                dialog.dismiss();
+            }
+        });
+        mResultDialog.show();
+    }
+
     public static void start(Context context, String userId, String roomId) {
         context.startActivity(new Intent(context, GameRoomActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
+    }
+
+    @Override
+    protected void onResume() {
+        //检查房间情况
+        if (mRoomPresenter != null) {
+            mRoomPresenter.checkedRoom(mUserId, mRoomId);
+        }
+        super.onResume();
     }
 
     @Override

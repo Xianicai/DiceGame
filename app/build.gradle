@@ -22,16 +22,27 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        DicGame{
-
-        }
+//        DicGame {
+//
+//        }
     }
+//    signingConfigs {
+//        DicGame {
+//            keyAlias KEY_ALIAS
+//            keyPassword KEY_PASSWORD
+//            storeFile file("${project.rootDir}/debug.keystore")
+//            storePassword STORE_PASSWORD
+//        }
+//    }
+//    buildTypes.all { type ->
+//        type.signingConfig signingConfigs.DicGame
+//        type.debuggable = true
+//    }
 }
 
 dependencies {
