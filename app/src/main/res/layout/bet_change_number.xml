@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/icon_pay_glod"
-        app:layout_constraintLeft_toRightOf="@+id/tv_number"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_number"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -19,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/icon_bet_minue"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_number"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_number"/>
+        app:layout_constraintBottom_toBottomOf="@+id/image_icon"
+        app:layout_constraintLeft_toRightOf="@+id/image_icon"
+        app:layout_constraintTop_toTopOf="@+id/image_icon"/>
 
     <TextView
         android:id="@+id/tv_number"
@@ -37,7 +37,8 @@
         android:singleLine="true"
         android:textColor="@color/white"
         app:layout_constraintLeft_toRightOf="@+id/image_minus"
-        app:layout_constraintTop_toBottomOf="@+id/image_icon"/>
+        app:layout_constraintBottom_toBottomOf="@+id/image_icon"
+        app:layout_constraintTop_toTopOf="@+id/image_icon"/>
 
     <ImageView
         android:id="@+id/image_add"
@@ -47,5 +48,5 @@
         android:src="@mipmap/icon_bet_add"
         app:layout_constraintBottom_toBottomOf="@+id/tv_number"
         app:layout_constraintLeft_toRightOf="@+id/tv_number"
-        app:layout_constraintTop_toTopOf="@+id/tv_number"/>
+        />
 </android.support.constraint.ConstraintLayout>

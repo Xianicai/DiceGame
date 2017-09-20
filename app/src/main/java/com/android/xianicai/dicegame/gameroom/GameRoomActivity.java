@@ -57,8 +57,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     TextView mTvUserId;
     @BindView(R.id.image_bg_gold)
     ImageView mImageBgGold;
-    @BindView(R.id.image_gold)
-    ImageView mImageGold;
     @BindView(R.id.image_quit_room)
     ImageView mImageQuitRoom;
     private GameRoomPresenterImpl mRoomPresenter;

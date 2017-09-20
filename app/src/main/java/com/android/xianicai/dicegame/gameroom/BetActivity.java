@@ -42,7 +42,7 @@ public class BetActivity extends BaseActivity implements BetView {
     private int[] icon = {R.mipmap.icon_size_big, R.mipmap.icon_size_small, R.mipmap.icon_single,
             R.mipmap.icon_doubl, R.mipmap.icon_number_nine, R.mipmap.icon_number_ten, R.mipmap.icon_number_eleven, R.mipmap.icon_number_twelve,
             R.mipmap.icon_number_seven, R.mipmap.icon_number_eight, R.mipmap.icon_number_thirteen, R.mipmap.icon_number_fourteen,
-            R.mipmap.icon_number_five, R.mipmap.icon_number_six, R.mipmap.icon_number_six, R.mipmap.icon_number_sixteen,
+            R.mipmap.icon_number_five, R.mipmap.icon_number_six, R.mipmap.icon_number_fifteen, R.mipmap.icon_number_sixteen,
             R.mipmap.icon_number_four, R.mipmap.icon_number_seventeen, R.mipmap.icon_lepoard};
     private BetpresenterImpl mBetpresenter;
     private BetAdapter mBetAdapter;

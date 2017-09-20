@@ -7,8 +7,8 @@
     android:background="@mipmap/bg_bet">
 <ImageView
     android:id="@+id/image_top"
-    android:layout_width="0dp"
-    android:layout_height="50dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@mipmap/bg_bet_top"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
