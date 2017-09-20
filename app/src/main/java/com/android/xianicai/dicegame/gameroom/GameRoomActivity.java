@@ -20,9 +20,11 @@ import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
+import com.android.xianicai.dicegame.widget.loading.LoadingView;
 import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
@@ -59,6 +61,10 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     ImageView mImageBgGold;
     @BindView(R.id.image_quit_room)
     ImageView mImageQuitRoom;
+    @BindView(R.id.image_ower_bg)
+    ImageView mImageOwerBg;
+    @BindView(R.id.loadView)
+    LoadingView mLoadView;
     private GameRoomPresenterImpl mRoomPresenter;
     private String mUserId;
     private String mRoomId;
@@ -105,16 +111,18 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             mImageOwerLogo.setVisibility(View.GONE);
             mImageBet.setVisibility(View.GONE);
             mImageQuitRoom.setVisibility(View.GONE);
+            mImageOwerBg.setVisibility(View.GONE);
             mImageStartGame.setVisibility(View.VISIBLE);
             mImageDissmiaaRoom.setVisibility(View.VISIBLE);
         } else {
             mImageOwerLogo.setVisibility(View.VISIBLE);
             mImageBet.setVisibility(View.VISIBLE);
             mImageQuitRoom.setVisibility(View.VISIBLE);
+            mImageOwerBg.setVisibility(View.VISIBLE);
             mImageStartGame.setVisibility(View.GONE);
             mImageDissmiaaRoom.setVisibility(View.GONE);
         }
-        mTvMemberCount.setText(mMemberCount + "/50");
+        mTvMemberCount.setText("房间人数: " + mMemberCount);
         mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
         if (StringUtil.isNotBlank(roomDetailBean.getResult().getLastResult())) {
             mTvLastResult.setText("上一期骰点：" + mLastResult);
@@ -351,5 +359,12 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         } else {
             exitRoom();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

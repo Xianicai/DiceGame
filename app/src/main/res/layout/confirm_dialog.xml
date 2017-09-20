@@ -3,34 +3,48 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="30dp"
-    android:background="@mipmap/bg_confirm_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/bg_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/bg_confirm_dialog"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bg_dialog"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/icon_title_dailog"/>
 
     <TextView
         android:id="@+id/tv_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="100dp"
         android:gravity="center"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
+        android:paddingTop="70dp"
         android:textColor="@color/white"
         android:textSize="18sp"
-        tools:text="确定退出游戏？"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"/>
+        tools:text="确定退出游戏？"/>
 
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:paddingBottom="50dp">
+        android:paddingBottom="50dp"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/image_sure"
@@ -52,8 +66,8 @@
         android:id="@+id/image_know"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_dialog_know"
-        android:visibility="gone"
         android:layout_alignParentBottom="true"
-        android:paddingBottom="50dp"/>
+        android:paddingBottom="50dp"
+        android:src="@mipmap/icon_dialog_know"
+        android:visibility="gone"/>
 </RelativeLayout>

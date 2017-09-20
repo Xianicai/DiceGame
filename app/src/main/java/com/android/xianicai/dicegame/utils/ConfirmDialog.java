@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,8 +58,8 @@ public class ConfirmDialog {
         mImageKnow = (ImageView) mView.findViewById(R.id.image_know);
         mBuilder.setView(mView);
 //         初始化Dialog的宽度，屏幕的6/7
-        mDialogHight = Mobile.SCREEN_HEIGHT * 8 / 10;
-        mDialogWidth = Mobile.SCREEN_WIDTH * 6 / 10;
+//        mDialogHight = Mobile.SCREEN_HEIGHT * 8 / 10;
+//        mDialogWidth = Mobile.SCREEN_WIDTH * 6 / 10;
         Log.i(TAG, "ConfirmDialog: mDialogHight   " + Mobile.SCREEN_HEIGHT * 8 / 10);
         Log.i(TAG, "ConfirmDialog: mDialogWidth   " + Mobile.SCREEN_WIDTH * 6 / 10);
     }
@@ -133,7 +132,9 @@ public class ConfirmDialog {
                 } else {
                     mImageCancle.setOnClickListener(new OnDialogButtonClick(mBtn2Listener));
                 }
-                mImageKnow.setVisibility(View.GONE);
+                if (mImageKnow != null) {
+                    mImageKnow.setVisibility(View.GONE);
+                }
                 mLayout.setVisibility(View.VISIBLE);
                 mImageSure.setVisibility(View.VISIBLE);
                 mImageCancle.setVisibility(View.VISIBLE);
@@ -150,10 +151,10 @@ public class ConfirmDialog {
             if (mContext != null && !mContext.isFinishing()) {
                 mDialog.show();
                 // 设置Dialog宽度
-                WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
-                lp.height = mDialogHight;
-                lp.width = mDialogWidth;
-                mDialog.getWindow().setAttributes(lp);
+//                WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
+//                lp.height = mDialogHight;
+//                lp.width = mDialogWidth;
+//                mDialog.getWindow().setAttributes(lp);
             }
         } catch (Exception e) {
             e.printStackTrace();

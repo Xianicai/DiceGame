@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="25dp">
 
     <ImageView
         android:id="@+id/image_icon"
@@ -21,7 +22,8 @@
         android:src="@mipmap/icon_bet_minue"
         app:layout_constraintBottom_toBottomOf="@+id/image_icon"
         app:layout_constraintLeft_toRightOf="@+id/image_icon"
-        app:layout_constraintTop_toTopOf="@+id/image_icon"/>
+        app:layout_constraintTop_toTopOf="@+id/image_icon"
+        android:layout_marginLeft="8dp"/>
 
     <TextView
         android:id="@+id/tv_number"
@@ -45,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:src="@mipmap/icon_bet_add"
+        android:src="@mipmap/icon_home_add"
         app:layout_constraintBottom_toBottomOf="@+id/tv_number"
         app:layout_constraintLeft_toRightOf="@+id/tv_number"
         />

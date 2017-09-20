@@ -56,7 +56,7 @@ public class BetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (position < 4) {
             ((BetVH)holder).mTvTitle.setText(betBeanList.get(position).title);
             ((BetVH)holder).mRecyclerView.setHasFixedSize(true);
-            ((BetVH)holder).mRecyclerView.setLayoutManager(new GridLayoutManager(context, 4));
+            ((BetVH)holder).mRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
             mBetItemAdapter = new BetItemAdapter(context, betBeanList.get(position).mBeatItemBeen);
             ((BetVH)holder).mRecyclerView.setAdapter(mBetItemAdapter);
         } else {

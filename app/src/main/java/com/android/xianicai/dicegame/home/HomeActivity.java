@@ -93,7 +93,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
     public void login(UserBean userBean) {
         mUserBean = userBean;
         mUserId = userBean.getResult().getUserId();
-        mImageHead.setRoundImage(userBean.getResult().getUserLogo(), 4);
+        mImageHead.setImage(userBean.getResult().getUserLogo());
         mTvUserName.setText(userBean.getResult().getUserName());
         mTvUserId.setText("ID:" + userBean.getResult().getUserId());
         mTvDiamondCount.setText(userBean.getResult().getDiamondCount() + "");

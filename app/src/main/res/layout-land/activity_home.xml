@@ -10,24 +10,40 @@
 
     <ImageView
         android:id="@+id/image_bg_top"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@mipmap/bg_home_top"
+        android:src="@mipmap/bg_top_right"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.android.xianicai.dicegame.utils.glide.GlideImageView
         android:id="@+id/image_head"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="35dp"
+        android:background="@mipmap/icon_user_logo"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:placeholderImage="@mipmap/head_deft"/>
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top"
+        app:placeholderImage="@mipmap/icon_user_logo"/>
+    <ImageView
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:background="@mipmap/icon_user_logo"
+        app:layout_constraintTop_toTopOf="@+id/image_head"
+        app:layout_constraintBottom_toBottomOf="@+id/image_head"
+        app:layout_constraintLeft_toLeftOf="@+id/image_head"
+        app:layout_constraintRight_toRightOf="@+id/image_head"/>
 
+    <ImageView
+        android:id="@+id/image_bg_top_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_top_left"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="70dp"
@@ -54,14 +70,14 @@
 
     <ImageView
         android:id="@+id/image_bg_diamond"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginLeft="35dp"
         android:scaleType="fitXY"
         android:src="@mipmap/bg_home_property"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top"
-        app:layout_constraintLeft_toRightOf="@+id/tv_user_name"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_top"/>
+        app:layout_constraintLeft_toRightOf="@+id/image_bg_top"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top"
+        app:layout_constraintRight_toLeftOf="@+id/image_bg_gold"/>
 
 
 
@@ -90,20 +106,19 @@
 
     <ImageView
         android:id="@+id/image_bg_gold"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginLeft="30dp"
         android:src="@mipmap/bg_home_gold"
-        app:layout_constraintBottom_toBottomOf="@+id/image_bg_top"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
         app:layout_constraintLeft_toRightOf="@+id/image_bg_diamond"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_top"/>
-
-
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"
+        app:layout_constraintRight_toLeftOf="@+id/image_bg_top_right"/>
 
     <TextView
         android:id="@+id/tv_gold_count"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_width="63dp"
+        android:layout_height="21dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
@@ -112,7 +127,8 @@
         app:layout_constraintLeft_toRightOf="@+id/image_bg_gold"
         app:layout_constraintRight_toLeftOf="@+id/image_bg_gold"
         app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
-        tools:text="10000"/>
+        tools:text="10000"
+        app:layout_constraintVertical_bias="0.461"/>
 
     <ImageView
         android:id="@+id/image_add_gold"
@@ -121,19 +137,29 @@
         android:src="@mipmap/icon_bet_add"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
         app:layout_constraintRight_toRightOf="@+id/image_bg_gold"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"/>
+        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
+        android:layout_marginRight="0dp"
+        app:layout_constraintVertical_bias="0.166"/>
 
 
     <ImageView
         android:id="@+id/image_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
         android:src="@mipmap/icon_home_finish"
+        app:layout_constraintLeft_toLeftOf="@+id/image_bg_top_right"
+        app:layout_constraintRight_toLeftOf="@+id/image_renovate"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"/>
+    <ImageView
+        android:id="@+id/image_renovate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_home_renovate"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
-        app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"/>
-
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
+        app:layout_constraintLeft_toRightOf="@+id/image_finish"/>
     <ImageView
         android:id="@+id/image_light_top"
         android:layout_width="wrap_content"
