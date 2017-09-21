@@ -26,11 +26,6 @@
     </style>
 
     <style name="confirm_dialog" parent="@android:style/Theme.Dialog">
-
-        <!--<item name="android:background">@drawable/dialogbg</item>-->
-        <!--<item name="android:windowBackground">@drawable/dialogbg</item>-->
-        <!--<item name="android:backgroundDimAmount">0.0</item>-->
-
         <item name="android:windowIsTranslucent">false</item><!--半透明-->
         <item name="android:windowNoTitle">true</item><!--无标题-->
         <item name="android:windowBackground">@color/transparent</item><!--背景透明-->

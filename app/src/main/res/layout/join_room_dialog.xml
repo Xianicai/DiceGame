@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
-    tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp">
+    android:background="@color/transparent">
 
     <ImageView
         android:id="@+id/bg_dialog"
@@ -22,7 +20,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:src="@mipmap/icon_title_dailog"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -82,16 +80,5 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
         app:layout_constraintLeft_toRightOf="@+id/image_sure"
-        app:layout_constraintRight_toRightOf="@+id/bg_dialog"/>
-
-    <ImageView
-        android:id="@+id/image_know"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:src="@mipmap/icon_dialog_know"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
-        app:layout_constraintLeft_toLeftOf="@+id/bg_dialog"
         app:layout_constraintRight_toRightOf="@+id/bg_dialog"/>
 </android.support.constraint.ConstraintLayout>

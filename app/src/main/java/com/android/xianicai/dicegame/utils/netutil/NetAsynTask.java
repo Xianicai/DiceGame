@@ -1,8 +1,13 @@
 package com.android.xianicai.dicegame.utils.netutil;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.android.xianicai.dicegame.utils.ToastUtil;
 
 import org.xutils.common.Callback;
 import org.xutils.common.Callback.CommonCallback;
@@ -10,6 +15,8 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.util.Map;
+
+import static com.android.xianicai.dicegame.base.BaseApplication.app;
 
 /**
  * ZY:统一的网络请求封装
@@ -90,7 +97,7 @@ public class NetAsynTask {
      */
     public static void connectByGet(String url, Map<String, String> map, ReqCommon req, CallBack call) {
         RequestParams params = getReqParamsForGet(url, map);
-        Log.i(TAG+"——→GET:", params.toString());
+        Log.i(TAG + "——→GET:", params.toString());
         connetData(GET, call, params, req);
     }
 
@@ -111,15 +118,14 @@ public class NetAsynTask {
      */
     public static void connectByPost(String url, Map<String, String> map, ReqCommon req, CallBack call) {
         RequestParams params = getReqParamsForPost(url, map);
-
         connetData(POST, call, params, req);
     }
 
     @NonNull
     private static RequestParams getReqParamsForPost(String url, Map<String, String> map) {
         RequestParams params = new RequestParams(url);
-        params.addHeader("Content-type","application/x-www-form-urlencoded");
-        params.addHeader("Accept","text/html;charset=UTF-8,application/json, text/javascript, */*; q=0.01");
+        params.addHeader("Content-type", "application/x-www-form-urlencoded");
+        params.addHeader("Accept", "text/html;charset=UTF-8,application/json, text/javascript, */*; q=0.01");
         StringBuilder sb = new StringBuilder("body");
         if (null != map) {
             for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -127,12 +133,22 @@ public class NetAsynTask {
                 sb.append("\n" + entry.getKey() + " = " + entry.getValue());
             }
         }
-        Log.i(TAG+"——→POST:", params.toString());
+        Log.i(TAG + "——→POST:", params.toString());
         Log.i(TAG, "getReqParamsForPost: " + sb.toString());
         return params;
     }
 
     private static void connetData(int Type, final CallBack call, RequestParams params, final ReqCommon req) {
+        //检查网络情况
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) app.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+        if (mNetworkInfo == null || !mNetworkInfo.isAvailable()) {
+            ToastUtil.showMessage("网络连接异常，请稍后重试。。。");
+            if (call != null) {
+                call.onGetError();
+            }
+            return;
+        }
         if (Type == GET) {
             x.http().get(params, new CommonCallback<String>() {
                 @Override

@@ -45,7 +45,9 @@ public class ShapeLoadingDialog {
     }
 
     public void show(){
-        mDialog.show();
+        if (mDialog != null) {
+            mDialog.show();
+        }
 
     }
 

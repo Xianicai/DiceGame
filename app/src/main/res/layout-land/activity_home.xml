@@ -26,7 +26,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/image_bg_top"
-        app:placeholderImage="@mipmap/icon_user_logo"/>
+        app:placeholderImage="@mipmap/icon_user_logo"
+        android:layout_marginStart="35dp"/>
 
     <ImageView
         android:layout_width="47dp"
@@ -57,7 +58,8 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_user_id"
         app:layout_constraintLeft_toRightOf="@+id/image_head"
         app:layout_constraintTop_toTopOf="@+id/image_head"
-        tools:text="有梦想的人不睡觉"/>
+        tools:text="有梦想的人不睡觉"
+        android:layout_marginStart="5dp"/>
 
     <TextView
         android:id="@+id/tv_user_id"
@@ -68,7 +70,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/image_head"
         app:layout_constraintLeft_toRightOf="@+id/image_head"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
-        tools:text="ID:291366"/>
+        tools:text="ID:291366"
+        android:layout_marginStart="5dp"/>
 
     <ImageView
         android:id="@+id/image_bg_diamond"
@@ -135,7 +138,6 @@
         android:id="@+id/image_add_gold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
         android:src="@mipmap/icon_bet_add"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
         app:layout_constraintRight_toRightOf="@+id/image_bg_gold"
@@ -174,7 +176,6 @@
         android:id="@+id/tv_home_notice"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="0dp"
         android:background="@mipmap/bg_home_info"
         android:drawableLeft="@mipmap/icon_info_trumpet"
         android:drawablePadding="20dp"
@@ -186,7 +187,8 @@
         android:paddingLeft="130dp"
         android:paddingRight="130dp"
         android:singleLine="true"
-        android:text="[骰王娱乐]代理咨询微信：shaiwangyule,文明游戏,禁止赌博."
+        android:textScaleX="1.1"
+        android:text="[骰王娱乐]代理咨询微信：shaiwangyule,文明游戏,禁止赌博.                    "
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -200,7 +202,8 @@
         android:src="@mipmap/icon_creat_room"
         app:layout_constraintBottom_toTopOf="@+id/image_join_room"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_notice"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_home_notice"
+        android:layout_marginEnd="55dp"/>
 
     <ImageView
         android:id="@+id/image_join_room"
@@ -211,7 +214,8 @@
         android:src="@mipmap/icon_join_room"
         app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_creat_room"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_creat_room"
+        android:layout_marginEnd="55dp"/>
 
     <ImageView
         android:id="@+id/image_notice"
@@ -221,7 +225,7 @@
         android:src="@mipmap/bg_home_notice"
         app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_home_notice"
+        app:layout_constraintTop_toBottomOf="@+id/tv_home_notice"
         />
 
 
@@ -231,12 +235,11 @@
         android:layout_margin="30dp"
         android:lineSpacingExtra="3dp"
         android:paddingBottom="5dp"
-        android:text="本游戏仅为娱乐使用请自觉远离赌博等非法行为
-                           游戏问题请联系微信：saiwangyule"
+        android:text="本游戏仅为娱乐使用请自觉远离赌博等非法行为游戏问题请联系微信：saiwangyule"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/image_notice"
         app:layout_constraintLeft_toLeftOf="@+id/image_notice"
-        app:layout_constraintLeft_toRightOf="@+id/image_notice"
+        app:layout_constraintRight_toRightOf="@+id/image_notice"
         app:layout_constraintTop_toTopOf="@+id/image_notice"/>
 
     <ImageView
@@ -254,10 +257,99 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:loadingText="加载中..."
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:loadingText="加载中..."/>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/edit_dialog"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/bg_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/bg_confirm_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/icon_title_dailog"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bg_dialog"/>
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:gravity="center"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="请输入房间号："
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/ed_room_number"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:background="@drawable/bg_home_roud"
+            android:gravity="center"
+            android:hint="例如:368858"
+            android:inputType="number"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColorHint="@color/gray"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/image_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:src="@mipmap/icon_dialog_sure"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
+            app:layout_constraintLeft_toLeftOf="@+id/bg_dialog"
+            app:layout_constraintRight_toLeftOf="@+id/image_cancle"/>
+
+        <ImageView
+            android:id="@+id/image_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:src="@mipmap/icon_dialog_cancle"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
+            app:layout_constraintLeft_toRightOf="@+id/image_sure"
+            app:layout_constraintRight_toRightOf="@+id/bg_dialog"/>
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

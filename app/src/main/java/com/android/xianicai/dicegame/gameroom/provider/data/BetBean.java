@@ -28,6 +28,6 @@ public class BetBean {
     public static final int BET_ID_LEOPARD_ONE = 18;
 
 
-    public String title;
+    public int title;
     public List<BeatItemBean> mBeatItemBeen;
 }

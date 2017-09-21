@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.gameroom.BetActivity;
@@ -54,7 +53,7 @@ public class BetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position < 4) {
-            ((BetVH)holder).mTvTitle.setText(betBeanList.get(position).title);
+            ((BetVH)holder).mImageTitle.setImageResource(betBeanList.get(position).title);
             ((BetVH)holder).mRecyclerView.setHasFixedSize(true);
             ((BetVH)holder).mRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
             mBetItemAdapter = new BetItemAdapter(context, betBeanList.get(position).mBeatItemBeen);
@@ -79,13 +78,13 @@ public class BetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
         private final RecyclerView mRecyclerView;
-        private final TextView mTvTitle;
+        private final ImageView mImageTitle;
         private final ImageView mImageBet;
 
         public BetVH(View itemView) {
             super(itemView);
             mRecyclerView = (RecyclerView) itemView.findViewById(R.id.recyclerview);
-            mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+            mImageTitle = (ImageView) itemView.findViewById(R.id.image_title);
             mImageBet = (ImageView) itemView.findViewById(R.id.image_bet);
         }
     }

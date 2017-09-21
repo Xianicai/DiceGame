@@ -3,9 +3,11 @@ package com.android.xianicai.dicegame.gameroom;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.android.xianicai.dicegame.Constant;
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.presenter.impl.BetpresenterImpl;
@@ -14,6 +16,7 @@ import com.android.xianicai.dicegame.gameroom.provider.data.BetBean;
 import com.android.xianicai.dicegame.gameroom.view.BetView;
 import com.android.xianicai.dicegame.gameroom.view.adapter.BetAdapter;
 import com.android.xianicai.dicegame.utils.ListUtil;
+import com.android.xianicai.dicegame.utils.RxBus;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by Zhanglibin on 2017/9/4.
@@ -44,6 +48,7 @@ public class BetActivity extends BaseActivity implements BetView {
             R.mipmap.icon_number_seven, R.mipmap.icon_number_eight, R.mipmap.icon_number_thirteen, R.mipmap.icon_number_fourteen,
             R.mipmap.icon_number_five, R.mipmap.icon_number_six, R.mipmap.icon_number_fifteen, R.mipmap.icon_number_sixteen,
             R.mipmap.icon_number_four, R.mipmap.icon_number_seventeen, R.mipmap.icon_lepoard};
+    private int[] titleIcon = {R.mipmap.icon_title_big,R.mipmap.icon_title_single,R.mipmap.icon_title_single,R.mipmap.icon_title_number};
     private BetpresenterImpl mBetpresenter;
     private BetAdapter mBetAdapter;
 
@@ -54,6 +59,7 @@ public class BetActivity extends BaseActivity implements BetView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        finishBeat();
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
         mBetpresenter = new BetpresenterImpl();
@@ -67,19 +73,19 @@ public class BetActivity extends BaseActivity implements BetView {
             int itemCount = 0;
             switch (i) {
                 case 0:
-                    betBean.title = "大小";
+                    betBean.title = titleIcon[0];
                     itemCount = 2;
                     break;
                 case 1:
-                    betBean.title = "单双";
+                    betBean.title =  titleIcon[1];
                     itemCount = 2;
                     break;
                 case 2:
-                    betBean.title = "总数";
+                    betBean.title =  titleIcon[2];
                     itemCount = 14;
                     break;
                 case 3:
-                    betBean.title = "豹子";
+                    betBean.title =  titleIcon[3];
                     itemCount = 1;
                     break;
             }
@@ -149,5 +155,19 @@ public class BetActivity extends BaseActivity implements BetView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+    /**
+     * 接收rxbus关闭当前页面
+     */
+    private void finishBeat() {
+        RxBus.getDefault().toObservable(String.class)
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@NonNull String s) throws Exception {
+                        if (s.equals(Constant.RXBUS_CLOSE_BET)) {
+                            finish();
+                        }
+                    }
+                });
     }
 }

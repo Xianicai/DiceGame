@@ -50,7 +50,10 @@
         android:layout_marginLeft="8dp"
         android:text="夏尼采"
         android:textColor="@color/white"
-        android:textSize="13sp"
+        android:textSize="15sp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@+id/tv_user_id"
         app:layout_constraintLeft_toRightOf="@+id/image_user_logo"
         app:layout_constraintTop_toTopOf="@+id/image_user_logo"/>
@@ -62,7 +65,7 @@
         android:layout_marginLeft="8dp"
         android:text="ID：62349"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/image_user_logo"
         app:layout_constraintLeft_toRightOf="@+id/image_user_logo"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_name"/>
@@ -83,7 +86,7 @@
         android:layout_height="wrap_content"
         android:text="房间号：25965"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_last_result"
         app:layout_constraintLeft_toRightOf="@+id/bg_top_right"
         app:layout_constraintRight_toLeftOf="@+id/tv_member_count"
@@ -93,9 +96,9 @@
         android:id="@+id/tv_member_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="房间人数：20/50"
+        android:text="房间人数：20"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_last_result"
         app:layout_constraintLeft_toRightOf="@+id/tv_room_number"
         app:layout_constraintRight_toLeftOf="@+id/image_bg_top_right"
@@ -108,12 +111,12 @@
         android:layout_marginTop="5dp"
         android:text="上一期点数：3 5 6"
         android:textColor="#ffdf07"
-        android:textSize="15sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_room_number"
-        />
+        app:layout_constraintHorizontal_bias="0.501"/>
 
     <com.android.xianicai.dicegame.utils.glide.GlideImageView
         android:id="@+id/image_ower_logo"
@@ -124,7 +127,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_last_result"
         app:placeholderImage="@mipmap/icon_user_logo"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/image_ower_bg"
@@ -134,7 +137,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/image_ower_logo"
         app:layout_constraintLeft_toLeftOf="@+id/image_ower_logo"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/image_quit_room"

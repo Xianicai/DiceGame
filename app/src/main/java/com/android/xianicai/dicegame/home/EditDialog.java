@@ -1,5 +1,6 @@
 package com.android.xianicai.dicegame.home;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,7 +48,7 @@ public class EditDialog  extends AlertDialog {
     private int mDialogHight;
     private View mView;
     private setOnTwoListener mViewListener;
-    private setOnSingleListener singleListener;
+    private setOnEditListener editListener;
     private EditText mEdRoomNumber;
 
     public EditDialog setTwoListener(setOnTwoListener viewListener) {
@@ -55,8 +56,8 @@ public class EditDialog  extends AlertDialog {
         return this;
     }
 
-    public EditDialog setSingleListener(setOnSingleListener singleListener) {
-        this.singleListener = singleListener;
+    public EditDialog setEditListener(setOnEditListener editListener) {
+        this.editListener = editListener;
         return this;
     }
 
@@ -68,7 +69,7 @@ public class EditDialog  extends AlertDialog {
         super(context, cancelable, cancelListener);
     }
 
-    protected EditDialog(Context context, @StyleRes int themeResId) {
+    protected EditDialog(final Context context, @StyleRes int themeResId) {
         super(context, R.style.confirm_dialog);
 
 
@@ -96,7 +97,13 @@ public class EditDialog  extends AlertDialog {
             @Override
             public void onClick(View v) {
 
-                singleListener.onSingleClicked(EditDialog.this);
+                editListener.onEditClicked(mEdRoomNumber);
+            }
+        });
+        mEdRoomNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editListener.onEditClicked(mEdRoomNumber);
             }
         });
     }
@@ -161,9 +168,16 @@ public class EditDialog  extends AlertDialog {
         void onCancleClicked(EditDialog dialog);
     }
 
-    public interface setOnSingleListener {
+    public interface setOnEditListener {
 
-        void onSingleClicked(EditDialog dialog);
+        void onEditClicked(EditText editText);
+    }
+
+    public static void showSoftInputFromWindow(Activity activity, EditText editText) {
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
+        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 }
 

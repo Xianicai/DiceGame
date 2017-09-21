@@ -6,6 +6,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.android.xianicai.dicegame.base.basemvp.BaseView;
+import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -16,6 +17,7 @@ import butterknife.Unbinder;
  */
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private Unbinder mUnbinder;
+    private ShapeLoadingDialog mShapeLoadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void showProgress() {
-
+        if (mShapeLoadingDialog == null) {
+            mShapeLoadingDialog = new ShapeLoadingDialog(this);
+        }
+        mShapeLoadingDialog.setLoadingText("请稍后...");
+        mShapeLoadingDialog.show();
     }
 
     @Override
@@ -55,11 +61,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void hideProgress() {
-
+        if (mShapeLoadingDialog != null) {
+            mShapeLoadingDialog.dismiss();
+        }
     }
 
     @Override
     public void showMsg(String msg) {
 
     }
+
 }

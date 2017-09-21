@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.xianicai.dicegame.Constant;
 import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.base.BaseActivity;
 import com.android.xianicai.dicegame.gameroom.presenter.impl.GameRoomPresenterImpl;
@@ -17,6 +18,7 @@ import com.android.xianicai.dicegame.gameroom.provider.data.GameResultBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
 import com.android.xianicai.dicegame.home.TipsDialog;
+import com.android.xianicai.dicegame.utils.RxBus;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
@@ -24,7 +26,6 @@ import com.android.xianicai.dicegame.widget.loading.LoadingView;
 import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
@@ -156,6 +157,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         //游戏房间是否被解散 0正常状态  1被解散
         mRoomState = countBean.getResult().getRoomState();
         if (countBean.getResult().getRoomState() == 1) {
+            RxBus.getDefault().post(Constant.RXBUS_CLOSE_BET);
             ToastUtil.showMessage(countBean.getMessage());
             finish();
             return;
@@ -163,7 +165,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         //房间人数是否发生变化
         if (mMemberCount != countBean.getResult().getMemberCount()) {
             mMemberCount = countBean.getResult().getMemberCount();
-            mTvMemberCount.setText(mMemberCount + "/50");
+            mTvMemberCount.setText("房间人数: " + mMemberCount);
         }
         //游戏结果是否是发生变化(新一局游戏结果)
         if (mGameTimes != countBean.getResult().getGameTimes()) {
@@ -259,7 +261,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 mRoomPresenter.dismissRoom(mUserId, mRoomId);
             }
         } else {
-            if (!mIsExitRoom) {
+            if (!mIsExitRoom&&mRoomState != 1) {
                 mRoomPresenter.quitRoom(mUserId, mRoomId);
             }
 
@@ -357,12 +359,5 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         } else {
             exitRoom();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

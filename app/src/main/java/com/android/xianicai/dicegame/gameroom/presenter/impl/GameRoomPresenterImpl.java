@@ -25,10 +25,12 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
 
     @Override
     public void getGameRoomDetail(String userId, String roomId) {
+        getView().showProgress();
         final ReqRoomDetail reqRoomDetail = new ReqRoomDetail();
         mGameRoomProvider.getGameRoomDetail(userId, roomId, reqRoomDetail, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (reqRoomDetail.code == 0) {
                     getView().getGameRoomDetail(reqRoomDetail.getT());
                 }
@@ -36,27 +38,29 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetError() {
-
+                getView().hideProgress();
             }
         });
     }
 
     @Override
     public void dismissRoom(String userId, String roomId) {
+        getView().showProgress();
         final ReqBase reqBase = new ReqBase();
         mGameRoomProvider.dismissRoom(userId, roomId, reqBase, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (reqBase.code == 0) {
                     getView().dismissRoom();
                 }
@@ -64,27 +68,29 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetError() {
-
+                getView().hideProgress();
             }
         });
     }
 
     @Override
     public void startGame(String userId, String roomId,int gameTimes) {
+        getView().showProgress();
         final ReqGameResult reqGameResult = new ReqGameResult();
         mGameRoomProvider.startGame(userId, roomId,gameTimes, reqGameResult, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (reqGameResult.code == 0) {
                     getView().startGame(reqGameResult.getT());
                 }
@@ -92,27 +98,29 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetError() {
-
+                getView().hideProgress();
             }
         });
     }
 
     @Override
     public void quitRoom(String userId, String roomId) {
+        getView().showProgress();
         final ReqBase reqBase = new ReqBase();
         mGameRoomProvider.quitRoom(userId, roomId, reqBase, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (reqBase.code == 0) {
                     getView().quitRoom();
                 }
@@ -120,17 +128,17 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetError() {
-
+                getView().hideProgress();
             }
         });
     }
@@ -148,17 +156,14 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
 
             @Override
             public void onGetFinished() {
-
             }
 
             @Override
             public void onGetFaild() {
-
             }
 
             @Override
             public void onGetError() {
-
             }
         });
     }

@@ -23,10 +23,12 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
     @Override
     public void login(String code, String phone) {
+        getView().showProgress();
         final ReqUser reqUser = new ReqUser();
         mUserProvider.login(code, phone, reqUser, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (reqUser.code == 0) {
                     getView().login(reqUser.getT());
                 } else {
@@ -37,17 +39,19 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
+                getView().hideProgress();
                 ToastUtil.showMessage(reqUser.message);
                 getView().loginFaild();
             }
 
             @Override
             public void onGetError() {
+                getView().hideProgress();
                 ToastUtil.showMessage(reqUser.message);
                 getView().loginFaild();
             }
@@ -56,10 +60,12 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
     @Override
     public void creatRomm(String userId) {
+        getView().showProgress();
         final ReqCreatRoom creatRoom = new ReqCreatRoom();
         mUserProvider.creatRoom(userId, creatRoom, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (creatRoom.code == 0) {
                     getView().creatRoom(creatRoom.getT());
                 }
@@ -67,27 +73,29 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetError() {
-
+                getView().hideProgress();
             }
         });
     }
 
     @Override
     public void joinRoom(String userId, String roomId) {
+        getView().showProgress();
         final ReqCreatRoom reqCreatRoom = new ReqCreatRoom();
         mUserProvider.joinRoom(userId, roomId, reqCreatRoom, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (reqCreatRoom.code == 0) {
                     getView().joinRoomSuccess(reqCreatRoom.getT());
                 } else {
@@ -97,16 +105,18 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
+                getView().hideProgress();
                 getView().joinRoomFaild(reqCreatRoom.message);
             }
 
             @Override
             public void onGetError() {
+                getView().hideProgress();
                 getView().joinRoomFaild(reqCreatRoom.message);
             }
         });
@@ -114,10 +124,12 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
     @Override
     public void refreshUser(String userId) {
+        getView().showProgress();
         final ReqUser reqUser = new ReqUser();
         mUserProvider.refreshUser(userId, reqUser, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
+                getView().hideProgress();
                 if (reqUser.code == 0) {
                     getView().refreshUser(reqUser.getT());
                 }
@@ -125,16 +137,18 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
+                getView().hideProgress();
                 ToastUtil.showMessage(reqUser.message);
             }
 
             @Override
             public void onGetError() {
+                getView().hideProgress();
                 ToastUtil.showMessage(reqUser.message);
             }
         });

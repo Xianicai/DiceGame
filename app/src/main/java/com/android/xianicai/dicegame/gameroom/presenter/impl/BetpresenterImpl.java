@@ -23,6 +23,7 @@ public class BetpresenterImpl extends BasePresenterImpl<BetView> implements BetP
 
     @Override
     public void setBet(String userId, String roomId, Map<String,String> map) {
+        getView().showProgress();
         final ReqBase reqBase = new ReqBase();
         mGameRoomProvider.setBet(userId, roomId, map, reqBase, new NetAsynTask.CallBack() {
             @Override
@@ -34,17 +35,17 @@ public class BetpresenterImpl extends BasePresenterImpl<BetView> implements BetP
 
             @Override
             public void onGetFinished() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetFaild() {
-
+                getView().hideProgress();
             }
 
             @Override
             public void onGetError() {
-
+                getView().hideProgress();
             }
         });
     }

@@ -9,6 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,6 +61,14 @@ public class HomeActivity extends BaseActivity implements HomeView {
     TextView mTvHomeNotice;
     @BindView(R.id.image_notice)
     ImageView mImageNotice;
+    @BindView(R.id.ed_room_number)
+    EditText mEdRoomNumber;
+    @BindView(R.id.image_sure)
+    ImageView mImageSure;
+    @BindView(R.id.image_cancle)
+    ImageView mImageCancle;
+    @BindView(R.id.edit_dialog)
+    View mEditDialog;
     private UserPresenterImpl mUserPresenter;
     private AlertDialog mDialog;
     private String mUserId;
@@ -71,6 +82,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+
+
         statAnimator();
         mUserBean = new UserBean();
         String code = getIntent().getStringExtra("code");
@@ -122,7 +135,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void joinRoomSuccess(CreatRoomBean roomBean) {
         if (roomBean != null && StringUtil.isNotBlank(roomBean.getResult().getRoomId())) {
-            mDialog.dismiss();
+            mEditDialog.setVisibility(View.GONE);
             GameRoomActivity.start(this, mUserId, roomBean.getResult().getRoomId());
         }
 
@@ -174,6 +187,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
                 break;
             case R.id.image_join_room:
                 joinRoom();
+                showSoftInput(this, view);
                 break;
             case R.id.image_renovate:
                 mUserPresenter.refreshUser(mUserId);
@@ -186,21 +200,53 @@ public class HomeActivity extends BaseActivity implements HomeView {
      * 加入房间
      */
     private void joinRoom() {
-        new EditDialog(this).setTwoListener(new EditDialog.setOnTwoListener() {
+
+        ViewGroup.LayoutParams layoutParams = mEditDialog.getLayoutParams();
+        layoutParams.height = Mobile.SCREEN_HEIGHT * 4 / 10;
+        layoutParams.width = Mobile.SCREEN_WIDTH * 2 / 10;
+        mEditDialog.setLayoutParams(layoutParams);
+        mEditDialog.setVisibility(View.VISIBLE);
+        // 确定
+        mImageSure.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSureClicked(EditDialog dialog, String str) {
-                if (StringUtil.isNotBlank(str) && str.length() == 6) {
-                    mUserPresenter.joinRoom(mUserId, str);
+            public void onClick(View v) {
+                String roomId = mEdRoomNumber.getText().toString();
+                if (StringUtil.isNotBlank(roomId) && roomId.length() == 6) {
+                    mUserPresenter.joinRoom(mUserId, roomId);
                 } else {
                     ToastUtil.showMessage("房间号有误，请重新输入");
                 }
             }
+        });
+        // 取消
+        mImageCancle.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onCancleClicked(EditDialog dialog) {
-                dialog.dismiss();
+            public void onClick(View v) {
+                mEditDialog.setVisibility(View.GONE);
             }
-        }).showTwo();
+        });
+//        EditDialog editDialog = new EditDialog(this).setTwoListener(new EditDialog.setOnTwoListener() {
+//            @Override
+//            public void onSureClicked(EditDialog dialog, String str) {
+//                if (StringUtil.isNotBlank(str) && str.length() == 6) {
+//                    mUserPresenter.joinRoom(mUserId, str);
+//                } else {
+//                    ToastUtil.showMessage("房间号有误，请重新输入");
+//                }
+//            }
+//
+//            @Override
+//            public void onCancleClicked(EditDialog dialog) {
+//                dialog.dismiss();
+//            }
+//        }).showTwo();
+//        editDialog.setEditListener(new EditDialog.setOnEditListener() {
+//            @Override
+//            public void onEditClicked(EditText editText) {
+//                showSoftInput(HomeActivity.this, editText);
+//            }
+//        });
     }
 
     /**
@@ -248,6 +294,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
                 dialog.dismiss();
             }
         }).showTwo();
+
     }
 
     private void sharToWeixin(int flag) {
@@ -275,7 +322,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
         if (mShapeLoadingDialog == null) {
             mShapeLoadingDialog = new ShapeLoadingDialog(this);
         }
-        mShapeLoadingDialog.setLoadingText("loading...");
+        mShapeLoadingDialog.setLoadingText("请稍后...");
         mShapeLoadingDialog.show();
     }
 
@@ -286,5 +333,13 @@ public class HomeActivity extends BaseActivity implements HomeView {
         if (mShapeLoadingDialog != null) {
             mShapeLoadingDialog.dismiss();
         }
+    }
+
+    /**
+     * 弹起软键盘
+     */
+    public static void showSoftInput(Context activity, View view) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 }
