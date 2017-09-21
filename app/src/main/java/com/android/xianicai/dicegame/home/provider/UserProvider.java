@@ -12,4 +12,5 @@ public interface UserProvider {
     void login(String code, String phone, ReqUser reqUser, NetAsynTask.CallBack callBack);
     void creatRoom(String userId, ReqCreatRoom reqCreatRoom, NetAsynTask.CallBack callBack);
     void joinRoom(String userId, String roomId, ReqCreatRoom reqCreatRoom, NetAsynTask.CallBack callBack);
+    void refreshUser(String userId, ReqUser reqUser, NetAsynTask.CallBack callBack);;
 }

@@ -16,7 +16,7 @@ import com.android.xianicai.dicegame.gameroom.provider.data.CheckRoomBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.GameResultBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
-import com.android.xianicai.dicegame.utils.ConfirmDialog;
+import com.android.xianicai.dicegame.home.TipsDialog;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
@@ -75,7 +75,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private int mRoomState = 0;
     private boolean mIsExitRoom = false;
     private AnimationDrawable mAnimation;
-    private ConfirmDialog mResultDialog;
+    private TipsDialog mResultDialog;
     private ShapeLoadingDialog mShapeLoadingDialog;
 
     @Override
@@ -237,19 +237,18 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 退出房间
      */
     private void exitRoom() {
-        new ConfirmDialog(this).setMessage("是否退出当前房间?").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        new TipsDialog(this).setMsg("是否退出当前房间?").setTwoListener(new TipsDialog.setOnTwoListener() {
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onSureClicked(TipsDialog dialog) {
                 mRoomPresenter.quitRoom(mUserId, mRoomId);
                 dialog.dismiss();
-
             }
-        }, new ConfirmDialog.OnConfirmDialogClickListener() {
+
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onCancleClicked(TipsDialog dialog) {
                 dialog.dismiss();
             }
-        }).show();
+        }).showTwo();
     }
 
     @Override
@@ -272,19 +271,19 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 解散房间的点击事件
      */
     private void dismissRoomClidked() {
-        new ConfirmDialog(this).setMessage("是否解散当前房间，解散后无法恢复").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        new TipsDialog(this).setMsg("是否解散当前房间，解散后无法恢复").setTwoListener(new TipsDialog.setOnTwoListener() {
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onSureClicked(TipsDialog dialog) {
                 mRoomPresenter.dismissRoom(mUserId, mRoomId);
                 dialog.dismiss();
-
             }
-        }, new ConfirmDialog.OnConfirmDialogClickListener() {
+
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onCancleClicked(TipsDialog dialog) {
                 dialog.dismiss();
             }
-        }).show();
+        }).showTwo();
+
 
     }
 
@@ -292,12 +291,12 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 充值金币
      */
     private void addDiamond() {
-        new ConfirmDialog(this).setMessage("充值金币请联系客服微信：touwang001").setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        new TipsDialog(this).setMsg("充值金币请联系客服微信：touwang001").setSingleListener(new TipsDialog.setOnSingleListener() {
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onSingleClicked(TipsDialog dialog) {
                 dialog.dismiss();
             }
-        }).show();
+        }).showSingle();
     }
 
     /**
@@ -310,13 +309,12 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         } else {
             mMsg = "本期游戏结果：" + countBean.getResult().getGameResult() + "\n\n您的亏盈情况： " + countBean.getResult().getResultGain();
         }
-        mResultDialog = new ConfirmDialog(this).setMessage(mMsg).setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        mResultDialog = new TipsDialog(this).setMsg(mMsg).setSingleListener(new TipsDialog.setOnSingleListener() {
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onSingleClicked(TipsDialog dialog) {
                 dialog.dismiss();
             }
-        });
-        mResultDialog.show();
+        }).showSingle();
     }
 
     /**
@@ -326,7 +324,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         if (mShapeLoadingDialog == null) {
             mShapeLoadingDialog = new ShapeLoadingDialog(this);
         }
-        mShapeLoadingDialog.setLoadingText("loading...");
+        mShapeLoadingDialog.setLoadingText("请稍后。。。");
         mShapeLoadingDialog.show();
     }
 

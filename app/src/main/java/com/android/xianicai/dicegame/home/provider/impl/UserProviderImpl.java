@@ -1,7 +1,6 @@
 package com.android.xianicai.dicegame.home.provider.impl;
 
 import com.android.xianicai.dicegame.Urls;
-import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
 import com.android.xianicai.dicegame.home.provider.UserProvider;
 import com.android.xianicai.dicegame.home.provider.data.ReqCreatRoom;
 import com.android.xianicai.dicegame.home.provider.data.ReqUser;
@@ -36,5 +35,12 @@ public class UserProviderImpl implements UserProvider {
         map.put("userId", userId);
         map.put("roomId", roomId);
         NetAsynTask.connectByPost(Urls.POST_ADD_ROOM, map, reqCreatRoom, callBack);
+    }
+
+    @Override
+    public void refreshUser(String userId, ReqUser reqUser, NetAsynTask.CallBack callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        NetAsynTask.connectByPost(Urls.POST_CHECK_USER, map, reqUser, callBack);
     }
 }

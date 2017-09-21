@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,11 +20,11 @@ import com.android.xianicai.dicegame.home.presenter.impl.UserPresenterImpl;
 import com.android.xianicai.dicegame.home.provider.data.CreatRoomBean;
 import com.android.xianicai.dicegame.home.provider.data.UserBean;
 import com.android.xianicai.dicegame.home.view.HomeView;
-import com.android.xianicai.dicegame.utils.ConfirmDialog;
 import com.android.xianicai.dicegame.utils.Mobile;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
+import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
@@ -55,10 +54,15 @@ public class HomeActivity extends BaseActivity implements HomeView {
     ImageView mImageLightTop;
     @BindView(R.id.image_light_bottom)
     ImageView mImageLightBottom;
+    @BindView(R.id.tv_home_notice)
+    TextView mTvHomeNotice;
+    @BindView(R.id.image_notice)
+    ImageView mImageNotice;
     private UserPresenterImpl mUserPresenter;
     private AlertDialog mDialog;
     private String mUserId;
     private UserBean mUserBean;
+    private ShapeLoadingDialog mShapeLoadingDialog;
 
     @Override
     public int getlayoutId() {
@@ -109,6 +113,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void creatRoom(CreatRoomBean creatRoomBean) {
         if (creatRoomBean != null && StringUtil.isNotBlank(creatRoomBean.getResult().getRoomId())) {
+            mUserBean.getResult().setDiamondCount(mUserBean.getResult().getDiamondCount() - 10);
+            mTvDiamondCount.setText(mUserBean.getResult().getDiamondCount() + "");
             GameRoomActivity.start(this, mUserId, creatRoomBean.getResult().getRoomId());
         }
     }
@@ -128,13 +134,25 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     }
 
+    @Override
+    public void refreshUser(UserBean userBean) {
+        mUserBean = userBean;
+        mUserId = userBean.getResult().getUserId();
+        mImageHead.setImage(userBean.getResult().getUserLogo());
+        mTvUserName.setText(userBean.getResult().getUserName());
+        mTvUserId.setText("ID:" + userBean.getResult().getUserId());
+        mTvDiamondCount.setText(userBean.getResult().getDiamondCount() + "");
+        mTvGoldCount.setText(userBean.getResult().getGoldCount() + "");
+        cancelLoading();
+    }
+
     //跳转到APP首页
     public static void start(Context context, String code) {
         context.startActivity(new Intent(context, HomeActivity.class).putExtra("code", code));
 
     }
 
-    @OnClick({R.id.image_add_diamond, R.id.image_add_gold, R.id.image_finish, R.id.image_creat_room, R.id.image_join_room})
+    @OnClick({R.id.image_add_diamond, R.id.image_add_gold, R.id.image_finish, R.id.image_creat_room, R.id.image_join_room, R.id.image_renovate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_add_diamond:
@@ -157,6 +175,10 @@ public class HomeActivity extends BaseActivity implements HomeView {
             case R.id.image_join_room:
                 joinRoom();
                 break;
+            case R.id.image_renovate:
+                mUserPresenter.refreshUser(mUserId);
+                showLoading();
+                break;
         }
     }
 
@@ -164,86 +186,68 @@ public class HomeActivity extends BaseActivity implements HomeView {
      * 加入房间
      */
     private void joinRoom() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = View.inflate(this, R.layout.join_room_dialog, null);
-        ImageView imageSure = (ImageView) view.findViewById(R.id.image_sure);
-        ImageView imageCancle = (ImageView) view.findViewById(R.id.image_cancle);
-        final EditText edRoomNumber = (EditText) view.findViewById(R.id.ed_room_number);
-        // 设置视图
-        builder.setView(view);
-        mDialog = builder.create();
-        // 确定
-        imageSure.setOnClickListener(new View.OnClickListener() {
+        new EditDialog(this).setTwoListener(new EditDialog.setOnTwoListener() {
             @Override
-            public void onClick(View v) {
-                String roomId = edRoomNumber.getText().toString();
-                if (StringUtil.isNotBlank(roomId) && roomId.length() == 6) {
-                    mUserPresenter.joinRoom(mUserId, roomId);
+            public void onSureClicked(EditDialog dialog, String str) {
+                if (StringUtil.isNotBlank(str) && str.length() == 6) {
+                    mUserPresenter.joinRoom(mUserId, str);
                 } else {
                     ToastUtil.showMessage("房间号有误，请重新输入");
                 }
             }
-        });
-        // 取消
-        imageCancle.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
+            public void onCancleClicked(EditDialog dialog) {
+                dialog.dismiss();
             }
-        });
-        mDialog.setCanceledOnTouchOutside(true);
-        mDialog.setCancelable(true);
-        mDialog.show();
+        }).showTwo();
     }
 
     /**
      * 创建房间
      */
     private void creatRoom() {
-        new ConfirmDialog(this).setMessage("创建房间将消费10个钻石，是否创建？").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        new TipsDialog(this).setMsg("创建房间将消费10个钻石，是否创建？").setTwoListener(new TipsDialog.setOnTwoListener() {
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
-                if (dialog != null) {
-                    //创建房间
-                    mUserPresenter.creatRomm(mUserId);
-                    dialog.dismiss();
-                }
-            }
-        }, new ConfirmDialog.OnConfirmDialogClickListener() {
-            @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onSureClicked(TipsDialog dialog) {
+                //创建房间
+                mUserPresenter.creatRomm(mUserId);
                 dialog.dismiss();
             }
-        }).show();
+
+            @Override
+            public void onCancleClicked(TipsDialog dialog) {
+                dialog.dismiss();
+            }
+        }).showTwo();
     }
 
     /**
      * 充值砖石
      */
     private void addDiamond(String msg) {
-        new ConfirmDialog(this).setMessage("充值" + msg + "请联系客服微信：touwang001").setSingleButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        new TipsDialog(this).setMsg("充值" + msg + "请联系客服微信：touwang001").setSingleListener(new TipsDialog.setOnSingleListener() {
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onSingleClicked(TipsDialog dialog) {
                 dialog.dismiss();
             }
-        }).show();
+        }).showSingle();
     }
 
     @Override
     public void onBackPressed() {
-        new ConfirmDialog(this).setMessage("是否关闭游戏?").setTwoButtonListener(new ConfirmDialog.OnConfirmDialogClickListener() {
+        new TipsDialog(this).setMsg("是否关闭游戏?").setTwoListener(new TipsDialog.setOnTwoListener() {
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onSureClicked(TipsDialog dialog) {
                 dialog.dismiss();
                 finish();
             }
-        }, new ConfirmDialog.OnConfirmDialogClickListener() {
+
             @Override
-            public void onClick(ConfirmDialog dialog, View v) {
+            public void onCancleClicked(TipsDialog dialog) {
                 dialog.dismiss();
             }
-        }).show();
+        }).showTwo();
     }
 
     private void sharToWeixin(int flag) {
@@ -263,4 +267,24 @@ public class HomeActivity extends BaseActivity implements HomeView {
         BaseApplication.api.sendReq(req);
     }
 
+
+    /**
+     * showloading
+     */
+    private void showLoading() {
+        if (mShapeLoadingDialog == null) {
+            mShapeLoadingDialog = new ShapeLoadingDialog(this);
+        }
+        mShapeLoadingDialog.setLoadingText("loading...");
+        mShapeLoadingDialog.show();
+    }
+
+    /**
+     * cancelLoading
+     */
+    private void cancelLoading() {
+        if (mShapeLoadingDialog != null) {
+            mShapeLoadingDialog.dismiss();
+        }
+    }
 }

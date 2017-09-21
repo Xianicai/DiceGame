@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
-    tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp">
+    android:background="@color/transparent">
 
     <ImageView
         android:id="@+id/bg_dialog"
@@ -32,35 +30,17 @@
         android:id="@+id/tv_msg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
         android:gravity="center"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:text="请输入房间号："
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <EditText
-        android:id="@+id/ed_room_number"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:background="@drawable/bg_home_roud"
-        android:gravity="center"
-        android:hint="例如:368858"
-        android:inputType="number"
-        android:maxLength="6"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColorHint="@color/gray"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="0dp"
+        tools:text="确定退出游戏？"/>
 
     <ImageView
         android:id="@+id/image_sure"

@@ -14,4 +14,5 @@ public interface HomeView extends BaseView {
     void creatRoom(CreatRoomBean creatRoomBean);
     void joinRoomSuccess(CreatRoomBean roomBean);
     void joinRoomFaild(String msg);
+    void refreshUser(UserBean userBean);
 }

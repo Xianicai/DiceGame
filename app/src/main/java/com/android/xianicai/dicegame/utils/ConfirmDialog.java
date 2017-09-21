@@ -45,13 +45,11 @@ public class ConfirmDialog {
 
     private int mDialogWidth;
     private int mDialogHight;
-    private final View mLayout;
 
     public ConfirmDialog(Activity context) {
         this.mContext = context;
-        mBuilder = new AlertDialog.Builder(context);
-        mView = LayoutInflater.from(context).inflate(R.layout.confirm_dialog, null);
-        mLayout = mView.findViewById(R.id.layout);
+        mBuilder = new AlertDialog.Builder(context, R.style.confirm_dialog);
+        mView = LayoutInflater.from(context).inflate(R.layout.layout, null);
         mTvMsg = (TextView) mView.findViewById(R.id.tv_msg);
         mImageSure = (ImageView) mView.findViewById(R.id.image_sure);
         mImageCancle = (ImageView) mView.findViewById(R.id.image_cancle);
@@ -117,7 +115,6 @@ public class ConfirmDialog {
                     mImageKnow.setOnClickListener(new OnDialogButtonClick(mSingleBtnListener));
                 }
                 mImageKnow.setVisibility(View.VISIBLE);
-                mLayout.setVisibility(View.GONE);
                 mImageSure.setVisibility(View.GONE);
                 mImageCancle.setVisibility(View.GONE);
             } // 2个按钮时
@@ -135,7 +132,6 @@ public class ConfirmDialog {
                 if (mImageKnow != null) {
                     mImageKnow.setVisibility(View.GONE);
                 }
-                mLayout.setVisibility(View.VISIBLE);
                 mImageSure.setVisibility(View.VISIBLE);
                 mImageCancle.setVisibility(View.VISIBLE);
             }

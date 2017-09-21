@@ -1,7 +1,6 @@
 package com.android.xianicai.dicegame.home.presenter.impl;
 
 import com.android.xianicai.dicegame.base.basemvp.BasePresenterImpl;
-import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
 import com.android.xianicai.dicegame.home.presenter.UserPresenter;
 import com.android.xianicai.dicegame.home.provider.data.ReqCreatRoom;
 import com.android.xianicai.dicegame.home.provider.data.ReqUser;
@@ -109,6 +108,34 @@ public class UserPresenterImpl extends BasePresenterImpl<HomeView> implements Us
             @Override
             public void onGetError() {
                 getView().joinRoomFaild(reqCreatRoom.message);
+            }
+        });
+    }
+
+    @Override
+    public void refreshUser(String userId) {
+        final ReqUser reqUser = new ReqUser();
+        mUserProvider.refreshUser(userId, reqUser, new NetAsynTask.CallBack() {
+            @Override
+            public void onGetSucc() {
+                if (reqUser.code == 0) {
+                    getView().refreshUser(reqUser.getT());
+                }
+            }
+
+            @Override
+            public void onGetFinished() {
+
+            }
+
+            @Override
+            public void onGetFaild() {
+                ToastUtil.showMessage(reqUser.message);
+            }
+
+            @Override
+            public void onGetError() {
+                ToastUtil.showMessage(reqUser.message);
             }
         });
     }

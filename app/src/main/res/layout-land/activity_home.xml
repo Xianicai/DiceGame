@@ -27,14 +27,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/image_bg_top"
         app:placeholderImage="@mipmap/icon_user_logo"/>
+
     <ImageView
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:background="@mipmap/icon_user_logo"
-        app:layout_constraintTop_toTopOf="@+id/image_head"
         app:layout_constraintBottom_toBottomOf="@+id/image_head"
         app:layout_constraintLeft_toLeftOf="@+id/image_head"
-        app:layout_constraintRight_toRightOf="@+id/image_head"/>
+        app:layout_constraintRight_toRightOf="@+id/image_head"
+        app:layout_constraintTop_toTopOf="@+id/image_head"/>
 
     <ImageView
         android:id="@+id/image_bg_top_right"
@@ -44,6 +45,7 @@
         android:src="@mipmap/bg_top_left"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="70dp"
@@ -76,9 +78,8 @@
         android:src="@mipmap/bg_home_property"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top"
         app:layout_constraintLeft_toRightOf="@+id/image_bg_top"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_top"
-        app:layout_constraintRight_toLeftOf="@+id/image_bg_gold"/>
-
+        app:layout_constraintRight_toLeftOf="@+id/image_bg_gold"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top"/>
 
 
     <TextView
@@ -108,12 +109,12 @@
         android:id="@+id/image_bg_gold"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:src="@mipmap/bg_home_gold"
         android:scaleType="fitXY"
+        android:src="@mipmap/bg_home_gold"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
         app:layout_constraintLeft_toRightOf="@+id/image_bg_diamond"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"
-        app:layout_constraintRight_toLeftOf="@+id/image_bg_top_right"/>
+        app:layout_constraintRight_toLeftOf="@+id/image_bg_top_right"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"/>
 
     <TextView
         android:id="@+id/tv_gold_count"
@@ -127,39 +128,41 @@
         app:layout_constraintLeft_toRightOf="@+id/image_bg_gold"
         app:layout_constraintRight_toLeftOf="@+id/image_bg_gold"
         app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
-        tools:text="10000"
-        app:layout_constraintVertical_bias="0.461"/>
+        app:layout_constraintVertical_bias="0.461"
+        tools:text="10000"/>
 
     <ImageView
         android:id="@+id/image_add_gold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
         android:src="@mipmap/icon_bet_add"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_gold"
         app:layout_constraintRight_toRightOf="@+id/image_bg_gold"
         app:layout_constraintTop_toTopOf="@+id/image_bg_gold"
-        android:layout_marginRight="0dp"
         app:layout_constraintVertical_bias="0.166"/>
 
+
+    <ImageView
+        android:id="@+id/image_renovate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_home_renovate"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
+        app:layout_constraintLeft_toLeftOf="@+id/image_bg_top_right"
+        app:layout_constraintRight_toLeftOf="@+id/image_finish"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"/>
 
     <ImageView
         android:id="@+id/image_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/icon_home_finish"
-        app:layout_constraintLeft_toLeftOf="@+id/image_bg_top_right"
-        app:layout_constraintRight_toLeftOf="@+id/image_renovate"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"
-        app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"/>
-    <ImageView
-        android:id="@+id/image_renovate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/icon_home_renovate"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
-        app:layout_constraintLeft_toRightOf="@+id/image_finish"/>
+        app:layout_constraintLeft_toRightOf="@+id/image_renovate"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"/>
+
     <ImageView
         android:id="@+id/image_light_top"
         android:layout_width="wrap_content"
@@ -171,6 +174,7 @@
         android:id="@+id/tv_home_notice"
         android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginTop="0dp"
         android:background="@mipmap/bg_home_info"
         android:drawableLeft="@mipmap/icon_info_trumpet"
         android:drawablePadding="20dp"
@@ -186,8 +190,7 @@
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_light_top"
-        android:layout_marginTop="0dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_light_top"/>
 
     <ImageView
         android:id="@+id/image_creat_room"
@@ -195,9 +198,9 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="55dp"
         android:src="@mipmap/icon_creat_room"
+        app:layout_constraintBottom_toTopOf="@+id/image_join_room"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_notice"
-        app:layout_constraintBottom_toTopOf="@+id/image_join_room"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_home_notice"/>
 
     <ImageView
         android:id="@+id/image_join_room"
@@ -206,9 +209,9 @@
         android:layout_marginRight="55dp"
         android:layout_marginTop="23dp"
         android:src="@mipmap/icon_join_room"
+        app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_creat_room"
-        app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_creat_room"/>
 
     <ImageView
         android:id="@+id/image_notice"
@@ -216,9 +219,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:src="@mipmap/bg_home_notice"
+        app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_home_notice"
-        app:layout_constraintBottom_toTopOf="@+id/image_light_bottom"
         />
 
 
@@ -231,10 +234,10 @@
         android:text="本游戏仅为娱乐使用请自觉远离赌博等非法行为
                            游戏问题请联系微信：saiwangyule"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/image_notice"
         app:layout_constraintLeft_toLeftOf="@+id/image_notice"
         app:layout_constraintLeft_toRightOf="@+id/image_notice"
-        app:layout_constraintTop_toTopOf="@+id/image_notice"
-        app:layout_constraintBottom_toBottomOf="@+id/image_notice"/>
+        app:layout_constraintTop_toTopOf="@+id/image_notice"/>
 
     <ImageView
         android:id="@+id/image_light_bottom"
@@ -245,4 +248,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <com.android.xianicai.dicegame.widget.loading.LoadingView
+        android:id="@+id/loadView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:loadingText="加载中..."
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
 </android.support.constraint.ConstraintLayout>

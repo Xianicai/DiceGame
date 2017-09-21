@@ -22,8 +22,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-
-    <!-- 极光推送  Required  一些系统要求的权限，如访问网络等-->
+    <!-- 极光推送  Required  一些系统要求的权限，如访问网络等 -->
     <uses-permission android:name="com.android.xianicai.dicegame.permission.JPUSH_MESSAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -45,7 +44,8 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
-    <!-- 极光推送  end-->
+
+    <!-- 极光推送  end -->
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
@@ -55,9 +55,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.android.xianicai.dicegame.home.LoginActivity"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|screenSize">
+            android:name=".home.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -65,60 +65,70 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.xianicai.dicegame.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:screenOrientation="landscape"/>
         <activity
-            android:name="com.android.xianicai.dicegame.home.HomeActivity"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|screenSize">
+            android:name=".home.HomeActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:name="com.android.xianicai.dicegame.pay.PayActivity"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|screenSize">
+            android:name=".pay.PayActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:name="com.android.xianicai.dicegame.gameroom.GameRoomActivity"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|screenSize">
-
+            android:name=".gameroom.GameRoomActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:name="com.android.xianicai.dicegame.gameroom.BetActivity"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|screenSize">
-
+            android:name=".gameroom.BetActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape">
         </activity>
-        <!--极光推送start-->
+        <!-- 极光推送start -->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
             tools:node="replace">
         </service>
-        <!--极光推送end-->
+        <!-- 极光推送end -->
 
 
-        <!-- User defined. 用户自定义的广播接收器-->
+        <!-- User defined. 用户自定义的广播接收器 -->
         <receiver
             android:name=".JPushReceiver"
             android:enabled="true">
             <intent-filter>
-                <!--Required 用户注册SDK的intent-->
+
+                <!-- Required 用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.REGISTRATION"/>
-                <!--Required 用户接收SDK消息的intent-->
+                <!-- Required 用户接收SDK消息的intent -->
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
-                <!--Required 用户接收SDK通知栏信息的intent-->
+                <!-- Required 用户接收SDK通知栏信息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/>
-                <!--Required 用户打开自定义通知栏的intent-->
+                <!-- Required 用户打开自定义通知栏的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
-                <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/>
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <action android:name="cn.jpush.android.intent.CONNECTION"/>
+
                 <category android:name="com.android.xianicai.dicegame"/>
             </intent-filter>
         </receiver>
+
+        <activity
+
+            android:name=".home.test">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
     </application>
 
 </manifest>

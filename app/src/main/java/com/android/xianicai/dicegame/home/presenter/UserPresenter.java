@@ -8,4 +8,5 @@ public interface UserPresenter  {
     void login(String code, String phone);
     void creatRomm(String userId);
     void joinRoom(String userId, String roomId);
+    void refreshUser(String userId);
 }
