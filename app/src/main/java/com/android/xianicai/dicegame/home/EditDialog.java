@@ -1,13 +1,13 @@
 package com.android.xianicai.dicegame.home;
 
-import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.StyleRes;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,31 +16,20 @@ import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.utils.Mobile;
 import com.android.xianicai.dicegame.utils.StringUtil;
 
+import static com.android.xianicai.dicegame.home.HomeActivity.showSoftInput;
+
 /**
  * Created by Zhanglibin on 2017/9/21.
  */
 
-public class EditDialog  extends AlertDialog {
+public class EditDialog extends Dialog {
 
     TextView mTvMsg;
     ImageView mImageSure;
     ImageView mImageCancle;
-    ImageView mImageKnow;
-    //    private Activity mContext;
-//    private AlertDialog.Builder mBuilder;
-//    private AlertDialog mDialog;
-//    private View mView;
     // 内容
     private String mMessage;
     private DialogInterface.OnDismissListener mOnDismissListener;
-    /**
-     * 按钮数量
-     */
-    private int mBtnNum = 1;
-    /**
-     * 是否已经初始化
-     */
-    private boolean mHasInit = false;
 
     private boolean mCancelable = true;
 
@@ -70,39 +59,32 @@ public class EditDialog  extends AlertDialog {
     }
 
     protected EditDialog(final Context context, @StyleRes int themeResId) {
-        super(context, R.style.confirm_dialog);
-
-
-
+        super(context, R.style.inputDialog);
         mView = View.inflate(context, R.layout.join_room_dialog, null);
         mTvMsg = (TextView) mView.findViewById(R.id.tv_msg);
         mImageSure = (ImageView) mView.findViewById(R.id.image_sure);
         mImageCancle = (ImageView) mView.findViewById(R.id.image_cancle);
-        mImageKnow = (ImageView) mView.findViewById(R.id.image_know);
         mEdRoomNumber = (EditText) mView.findViewById(R.id.ed_room_number);
         mImageSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewListener.onSureClicked(EditDialog.this,mEdRoomNumber.getText().toString());
+                showSoftInput(context, v);
+                mViewListener.onSureClicked(EditDialog.this, mEdRoomNumber.getText().toString());
 
             }
         });
         mImageCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                showSoftInputFromWindow(context, v);
                 mViewListener.onCancleClicked(EditDialog.this);
-            }
-        });
-        mImageKnow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                editListener.onEditClicked(mEdRoomNumber);
             }
         });
         mEdRoomNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                showSoftInputFromWindow(context, view);
+                showSoftInputFromWindow(context,mEdRoomNumber);
                 editListener.onEditClicked(mEdRoomNumber);
             }
         });
@@ -140,7 +122,6 @@ public class EditDialog  extends AlertDialog {
     public EditDialog showTwo() {
         mImageSure.setVisibility(View.VISIBLE);
         mImageCancle.setVisibility(View.VISIBLE);
-        mImageKnow.setVisibility(View.GONE);
         setOnDismissListener(mOnDismissListener);
         setCancelable(mCancelable);
         setCanceledOnTouchOutside(mCancelable);
@@ -154,7 +135,6 @@ public class EditDialog  extends AlertDialog {
     public EditDialog showSingle() {
         mImageSure.setVisibility(View.GONE);
         mImageCancle.setVisibility(View.GONE);
-        mImageKnow.setVisibility(View.VISIBLE);
         setOnDismissListener(mOnDismissListener);
         setCancelable(mCancelable);
         setCanceledOnTouchOutside(mCancelable);
@@ -163,7 +143,7 @@ public class EditDialog  extends AlertDialog {
     }
 
     public interface setOnTwoListener {
-        void onSureClicked(EditDialog dialog,String str);
+        void onSureClicked(EditDialog dialog, String str);
 
         void onCancleClicked(EditDialog dialog);
     }
@@ -173,11 +153,18 @@ public class EditDialog  extends AlertDialog {
         void onEditClicked(EditText editText);
     }
 
-    public static void showSoftInputFromWindow(Activity activity, EditText editText) {
-        editText.setFocusable(true);
-        editText.setFocusableInTouchMode(true);
-        editText.requestFocus();
-        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+    public static void showSoftInputFromWindow(Context context, EditText view) {
+        if (view != null) {
+            //设置可获得焦点
+            view.setFocusable(true);
+            view.setFocusableInTouchMode(true);
+            //请求获得焦点
+            view.requestFocus();
+            //调用系统输入法
+            InputMethodManager inputManager = (InputMethodManager) view
+                    .getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.showSoftInput(view, 0);
+        }
     }
 }
 

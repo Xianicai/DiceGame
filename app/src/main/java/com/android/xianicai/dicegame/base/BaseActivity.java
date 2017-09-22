@@ -12,12 +12,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- ZY:基础的Aty,实现简单的接口，方法
+ * ZY:基础的Aty,实现简单的接口，方法
  * Created by zhanglibin.
  */
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private Unbinder mUnbinder;
     private ShapeLoadingDialog mShapeLoadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(getlayoutId());
         //初始化黄油刀控件绑定框架
-        mUnbinder=  ButterKnife.bind(this);
+        mUnbinder = ButterKnife.bind(this);
         //初始化控件
         initViews(savedInstanceState);
     }
@@ -41,8 +42,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
+        if (mShapeLoadingDialog != null) {
+            mShapeLoadingDialog.dismiss();
+            mShapeLoadingDialog = null;
+        }
     }
+
     public abstract int getlayoutId();
+
     public abstract void initViews(Bundle savedInstanceState);
 
     @Override

@@ -52,7 +52,9 @@ public class ShapeLoadingDialog {
     }
 
     public void dismiss(){
-        mDialog.dismiss();
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
     }
 
     public Dialog getDialog(){

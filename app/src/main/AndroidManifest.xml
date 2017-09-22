@@ -59,9 +59,9 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -119,10 +119,10 @@
                 <category android:name="com.android.xianicai.dicegame"/>
             </intent-filter>
         </receiver>
-
         <activity
-
-            android:name=".home.test">
+            android:name=".home.view.TestActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 

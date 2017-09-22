@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
-    public static int goldcount = 1000;
+    public int goldcount = 0;
 
     public static int mGameTimes = 0;
     @BindView(R.id.tv_room_number)
@@ -127,6 +127,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
         if (StringUtil.isNotBlank(roomDetailBean.getResult().getLastResult())) {
             mTvLastResult.setText("上一期骰点：" + mLastResult);
+        }else {
+            mTvLastResult.setVisibility(View.GONE);
         }
         mImageOwerLogo.setImage(roomDetailBean.getResult().getOwnerLogo());
         mImageUserLogo.setImage(roomDetailBean.getResult().getUserLogo());
@@ -196,7 +198,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 骰子动画
      */
     private void startAnimation(final CheckRoomBean countBean) {
-        cancelLoading();
         mImgeDice.setVisibility(View.VISIBLE);
         mAnimation.start();
         if (mHandler == null) {
@@ -207,7 +208,10 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 mAnimation.stop();
                 mImgeDice.setVisibility(View.GONE);
                 resultDialog(countBean);
-                mTvLastResult.setText("上一期骰点：" + mLastResult);
+                if (StringUtil.isNotBlank(mLastResult)) {
+                    mTvLastResult.setVisibility(View.VISIBLE);
+                    mTvLastResult.setText("上一期骰点：" + mLastResult);
+                }
             }
         }, 3000);
     }
@@ -216,11 +220,10 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_start_game:
-                showLoading();
                 mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
                 break;
             case R.id.image_bet:
-                BetActivity.start(this, mUserId, mRoomId);
+                BetActivity.start(this, mUserId, mRoomId,goldcount);
                 break;
             case R.id.image_dissmiaa_room:
                 dismissRoomClidked();
@@ -319,25 +322,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         }).showSingle();
     }
 
-    /**
-     * showloading
-     */
-    private void showLoading() {
-        if (mShapeLoadingDialog == null) {
-            mShapeLoadingDialog = new ShapeLoadingDialog(this);
-        }
-        mShapeLoadingDialog.setLoadingText("请稍后。。。");
-        mShapeLoadingDialog.show();
-    }
-
-    /**
-     * cancelLoading
-     */
-    private void cancelLoading() {
-        if (mShapeLoadingDialog != null) {
-            mShapeLoadingDialog.dismiss();
-        }
-    }
 
     public static void start(Context context, String userId, String roomId) {
         context.startActivity(new Intent(context, GameRoomActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));

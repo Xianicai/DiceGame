@@ -9,9 +9,10 @@
 
     <ImageView
         android:id="@+id/bg_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:src="@mipmap/bg_confirm_dialog"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -20,7 +21,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:src="@mipmap/icon_title_dailog"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -66,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:src="@mipmap/icon_dialog_sure"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
         app:layout_constraintLeft_toLeftOf="@+id/bg_dialog"
         app:layout_constraintRight_toLeftOf="@+id/image_cancle"/>
@@ -77,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:src="@mipmap/icon_dialog_cancle"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
         app:layout_constraintLeft_toRightOf="@+id/image_sure"
         app:layout_constraintRight_toRightOf="@+id/bg_dialog"/>

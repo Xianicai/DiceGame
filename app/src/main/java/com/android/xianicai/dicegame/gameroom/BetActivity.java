@@ -36,7 +36,7 @@ public class BetActivity extends BaseActivity implements BetView {
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
-
+public static int goldcount = 0;
     private String mUserId;
     private String mRoomId;
     private int[] itemId = {BetBean.BET_ID_SIZE_BIG, BetBean.BET_ID__SIZE_SMALL, BetBean.BET_ID_SINGLEDOUBLE_SINGLE, BetBean.BET_ID_SINGLEDOUBLE_DOUBLE, BetBean.BET_ID_NUMBER_NINE,
@@ -62,6 +62,7 @@ public class BetActivity extends BaseActivity implements BetView {
         finishBeat();
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
+        goldcount = getIntent().getIntExtra("goldcount",0);
         mBetpresenter = new BetpresenterImpl();
         mBetpresenter.bindView(this);
 
@@ -113,8 +114,9 @@ public class BetActivity extends BaseActivity implements BetView {
     }
 
 
-    public static void start(Context context, String userId, String roomId) {
-        context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId).putExtra("roomId", roomId));
+    public static void start(Context context, String userId, String roomId,int goldcount) {
+        context.startActivity(new Intent(context, BetActivity.class).putExtra("userId", userId)
+                .putExtra("roomId", roomId).putExtra("goldcount",goldcount));
     }
 
 

@@ -2,14 +2,12 @@ package com.android.xianicai.dicegame.home;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,7 +25,6 @@ import com.android.xianicai.dicegame.utils.Mobile;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
-import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
@@ -61,19 +58,10 @@ public class HomeActivity extends BaseActivity implements HomeView {
     TextView mTvHomeNotice;
     @BindView(R.id.image_notice)
     ImageView mImageNotice;
-    @BindView(R.id.ed_room_number)
-    EditText mEdRoomNumber;
-    @BindView(R.id.image_sure)
-    ImageView mImageSure;
-    @BindView(R.id.image_cancle)
-    ImageView mImageCancle;
-    @BindView(R.id.edit_dialog)
-    View mEditDialog;
     private UserPresenterImpl mUserPresenter;
-    private AlertDialog mDialog;
     private String mUserId;
     private UserBean mUserBean;
-    private ShapeLoadingDialog mShapeLoadingDialog;
+    private EditDialog mEditDialog;
 
     @Override
     public int getlayoutId() {
@@ -86,10 +74,11 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
         statAnimator();
         mUserBean = new UserBean();
-        String code = getIntent().getStringExtra("code");
+        mUserId = getIntent().getStringExtra("userId");
         mUserPresenter = new UserPresenterImpl();
         mUserPresenter.bindView(this);
-        mUserPresenter.login(code, "1");
+//        mUserPresenter.login(code, "1");
+        mUserPresenter.refreshUser(mUserId);
     }
 
     /**
@@ -135,7 +124,9 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void joinRoomSuccess(CreatRoomBean roomBean) {
         if (roomBean != null && StringUtil.isNotBlank(roomBean.getResult().getRoomId())) {
-            mEditDialog.setVisibility(View.GONE);
+            if (mEditDialog != null) {
+                mEditDialog.dismiss();
+            }
             GameRoomActivity.start(this, mUserId, roomBean.getResult().getRoomId());
         }
 
@@ -144,7 +135,9 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void joinRoomFaild(String msg) {
         ToastUtil.showMessage(msg);
-
+        if (mEditDialog != null) {
+            mEditDialog.dismiss();
+        }
     }
 
     @Override
@@ -156,12 +149,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
         mTvUserId.setText("ID:" + userBean.getResult().getUserId());
         mTvDiamondCount.setText(userBean.getResult().getDiamondCount() + "");
         mTvGoldCount.setText(userBean.getResult().getGoldCount() + "");
-        cancelLoading();
+
     }
 
     //跳转到APP首页
-    public static void start(Context context, String code) {
-        context.startActivity(new Intent(context, HomeActivity.class).putExtra("code", code));
+    public static void start(Context context, String userId) {
+        context.startActivity(new Intent(context, HomeActivity.class).putExtra("userId", userId));
 
     }
 
@@ -187,11 +180,9 @@ public class HomeActivity extends BaseActivity implements HomeView {
                 break;
             case R.id.image_join_room:
                 joinRoom();
-                showSoftInput(this, view);
                 break;
             case R.id.image_renovate:
                 mUserPresenter.refreshUser(mUserId);
-                showLoading();
                 break;
         }
     }
@@ -201,52 +192,27 @@ public class HomeActivity extends BaseActivity implements HomeView {
      */
     private void joinRoom() {
 
-        ViewGroup.LayoutParams layoutParams = mEditDialog.getLayoutParams();
-        layoutParams.height = Mobile.SCREEN_HEIGHT * 4 / 10;
-        layoutParams.width = Mobile.SCREEN_WIDTH * 2 / 10;
-        mEditDialog.setLayoutParams(layoutParams);
-        mEditDialog.setVisibility(View.VISIBLE);
-        // 确定
-        mImageSure.setOnClickListener(new View.OnClickListener() {
+        mEditDialog = new EditDialog(this).setTwoListener(new EditDialog.setOnTwoListener() {
             @Override
-            public void onClick(View v) {
-                String roomId = mEdRoomNumber.getText().toString();
-                if (StringUtil.isNotBlank(roomId) && roomId.length() == 6) {
-                    mUserPresenter.joinRoom(mUserId, roomId);
+            public void onSureClicked(EditDialog dialog, String str) {
+                if (StringUtil.isNotBlank(str) && str.length() == 6) {
+                    mUserPresenter.joinRoom(mUserId, str);
                 } else {
                     ToastUtil.showMessage("房间号有误，请重新输入");
                 }
             }
-        });
-        // 取消
-        mImageCancle.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
-                mEditDialog.setVisibility(View.GONE);
+            public void onCancleClicked(EditDialog dialog) {
+                dialog.dismiss();
+            }
+        }).showTwo();
+        mEditDialog.setEditListener(new EditDialog.setOnEditListener() {
+            @Override
+            public void onEditClicked(EditText editText) {
+                showSoftInput(HomeActivity.this, editText);
             }
         });
-//        EditDialog editDialog = new EditDialog(this).setTwoListener(new EditDialog.setOnTwoListener() {
-//            @Override
-//            public void onSureClicked(EditDialog dialog, String str) {
-//                if (StringUtil.isNotBlank(str) && str.length() == 6) {
-//                    mUserPresenter.joinRoom(mUserId, str);
-//                } else {
-//                    ToastUtil.showMessage("房间号有误，请重新输入");
-//                }
-//            }
-//
-//            @Override
-//            public void onCancleClicked(EditDialog dialog) {
-//                dialog.dismiss();
-//            }
-//        }).showTwo();
-//        editDialog.setEditListener(new EditDialog.setOnEditListener() {
-//            @Override
-//            public void onEditClicked(EditText editText) {
-//                showSoftInput(HomeActivity.this, editText);
-//            }
-//        });
     }
 
     /**
@@ -312,27 +278,6 @@ public class HomeActivity extends BaseActivity implements HomeView {
         req.message = msg;
         req.scene = flag == 0 ? SendMessageToWX.Req.WXSceneSession : SendMessageToWX.Req.WXSceneTimeline;
         BaseApplication.api.sendReq(req);
-    }
-
-
-    /**
-     * showloading
-     */
-    private void showLoading() {
-        if (mShapeLoadingDialog == null) {
-            mShapeLoadingDialog = new ShapeLoadingDialog(this);
-        }
-        mShapeLoadingDialog.setLoadingText("请稍后...");
-        mShapeLoadingDialog.show();
-    }
-
-    /**
-     * cancelLoading
-     */
-    private void cancelLoading() {
-        if (mShapeLoadingDialog != null) {
-            mShapeLoadingDialog.dismiss();
-        }
     }
 
     /**

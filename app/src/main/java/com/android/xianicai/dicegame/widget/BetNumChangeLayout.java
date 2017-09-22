@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.xianicai.dicegame.R;
-import com.android.xianicai.dicegame.gameroom.GameRoomActivity;
+import com.android.xianicai.dicegame.gameroom.BetActivity;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -76,7 +76,7 @@ public class BetNumChangeLayout extends LinearLayout {
             case R.id.image_minus:
                 if (mViewListener != null) {
                     if (number > 0) {
-                        GameRoomActivity.goldcount += 100;
+                        BetActivity.goldcount += 100;
                         mTvNumber.setText((number - goldCount) + "");
                     }
                     mViewListener.onMinusClicked(getGoldCount());
@@ -87,11 +87,11 @@ public class BetNumChangeLayout extends LinearLayout {
                 break;
             case R.id.image_add:
                 if (mViewListener != null) {
-                    if (GameRoomActivity.goldcount < 100) {
+                    if (BetActivity.goldcount < 100) {
                         ToastUtil.showMessage("您的金币不足");
                     } else {
                         mTvNumber.setText((goldCount + number) + "");
-                        GameRoomActivity.goldcount -= 100;
+                        BetActivity.goldcount -= 100;
                     }
                     mViewListener.onAddClicked(getGoldCount());
                 }
