@@ -1,14 +1,12 @@
-package com.android.xianicai.dicegame.home;
+package com.android.xianicai.dicegame.widget;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.StyleRes;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,20 +14,31 @@ import com.android.xianicai.dicegame.R;
 import com.android.xianicai.dicegame.utils.Mobile;
 import com.android.xianicai.dicegame.utils.StringUtil;
 
-import static com.android.xianicai.dicegame.home.HomeActivity.showSoftInput;
-
 /**
  * Created by Zhanglibin on 2017/9/21.
  */
 
-public class EditDialog extends Dialog {
+public class TipsDialog extends AlertDialog {
 
     TextView mTvMsg;
     ImageView mImageSure;
     ImageView mImageCancle;
+    ImageView mImageKnow;
+    //    private Activity mContext;
+//    private AlertDialog.Builder mBuilder;
+//    private AlertDialog mDialog;
+//    private View mView;
     // 内容
     private String mMessage;
     private DialogInterface.OnDismissListener mOnDismissListener;
+    /**
+     * 按钮数量
+     */
+    private int mBtnNum = 1;
+    /**
+     * 是否已经初始化
+     */
+    private boolean mHasInit = false;
 
     private boolean mCancelable = true;
 
@@ -37,55 +46,51 @@ public class EditDialog extends Dialog {
     private int mDialogHight;
     private View mView;
     private setOnTwoListener mViewListener;
-    private setOnEditListener editListener;
-    private EditText mEdRoomNumber;
+    private setOnSingleListener singleListener;
 
-    public EditDialog setTwoListener(setOnTwoListener viewListener) {
+    public TipsDialog setTwoListener(setOnTwoListener viewListener) {
         mViewListener = viewListener;
         return this;
     }
 
-    public EditDialog setEditListener(setOnEditListener editListener) {
-        this.editListener = editListener;
+    public TipsDialog setSingleListener(setOnSingleListener singleListener) {
+        this.singleListener = singleListener;
         return this;
     }
 
-    public EditDialog(Context context) {
+    public TipsDialog(Context context) {
         this(context, 0);
     }
 
-    protected EditDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
+    protected TipsDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
-    protected EditDialog(final Context context, @StyleRes int themeResId) {
-        super(context, R.style.inputDialog);
-        mView = View.inflate(context, R.layout.join_room_dialog, null);
+    protected TipsDialog(Context context, @StyleRes int themeResId) {
+        super(context, R.style.confirm_dialog);
+        mView = View.inflate(context, R.layout.layout, null);
         mTvMsg = (TextView) mView.findViewById(R.id.tv_msg);
         mImageSure = (ImageView) mView.findViewById(R.id.image_sure);
         mImageCancle = (ImageView) mView.findViewById(R.id.image_cancle);
-        mEdRoomNumber = (EditText) mView.findViewById(R.id.ed_room_number);
+        mImageKnow = (ImageView) mView.findViewById(R.id.image_know);
         mImageSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showSoftInput(context, v);
-                mViewListener.onSureClicked(EditDialog.this, mEdRoomNumber.getText().toString());
+                mViewListener.onSureClicked(TipsDialog.this);
 
             }
         });
         mImageCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showSoftInputFromWindow(context, v);
-                mViewListener.onCancleClicked(EditDialog.this);
+                mViewListener.onCancleClicked(TipsDialog.this);
             }
         });
-        mEdRoomNumber.setOnClickListener(new View.OnClickListener() {
+        mImageKnow.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-//                showSoftInputFromWindow(context, view);
-                showSoftInputFromWindow(context,mEdRoomNumber);
-                editListener.onEditClicked(mEdRoomNumber);
+            public void onClick(View v) {
+
+                singleListener.onSingleClicked(TipsDialog.this);
             }
         });
     }
@@ -108,7 +113,7 @@ public class EditDialog extends Dialog {
     /**
      * 设置内容
      */
-    public EditDialog setMsg(String message) {
+    public TipsDialog setMsg(String message) {
         this.mMessage = message;
         if (StringUtil.isNotBlank(mMessage)) {
             mTvMsg.setText(mMessage);
@@ -119,9 +124,10 @@ public class EditDialog extends Dialog {
     /**
      * 显示Dialog
      */
-    public EditDialog showTwo() {
+    public TipsDialog showTwo() {
         mImageSure.setVisibility(View.VISIBLE);
         mImageCancle.setVisibility(View.VISIBLE);
+        mImageKnow.setVisibility(View.GONE);
         setOnDismissListener(mOnDismissListener);
         setCancelable(mCancelable);
         setCanceledOnTouchOutside(mCancelable);
@@ -132,9 +138,10 @@ public class EditDialog extends Dialog {
     /**
      * 显示Dialog
      */
-    public EditDialog showSingle() {
+    public TipsDialog showSingle() {
         mImageSure.setVisibility(View.GONE);
         mImageCancle.setVisibility(View.GONE);
+        mImageKnow.setVisibility(View.VISIBLE);
         setOnDismissListener(mOnDismissListener);
         setCancelable(mCancelable);
         setCanceledOnTouchOutside(mCancelable);
@@ -143,28 +150,13 @@ public class EditDialog extends Dialog {
     }
 
     public interface setOnTwoListener {
-        void onSureClicked(EditDialog dialog, String str);
+        void onSureClicked(TipsDialog dialog);
 
-        void onCancleClicked(EditDialog dialog);
+        void onCancleClicked(TipsDialog dialog);
     }
 
-    public interface setOnEditListener {
+    public interface setOnSingleListener {
 
-        void onEditClicked(EditText editText);
-    }
-
-    public static void showSoftInputFromWindow(Context context, EditText view) {
-        if (view != null) {
-            //设置可获得焦点
-            view.setFocusable(true);
-            view.setFocusableInTouchMode(true);
-            //请求获得焦点
-            view.requestFocus();
-            //调用系统输入法
-            InputMethodManager inputManager = (InputMethodManager) view
-                    .getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.showSoftInput(view, 0);
-        }
+        void onSingleClicked(TipsDialog dialog);
     }
 }
-

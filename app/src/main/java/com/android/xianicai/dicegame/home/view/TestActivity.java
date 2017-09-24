@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 import com.android.xianicai.dicegame.R;
-import com.android.xianicai.dicegame.home.EditDialog;
+import com.android.xianicai.dicegame.widget.EditDialog;
 
 public class TestActivity extends AppCompatActivity {
     private AlertDialog mDialog;
@@ -34,7 +34,7 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.confirm_dialog);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.share_dialog);
 //        View view = View.inflate(this, R.layout.join_room_dialog, null);
 //        ImageView imageSure = (ImageView) view.findViewById(R.id.image_sure);
 //        ImageView imageCancle = (ImageView) view.findViewById(R.id.image_cancle);

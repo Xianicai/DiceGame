@@ -17,15 +17,16 @@ import com.android.xianicai.dicegame.gameroom.provider.data.CheckRoomBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.GameResultBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
-import com.android.xianicai.dicegame.home.TipsDialog;
 import com.android.xianicai.dicegame.utils.RxBus;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
+import com.android.xianicai.dicegame.widget.TipsDialog;
 import com.android.xianicai.dicegame.widget.loading.LoadingView;
 import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
@@ -66,6 +67,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     ImageView mImageOwerBg;
     @BindView(R.id.loadView)
     LoadingView mLoadView;
+    @BindView(R.id.imge_share)
+    ImageView mImgeShare;
     private GameRoomPresenterImpl mRoomPresenter;
     private String mUserId;
     private String mRoomId;
@@ -127,7 +130,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
         if (StringUtil.isNotBlank(roomDetailBean.getResult().getLastResult())) {
             mTvLastResult.setText("上一期骰点：" + mLastResult);
-        }else {
+        } else {
             mTvLastResult.setVisibility(View.GONE);
         }
         mImageOwerLogo.setImage(roomDetailBean.getResult().getOwnerLogo());
@@ -198,6 +201,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 骰子动画
      */
     private void startAnimation(final CheckRoomBean countBean) {
+        mImgeShare.setVisibility(View.GONE);
         mImgeDice.setVisibility(View.VISIBLE);
         mAnimation.start();
         if (mHandler == null) {
@@ -207,6 +211,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             public void run() {
                 mAnimation.stop();
                 mImgeDice.setVisibility(View.GONE);
+                mImgeShare.setVisibility(View.VISIBLE);
                 resultDialog(countBean);
                 if (StringUtil.isNotBlank(mLastResult)) {
                     mTvLastResult.setVisibility(View.VISIBLE);
@@ -216,14 +221,15 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         }, 3000);
     }
 
-    @OnClick({R.id.image_start_game, R.id.image_bet, R.id.image_dissmiaa_room, R.id.image_add_gold, R.id.image_quit_room})
+    @OnClick({R.id.image_start_game, R.id.image_bet, R.id.image_dissmiaa_room, R.id.image_add_gold,
+            R.id.image_quit_room, R.id.imge_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_start_game:
                 mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
                 break;
             case R.id.image_bet:
-                BetActivity.start(this, mUserId, mRoomId,goldcount);
+                BetActivity.start(this, mUserId, mRoomId, goldcount);
                 break;
             case R.id.image_dissmiaa_room:
                 dismissRoomClidked();
@@ -234,6 +240,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 break;
             case R.id.image_quit_room:
                 exitRoom();
+                break;
+            case R.id.imge_share:
                 break;
         }
     }
@@ -264,7 +272,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
                 mRoomPresenter.dismissRoom(mUserId, mRoomId);
             }
         } else {
-            if (!mIsExitRoom&&mRoomState != 1) {
+            if (!mIsExitRoom && mRoomState != 1) {
                 mRoomPresenter.quitRoom(mUserId, mRoomId);
             }
 
@@ -343,5 +351,12 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         } else {
             exitRoom();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

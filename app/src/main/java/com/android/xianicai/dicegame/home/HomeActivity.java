@@ -25,6 +25,9 @@ import com.android.xianicai.dicegame.utils.Mobile;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
+import com.android.xianicai.dicegame.widget.EditDialog;
+import com.android.xianicai.dicegame.widget.ShareDialog;
+import com.android.xianicai.dicegame.widget.TipsDialog;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
@@ -158,7 +161,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     }
 
-    @OnClick({R.id.image_add_diamond, R.id.image_add_gold, R.id.image_finish, R.id.image_creat_room, R.id.image_join_room, R.id.image_renovate})
+    @OnClick({R.id.image_add_diamond, R.id.image_add_gold, R.id.image_finish, R.id.image_creat_room,
+            R.id.image_join_room, R.id.image_renovate, R.id.image_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_add_diamond:
@@ -170,10 +174,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
                 break;
             case R.id.image_finish:
                 onBackPressed();
-                //分享到微信好友
-//                sharToWeixin(0);
-                //分享到微信朋友圈
-//                sharToWeixin(1);
+
                 break;
             case R.id.image_creat_room:
                 creatRoom();
@@ -184,7 +185,31 @@ public class HomeActivity extends BaseActivity implements HomeView {
             case R.id.image_renovate:
                 mUserPresenter.refreshUser(mUserId);
                 break;
+            case R.id.image_share:
+                showShare();
+                break;
         }
+    }
+
+    /**
+     * 分享提示框
+     */
+    private void showShare() {
+        new ShareDialog(this).setMsg("请选择分享方式：").setTwoListener(new ShareDialog.setOnTwoListener() {
+            @Override
+            public void onSureClicked(ShareDialog dialog) {
+                //分享到微信好友
+                sharToWeixin(0);
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onCancleClicked(ShareDialog dialog) {
+                //分享到微信朋友圈
+                sharToWeixin(1);
+                dialog.dismiss();
+            }
+        }).showTwo();
     }
 
     /**

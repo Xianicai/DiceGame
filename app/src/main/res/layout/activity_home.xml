@@ -152,16 +152,24 @@
         android:src="@mipmap/icon_home_renovate"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
         app:layout_constraintLeft_toLeftOf="@+id/image_bg_top_right"
+        app:layout_constraintRight_toLeftOf="@+id/image_share"
+        app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"/>
+    <ImageView
+        android:id="@+id/image_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_home_share"
+        app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
+        app:layout_constraintLeft_toRightOf="@+id/image_renovate"
         app:layout_constraintRight_toLeftOf="@+id/image_finish"
         app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"/>
-
     <ImageView
         android:id="@+id/image_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/icon_home_finish"
         app:layout_constraintBottom_toBottomOf="@+id/image_bg_top_right"
-        app:layout_constraintLeft_toRightOf="@+id/image_renovate"
+        app:layout_constraintLeft_toRightOf="@+id/image_share"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/image_bg_top_right"/>
 

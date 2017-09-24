@@ -9,56 +9,37 @@
 
     <ImageView
         android:id="@+id/bg_dialog"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@mipmap/bg_confirm_dialog"
-        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
 
     <TextView
         android:id="@+id/tv_msg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
         android:gravity="center"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:text="请输入房间号："
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <EditText
-        android:id="@+id/ed_room_number"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:background="@drawable/bg_home_roud"
-        android:gravity="center"
-        android:hint="例如:368858"
-        android:inputType="number"
-        android:maxLength="6"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColorHint="@color/gray"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="请选择分享方式："/>
 
     <ImageView
         android:id="@+id/image_sure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:src="@mipmap/icon_dialog_sure"
-        android:visibility="gone"
+        android:src="@mipmap/icon_share_friend"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
         app:layout_constraintLeft_toLeftOf="@+id/bg_dialog"
         app:layout_constraintRight_toLeftOf="@+id/image_cancle"/>
@@ -68,8 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:src="@mipmap/icon_dialog_cancle"
-        android:visibility="gone"
+        android:src="@mipmap/icon_share_circle"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/bg_dialog"
         app:layout_constraintLeft_toRightOf="@+id/image_sure"
         app:layout_constraintRight_toRightOf="@+id/bg_dialog"/>
