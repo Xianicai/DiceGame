@@ -290,10 +290,11 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     private void sharToWeixin(int flag) {
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "https://fir.im/qn61";
+        webpage.webpageUrl = "https://fir.im/426v";
         WXMediaMessage msg = new WXMediaMessage(webpage);
-        msg.title = "骰子娱乐";
-        msg.description = "最好玩的游戏";
+        msg.title = "骰王娱乐";
+        msg.description = "骰王娱乐是一款以骰子玩法为主的骰子类的手机游戏，玩家可以在这里与其他玩家一起同场PK，" +
+                "感兴趣的玩家快来下载游戏试玩吧！安全，专业，功能齐全，实时沟通的游戏客服全";
         //这里替换一张自己工程里的图片资源
         Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         msg.setThumbImage(thumb);

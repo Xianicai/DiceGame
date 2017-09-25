@@ -244,21 +244,21 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         switch (view.getId()) {
             case R.id.image_start_game:
 //                mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
-//                mRoomPresenter.gameReady(mUserId, mRoomId);
-                mImgeDice.setVisibility(View.VISIBLE);
-                mImgeDice.setImageResource(R.drawable.anim_game_ready);
-                mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
-                mAnimation.start();
-                if (mHandler == null) {
-                    mHandler = new Handler();
-                }
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        mAnimation.stop();
-                        mImgeDice.setVisibility(View.GONE);
-                        mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
-                    }
-                }, 10000);
+                mRoomPresenter.gameReady(mUserId, mRoomId);
+//                mImgeDice.setVisibility(View.VISIBLE);
+//                mImgeDice.setImageResource(R.drawable.anim_game_ready);
+//                mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
+//                mAnimation.start();
+//                if (mHandler == null) {
+//                    mHandler = new Handler();
+//                }
+//                mHandler.postDelayed(new Runnable() {
+//                    public void run() {
+//                        mAnimation.stop();
+//                        mImgeDice.setVisibility(View.GONE);
+//                        mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
+//                    }
+//                }, 10000);
                 break;
             case R.id.image_bet:
                 BetActivity.start(this, mUserId, mRoomId, goldcount);
