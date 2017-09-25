@@ -3,8 +3,8 @@ package com.android.xianicai.dicegame.gameroom.presenter.impl;
 import com.android.xianicai.dicegame.base.basemvp.BasePresenterImpl;
 import com.android.xianicai.dicegame.base.basemvp.ReqBase;
 import com.android.xianicai.dicegame.gameroom.presenter.GameRoomPresenter;
-import com.android.xianicai.dicegame.gameroom.provider.data.ReqGameResult;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqCheckRoom;
+import com.android.xianicai.dicegame.gameroom.provider.data.ReqGameResult;
 import com.android.xianicai.dicegame.gameroom.provider.data.ReqRoomDetail;
 import com.android.xianicai.dicegame.gameroom.provider.impl.GameRoomProviderImpl;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
@@ -84,10 +84,10 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
     }
 
     @Override
-    public void startGame(String userId, String roomId,int gameTimes) {
+    public void startGame(String userId, String roomId, int gameTimes) {
         getView().showProgress();
         final ReqGameResult reqGameResult = new ReqGameResult();
-        mGameRoomProvider.startGame(userId, roomId,gameTimes, reqGameResult, new NetAsynTask.CallBack() {
+        mGameRoomProvider.startGame(userId, roomId, gameTimes, reqGameResult, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 getView().hideProgress();
@@ -144,9 +144,9 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
     }
 
     @Override
-    public void checkedRoom(String userId,String roomId) {
+    public void checkedRoom(String userId, String roomId) {
         final ReqCheckRoom reqMemberCount = new ReqCheckRoom();
-        mGameRoomProvider.checkMemberCount(userId,roomId, reqMemberCount, new NetAsynTask.CallBack() {
+        mGameRoomProvider.checkMemberCount(userId, roomId, reqMemberCount, new NetAsynTask.CallBack() {
             @Override
             public void onGetSucc() {
                 if (reqMemberCount.code == 0) {
@@ -164,6 +164,39 @@ public class GameRoomPresenterImpl extends BasePresenterImpl<GameRoomView> imple
 
             @Override
             public void onGetError() {
+            }
+        });
+    }
+
+    @Override
+    public void gameReady(String userId, String roomId) {
+        getView().showProgress();
+        final ReqBase reqBase = new ReqBase();
+        mGameRoomProvider.gameReady(userId, roomId, reqBase, new NetAsynTask.CallBack() {
+            @Override
+            public void onGetSucc() {
+                if (reqBase.code == 0) {
+                    getView().gameReady(true);
+                } else {
+                    getView().gameReady(false);
+                }
+            }
+
+            @Override
+            public void onGetFinished() {
+                getView().hideProgress();
+            }
+
+            @Override
+            public void onGetFaild() {
+                getView().gameReady(false);
+
+            }
+
+            @Override
+            public void onGetError() {
+                getView().gameReady(false);
+
             }
         });
     }

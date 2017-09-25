@@ -50,14 +50,16 @@ public class Urls {
      */
     public static final String POST_DISMISS_ROOM = BASE_URL + "user/dissolve";
     /**
-     *
-     *查询房间人数
+     * 查询房间人数
      */
     public static final String POST_CHECK_MEMBER = BASE_URL + "room/check";
 
     /**
-     *
-     *查询用户详情
+     * 查询用户详情
      */
     public static final String POST_CHECK_USER = BASE_URL + "user/detail";
+    /**
+     * 开始游戏倒计时
+     */
+    public static final String POST_GAME_READY = BASE_URL + "game/ready";
 }

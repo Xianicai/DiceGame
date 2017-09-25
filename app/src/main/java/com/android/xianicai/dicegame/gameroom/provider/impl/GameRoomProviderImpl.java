@@ -63,4 +63,12 @@ public class GameRoomProviderImpl implements GameRoomProvider {
         map.put("roomId", roomId);
         NetAsynTask.connectByPost(Urls.POST_CHECK_MEMBER, map, reqCheckRoom, callBack);
     }
+
+    @Override
+    public void gameReady(String userId, String roomId, ReqBase reqBase, NetAsynTask.CallBack callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("roomId", roomId);
+        NetAsynTask.connectByPost(Urls.POST_GAME_READY, map, reqBase, callBack);
+    }
 }

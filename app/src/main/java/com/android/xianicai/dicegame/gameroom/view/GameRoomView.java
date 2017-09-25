@@ -15,4 +15,5 @@ public interface GameRoomView extends BaseView {
     void startGame(GameResultBean gameResultBean);
     void quitRoom();
     void checkedRoom(CheckRoomBean countBean);
+    void gameReady(boolean b);
 }

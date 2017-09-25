@@ -89,8 +89,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        mImgeDice.setImageResource(R.drawable.anim_dice);
-        mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
         mImgeDice.setVisibility(View.GONE);
         mUserId = getIntent().getStringExtra("userId");
         mRoomId = getIntent().getStringExtra("roomId");
@@ -197,11 +195,30 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         }, 2000);
     }
 
+    @Override
+    public void gameReady(boolean b) {
+        if (b) {
+            mImgeDice.setImageResource(R.drawable.anim_game_ready);
+            mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
+            mAnimation.start();
+            mHandler.postDelayed(new Runnable() {
+                public void run() {
+                    mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
+                }
+            }, 10000);
+            //开始游戏
+
+        }
+
+    }
+
     /**
      * 骰子动画
      */
     private void startAnimation(final CheckRoomBean countBean) {
-        mImgeShare.setVisibility(View.GONE);
+        mImgeDice.setImageResource(R.drawable.anim_dice);
+        mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
+//        mImgeShare.setVisibility(View.GONE);
         mImgeDice.setVisibility(View.VISIBLE);
         mAnimation.start();
         if (mHandler == null) {
@@ -211,7 +228,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             public void run() {
                 mAnimation.stop();
                 mImgeDice.setVisibility(View.GONE);
-                mImgeShare.setVisibility(View.VISIBLE);
+//                mImgeShare.setVisibility(View.VISIBLE);
                 resultDialog(countBean);
                 if (StringUtil.isNotBlank(mLastResult)) {
                     mTvLastResult.setVisibility(View.VISIBLE);
@@ -226,7 +243,22 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.image_start_game:
-                mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
+//                mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
+//                mRoomPresenter.gameReady(mUserId, mRoomId);
+                mImgeDice.setVisibility(View.VISIBLE);
+                mImgeDice.setImageResource(R.drawable.anim_game_ready);
+                mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
+                mAnimation.start();
+                if (mHandler == null) {
+                    mHandler = new Handler();
+                }
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        mAnimation.stop();
+                        mImgeDice.setVisibility(View.GONE);
+                        mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
+                    }
+                }, 10000);
                 break;
             case R.id.image_bet:
                 BetActivity.start(this, mUserId, mRoomId, goldcount);

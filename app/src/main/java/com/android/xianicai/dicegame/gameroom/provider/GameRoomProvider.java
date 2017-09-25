@@ -19,4 +19,5 @@ public interface GameRoomProvider {
     void quitRoom(String userId, String roomId, ReqBase reqBase, NetAsynTask.CallBack callBack);
     void setBet(String userId, String roomId, Map<String,String> map, ReqBase reqBase, NetAsynTask.CallBack callBack);
     void checkMemberCount(String userId,String roomId, ReqCheckRoom reqCheckRoom, NetAsynTask.CallBack callBack);
+    void gameReady(String userId,String roomId, ReqBase reqBase, NetAsynTask.CallBack callBack);
 }
