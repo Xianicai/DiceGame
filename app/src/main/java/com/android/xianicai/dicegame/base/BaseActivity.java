@@ -38,7 +38,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
@@ -46,6 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mShapeLoadingDialog.dismiss();
             mShapeLoadingDialog = null;
         }
+        super.onDestroy();
     }
 
     public abstract int getlayoutId();

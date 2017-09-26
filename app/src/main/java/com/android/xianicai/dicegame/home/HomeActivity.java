@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -73,7 +74,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
+        Log.i("act", "initViews:     HomeActivity");
 
         statAnimator();
         mUserBean = new UserBean();

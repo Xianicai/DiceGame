@@ -56,7 +56,7 @@ public class CheckRoomBean {
          * gameResult :
          */
 
-        private String roomState;
+        private int roomState;
         private int betUserCount;
         private int memberCount;
         private int gameTimes;
@@ -67,11 +67,11 @@ public class CheckRoomBean {
         private int gameState;
         private List<RoomUserListBean> roomUserList;
 
-        public String getRoomState() {
+        public int getRoomState() {
             return roomState;
         }
 
-        public void setRoomState(String roomState) {
+        public void setRoomState(int roomState) {
             this.roomState = roomState;
         }
 

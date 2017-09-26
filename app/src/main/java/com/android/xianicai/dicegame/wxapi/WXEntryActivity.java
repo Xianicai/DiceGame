@@ -3,6 +3,7 @@ package com.android.xianicai.dicegame.wxapi;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.android.xianicai.dicegame.Constant;
 import com.android.xianicai.dicegame.Urls;
@@ -34,6 +35,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         super.onCreate(savedInstanceState);
         IWXAPI api = WXAPIFactory.createWXAPI(getApplicationContext(), Constant.APP_ID, false);
         api.handleIntent(getIntent(), this);
+        Log.i("act", "initViews:     LoginActivity");
     }
 
     @Override

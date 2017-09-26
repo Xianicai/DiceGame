@@ -5,7 +5,7 @@ package com.android.xianicai.dicegame;
  */
 
 public class Urls {
-    public static final String BASE_URL = "http://127.0.0.1:8080/web-ssm/";
+    public static final String BASE_URL = "http://47.94.225.154:8080/web-ssm/";
     /**
      * 登录
      */

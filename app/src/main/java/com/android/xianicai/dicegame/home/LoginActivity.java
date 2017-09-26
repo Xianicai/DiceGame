@@ -3,6 +3,7 @@ package com.android.xianicai.dicegame.home;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.xianicai.dicegame.Constant;
@@ -32,6 +33,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        Log.i("act", "initViews:     LoginActivity");
         finishLogin();
     }
 

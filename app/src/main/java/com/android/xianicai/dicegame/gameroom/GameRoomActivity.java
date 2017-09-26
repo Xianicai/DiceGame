@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,10 +24,8 @@ import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
 import com.android.xianicai.dicegame.widget.TipsDialog;
 import com.android.xianicai.dicegame.widget.loading.LoadingView;
-import com.android.xianicai.dicegame.widget.loading.ShapeLoadingDialog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GameRoomActivity extends BaseActivity implements GameRoomView {
@@ -69,6 +68,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     LoadingView mLoadView;
     @BindView(R.id.imge_share)
     ImageView mImgeShare;
+    @BindView(R.id.recycler_left)
+    RecyclerView mRecyclerLeft;
     private GameRoomPresenterImpl mRoomPresenter;
     private String mUserId;
     private String mRoomId;
@@ -80,7 +81,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private boolean mIsExitRoom = false;
     private AnimationDrawable mAnimation;
     private TipsDialog mResultDialog;
-    private ShapeLoadingDialog mShapeLoadingDialog;
 
     @Override
     public int getlayoutId() {
@@ -298,7 +298,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (mDetailBean != null && mDetailBean.getResult().getUserType() == 0) {
             if (mRoomState != 1) {
                 mRoomPresenter.dismissRoom(mUserId, mRoomId);
@@ -309,6 +308,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             }
 
         }
+        super.onDestroy();
 
     }
 
@@ -383,12 +383,5 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         } else {
             exitRoom();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }
