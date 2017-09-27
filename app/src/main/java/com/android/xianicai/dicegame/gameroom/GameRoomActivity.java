@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,12 +19,16 @@ import com.android.xianicai.dicegame.gameroom.provider.data.CheckRoomBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.GameResultBean;
 import com.android.xianicai.dicegame.gameroom.provider.data.RoomDetailBean;
 import com.android.xianicai.dicegame.gameroom.view.GameRoomView;
+import com.android.xianicai.dicegame.gameroom.view.LeftAdappter;
 import com.android.xianicai.dicegame.utils.RxBus;
 import com.android.xianicai.dicegame.utils.StringUtil;
 import com.android.xianicai.dicegame.utils.ToastUtil;
 import com.android.xianicai.dicegame.utils.glide.GlideImageView;
 import com.android.xianicai.dicegame.widget.TipsDialog;
 import com.android.xianicai.dicegame.widget.loading.LoadingView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,19 +73,23 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     LoadingView mLoadView;
     @BindView(R.id.imge_share)
     ImageView mImgeShare;
+    private GameRoomPresenterImpl mRoomPresenter;
     @BindView(R.id.recycler_left)
     RecyclerView mRecyclerLeft;
-    private GameRoomPresenterImpl mRoomPresenter;
+    @BindView(R.id.recycler_right)
+    RecyclerView mRecyclerRight;
     private String mUserId;
     private String mRoomId;
     private RoomDetailBean mDetailBean;
     private Handler mHandler;
-    private int mMemberCount;
+    private int mMemberCount = 0;
     private String mLastResult;
     private int mRoomState = 0;
     private boolean mIsExitRoom = false;
     private AnimationDrawable mAnimation;
     private TipsDialog mResultDialog;
+    private List<CheckRoomBean.ResultBean.RoomUserListBean> mRoomUserListBeen;
+    private LeftAdappter mLeftAdappter;
 
     @Override
     public int getlayoutId() {
@@ -96,13 +105,19 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mRoomPresenter = new GameRoomPresenterImpl();
         mRoomPresenter.bindView(this);
         mRoomPresenter.getGameRoomDetail(mUserId, mRoomId);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerLeft.setLayoutManager(layoutManager);
+        mRoomUserListBeen = new ArrayList<>();
+        mLeftAdappter = new LeftAdappter(this, mRoomUserListBeen);
+        mRecyclerLeft.setAdapter(mLeftAdappter);
     }
 
 
     @Override
     public void getGameRoomDetail(RoomDetailBean roomDetailBean) {
         mDetailBean = roomDetailBean;
-        mMemberCount = roomDetailBean.getResult().getMemberCount();
+//        mMemberCount = roomDetailBean.getResult().getMemberCount();
         mGameTimes = roomDetailBean.getResult().getGameTimes();
         mLastResult = roomDetailBean.getResult().getLastResult();
         goldcount = roomDetailBean.getResult().getUserGoldCount();
@@ -124,7 +139,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             mImageStartGame.setVisibility(View.GONE);
             mImageDissmiaaRoom.setVisibility(View.GONE);
         }
-        mTvMemberCount.setText("房间人数: " + mMemberCount);
+//        mTvMemberCount.setText("房间人数: " + mMemberCount);
         mTvRoomNumber.setText("房间号：" + roomDetailBean.getResult().getRoomId());
         if (StringUtil.isNotBlank(roomDetailBean.getResult().getLastResult())) {
             mTvLastResult.setText("上一期骰点：" + mLastResult);
@@ -136,6 +151,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         mTvUserName.setText(roomDetailBean.getResult().getUserName());
         mTvUserId.setText("ID：" + roomDetailBean.getResult().getUserId());
         mTvGoldCount.setText(goldcount + "");
+
     }
 
     @Override
@@ -169,6 +185,11 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         if (mMemberCount != countBean.getResult().getMemberCount()) {
             mMemberCount = countBean.getResult().getMemberCount();
             mTvMemberCount.setText("房间人数: " + mMemberCount);
+
+            mRoomUserListBeen.clear();
+            mRoomUserListBeen.addAll(countBean.getResult().getRoomUserList());
+            mLeftAdappter.notifyDataSetChanged();
+
         }
         //游戏结果是否是发生变化(新一局游戏结果)
         if (mGameTimes != countBean.getResult().getGameTimes()) {
@@ -244,21 +265,21 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         switch (view.getId()) {
             case R.id.image_start_game:
 //                mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
-                mRoomPresenter.gameReady(mUserId, mRoomId);
-//                mImgeDice.setVisibility(View.VISIBLE);
-//                mImgeDice.setImageResource(R.drawable.anim_game_ready);
-//                mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
-//                mAnimation.start();
-//                if (mHandler == null) {
-//                    mHandler = new Handler();
-//                }
-//                mHandler.postDelayed(new Runnable() {
-//                    public void run() {
-//                        mAnimation.stop();
-//                        mImgeDice.setVisibility(View.GONE);
-//                        mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
-//                    }
-//                }, 10000);
+//                mRoomPresenter.gameReady(mUserId, mRoomId);
+                mImgeDice.setVisibility(View.VISIBLE);
+                mImgeDice.setImageResource(R.drawable.anim_game_ready);
+                mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
+                mAnimation.start();
+                if (mHandler == null) {
+                    mHandler = new Handler();
+                }
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        mAnimation.stop();
+                        mImgeDice.setVisibility(View.GONE);
+                        mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
+                    }
+                }, 9500);
                 break;
             case R.id.image_bet:
                 BetActivity.start(this, mUserId, mRoomId, goldcount);
@@ -336,7 +357,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
      * 充值金币
      */
     private void addDiamond() {
-        new TipsDialog(this).setMsg("充值金币请联系客服微信：touwang001").setSingleListener(new TipsDialog.setOnSingleListener() {
+        new TipsDialog(this).setMsg("充值金币请联系客服微信：swyl168948").setSingleListener(new TipsDialog.setOnSingleListener() {
             @Override
             public void onSingleClicked(TipsDialog dialog) {
                 dialog.dismiss();

@@ -264,7 +264,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
      * 充值砖石
      */
     private void addDiamond(String msg) {
-        new TipsDialog(this).setMsg("充值" + msg + "请联系客服微信：touwang001").setSingleListener(new TipsDialog.setOnSingleListener() {
+        new TipsDialog(this).setMsg("充值" + msg + "请联系客服微信：swyl168948").setSingleListener(new TipsDialog.setOnSingleListener() {
             @Override
             public void onSingleClicked(TipsDialog dialog) {
                 dialog.dismiss();
