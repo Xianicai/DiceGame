@@ -90,6 +90,7 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
     private TipsDialog mResultDialog;
     private List<CheckRoomBean.ResultBean.RoomUserListBean> mRoomUserListBeen;
     private LeftAdappter mLeftAdappter;
+    private int mGameState = 1;
 
     @Override
     public int getlayoutId() {
@@ -189,14 +190,36 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
             mRoomUserListBeen.clear();
             mRoomUserListBeen.addAll(countBean.getResult().getRoomUserList());
             mLeftAdappter.notifyDataSetChanged();
+        }
+        if (mGameState != countBean.getResult().getGameState()) {
+            mGameState = countBean.getResult().getGameState();
+            if (mGameState == 0) {
+                //将上次的提示框销毁掉
+                if (mResultDialog != null) {
+                    mResultDialog.dismiss();
+                }
+                mImgeDice.setVisibility(View.VISIBLE);
+                mImgeDice.setImageResource(R.drawable.anim_game_ready);
+                mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
+                mAnimation.start();
+                if (mHandler == null) {
+                    mHandler = new Handler();
+                }
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        mAnimation.stop();
+                        mImgeDice.setVisibility(View.GONE);
+                        if (mDetailBean.getResult().getUserType() == 0) {
+                            mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
+                        }
+                    }
+                }, 10000);
+            }
 
         }
         //游戏结果是否是发生变化(新一局游戏结果)
         if (mGameTimes != countBean.getResult().getGameTimes()) {
-            //将上次的提示框销毁掉
-            if (mResultDialog != null) {
-                mResultDialog.dismiss();
-            }
+
             mGameTimes = countBean.getResult().getGameTimes();
             mLastResult = countBean.getResult().getGameResult();
             startAnimation(countBean);
@@ -218,18 +241,6 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
 
     @Override
     public void gameReady(boolean b) {
-        if (b) {
-            mImgeDice.setImageResource(R.drawable.anim_game_ready);
-            mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
-            mAnimation.start();
-            mHandler.postDelayed(new Runnable() {
-                public void run() {
-                    mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
-                }
-            }, 10000);
-            //开始游戏
-
-        }
 
     }
 
@@ -265,21 +276,8 @@ public class GameRoomActivity extends BaseActivity implements GameRoomView {
         switch (view.getId()) {
             case R.id.image_start_game:
 //                mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
-//                mRoomPresenter.gameReady(mUserId, mRoomId);
-                mImgeDice.setVisibility(View.VISIBLE);
-                mImgeDice.setImageResource(R.drawable.anim_game_ready);
-                mAnimation = (AnimationDrawable) mImgeDice.getDrawable();
-                mAnimation.start();
-                if (mHandler == null) {
-                    mHandler = new Handler();
-                }
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        mAnimation.stop();
-                        mImgeDice.setVisibility(View.GONE);
-                        mRoomPresenter.startGame(mUserId, mRoomId, mGameTimes + 1);
-                    }
-                }, 9500);
+                mRoomPresenter.gameReady(mUserId, mRoomId);
+
                 break;
             case R.id.image_bet:
                 BetActivity.start(this, mUserId, mRoomId, goldcount);
