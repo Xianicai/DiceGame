@@ -27,6 +27,7 @@ public class LeftAdappter extends RecyclerView.Adapter<LeftAdappter.LeftVH> {
 
     public LeftAdappter(Context context, List<CheckRoomBean.ResultBean.RoomUserListBean> mRoomUserListBeen) {
         mContext = context;
+
         this.mRoomUserListBeen = mRoomUserListBeen;
     }
 
